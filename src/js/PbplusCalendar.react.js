@@ -3,20 +3,47 @@
 import React from 'react';
 import '../css/pbplus-calendar.less';
 
-const calendarWeeks = [
-    ['00', '00', '00', '00', '00', '01', '02'],
-    ['03', '04', '05', '06', '07', '08', '09'],
-    ['10', '11', '12', '13', '14', '15', '16'],
-    ['17', '18', '19', '20', '21', '22', '23'],
-    ['24', '25', '26', '27', '28', '29', '30'],
-];
 class PbplusCalendar extends React.Component {
+    getDatesOfPreviousMonth(date) {
+        const dayCountBeforeFirstDate = date.getDay();
+        const lastDateOfPreviousMonth = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
+        return new Array(dayCountBeforeFirstDate).fill(0).map((omit, index) => {
+            return lastDateOfPreviousMonth - dayCountBeforeFirstDate + index + 1;
+        });
+    }
+    getDatesOfThisMonth(date) {
+        const dateCount = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+        return new Array(dateCount).fill(0).map((omit, index) => index + 1);
+    }
+    getDatesOfNextMonth(date) {
+        const lastDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        const dayCountAfterLastDate = 6 - lastDate.getDay();
+        return new Array(dayCountAfterLastDate).fill(0).map((omit, index) => index + 1);
+    }
     render() {
+        //const { month, year } = this.props;
+        const { month, year } = {month: 8, year: 2017};
+        const date = new Date(year, month);
+        const monthString = date.toDateString().substr(4, 3);
+
+        const datesOfPreviousMonth = this.getDatesOfPreviousMonth(date);
+        const datesOfThisMonth = this.getDatesOfThisMonth(date);
+        const datesOfNextMonth = this.getDatesOfNextMonth(date);
+
+        const previousMonthDateObjects = datesOfPreviousMonth.map(date => ({isThisMonth: false, date}));
+        const thisMonthDateObjects = datesOfThisMonth.map(date => ({isThisMonth: true, date}));
+        const nextMonthDateObjects = datesOfNextMonth.map(date => ({isThisMonth: false, date}));
+
+        const calendarDates = [...previousMonthDateObjects, ...thisMonthDateObjects, ...nextMonthDateObjects];
+        const tempArray = [...calendarDates];
+        const calendarWeeks = [];
+        while(0 < tempArray.length) { calendarWeeks.push(tempArray.splice(0, 7)); }
+
         return <div className='pbplus-calendar'>
             <div className='calendar-header'>
                 <div className='calendar-month-selector'>
                     <div className='calendar-last-month-button' role='button'>{'<'}</div>
-                    <div className='calendar-month-display'>九月 2017</div>
+                    <div className='calendar-month-display'>{`${monthString} ${year}`}</div>
                     <div className='calendar-next-month-button' role='button'>{'>'}</div>
                 </div>
                 <div className='calendar-legend'>
@@ -38,7 +65,10 @@ class PbplusCalendar extends React.Component {
                     {calendarWeeks.map((calendarWeek, weekIndex) => {
                         return <div className='calendar-week' key={weekIndex}>
                             {calendarWeek.map((calendarDay, index) => {
-                                return <div className='calendar-day' key={index}>{calendarDay}</div>;
+                                const notThisMonthClassName = calendarDay.isThisMonth ? '' : ' not-this-month';
+                                return <div className={`calendar-day${notThisMonthClassName}`} key={index}>
+                                    {`${('0' + calendarDay.date).slice(-2)}`}
+                                </div>;
                             })}
                         </div>;
                     })}
