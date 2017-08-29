@@ -1,0 +1,24 @@
+{
+  "name": "pbplus-member-ui",
+  "version": "0.0.1",
+  "description": "User interface of PBPlus member plugin.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bill42362/pbplus-member-ui.git"
+  },
+  "keywords": [
+    "pbplus",
+    "member",
+    "react"
+  ],
+  "author": "Pi-Yin Hsiao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bill42362/pbplus-member-ui/issues"
+  },
+  "homepage": "https://github.com/bill42362/pbplus-member-ui#readme"
+}
