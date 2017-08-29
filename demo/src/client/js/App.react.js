@@ -7,8 +7,10 @@ import '../css/app.less';
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {year: 2017, month: 9};
+        const today = new Date();
+        this.state = {year: today.getFullYear(), month: today.getMonth()};
         this.goPreviousMonth = this.goPreviousMonth.bind(this);
+        this.goThisMonth = this.goThisMonth.bind(this);
         this.goNextMonth = this.goNextMonth.bind(this);
     }
     goPreviousMonth() {
@@ -17,6 +19,10 @@ class App extends React.Component {
         else { month -= 1; }
         this.setState({ year, month });
     }
+    goThisMonth() {
+        const today = new Date();
+        this.setState({year: today.getFullYear(), month: today.getMonth()});
+    }
     goNextMonth() {
         let { year, month } = this.state;
         if(11 === +month) { year += 1; month = 0; }
@@ -24,13 +30,10 @@ class App extends React.Component {
         this.setState({ year, month });
     }
     render() {
+        const { goPreviousMonth, goThisMonth, goNextMonth } = this;
         const { year, month } = this.state;
         return <div className='app'>
-            <PbplusCalendar
-                year={year} month={month}
-                goPreviousMonth={this.goPreviousMonth}
-                goNextMonth={this.goNextMonth}
-            />
+            <PbplusCalendar {...{ year, month, goPreviousMonth, goThisMonth, goNextMonth }} />
         </div>;
     }
 }

@@ -3,6 +3,8 @@
 import React from 'react';
 import '../css/pbplus-calendar.less';
 
+const monthStringMap = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十' , '十一', '十二'];
+
 class PbplusCalendar extends React.Component {
     getDatesOfPreviousMonth(date) {
         const dayCountBeforeFirstDate = date.getDay();
@@ -20,10 +22,11 @@ class PbplusCalendar extends React.Component {
         const dayCountAfterLastDate = 6 - lastDate.getDay();
         return new Array(dayCountAfterLastDate).fill(0).map((omit, index) => index + 1);
     }
+    preventSelect(e) { e.preventDefault(); }
     render() {
-        const { month, year, goPreviousMonth, goNextMonth } = this.props;
+        const { month, year, goThisMonth, goPreviousMonth, goNextMonth } = this.props;
         const date = new Date(year, month);
-        const monthString = date.toDateString().substr(4, 3);
+        const monthString = monthStringMap[date.getMonth()];
 
         const datesOfPreviousMonth = this.getDatesOfPreviousMonth(date);
         const datesOfThisMonth = this.getDatesOfThisMonth(date);
@@ -41,9 +44,18 @@ class PbplusCalendar extends React.Component {
         return <div className='pbplus-calendar'>
             <div className='calendar-header'>
                 <div className='calendar-month-selector'>
-                    <div className='calendar-last-month-button' role='button' onClick={goPreviousMonth}>{'<'}</div>
-                    <div className='calendar-month-display'>{`${monthString} ${year}`}</div>
-                    <div className='calendar-next-month-button' role='button' onClick={goNextMonth}>{'>'}</div>
+                    <div
+                        className='calendar-last-month-button' role='button'
+                        onClick={goPreviousMonth} onMouseDown={this.preventSelect}
+                    >{'<'}</div>
+                    <div
+                        className='calendar-month-display' role='button'
+                        onClick={goThisMonth} onMouseDown={this.preventSelect}
+                    >{`${monthString}月 ${year}`}</div>
+                    <div
+                        className='calendar-next-month-button' role='button'
+                        onClick={goNextMonth} onMouseDown={this.preventSelect}
+                    >{'>'}</div>
                 </div>
                 <div className='calendar-legend'>
                     <div className='calendar-legend-item'>即將來臨的活動/優惠</div>
