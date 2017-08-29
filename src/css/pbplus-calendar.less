@@ -2,5 +2,65 @@
 
 div.pbplus-calendar {
     width: 500px; height: 400px;
+    margin-top: 10px;
     background-color: white;
+    color: dimgray;
+    div.calendar-header {
+        display: flex;
+        padding: 0px 10px;
+        div.calendar-month-selector {
+            flex: none;
+            div.calendar-last-month-button {
+                display: inline-block;
+                font-size: 20px;
+                letter-spacing: 1px;
+            }
+            div.calendar-month-display {
+                display: inline-block;
+                margin: 0px 1em;
+                font-size: 20px;
+                letter-spacing: 1px;
+            }
+            div.calendar-next-month-button {
+                display: inline-block;
+                font-size: 20px;
+                letter-spacing: 1px;
+            }
+        }
+        div.calendar-legend {
+            flex: auto;
+            font-size: 12px;
+            text-align: right;
+        }
+    }
+    div.calendar-body {
+        margin-top: 5px;
+        div.calendar-week-titles {
+            display: flex;
+            div.calendar-week-title {
+                flex: auto;
+                background-color: lightgray;
+                text-align: center;
+                font-size: 10px;
+                &:first-of-type { padding-left: 15px; }
+                &:last-of-type { padding-right: 15px; }
+            }
+        }
+        div.calendar-weeks {
+            div.calendar-week {
+                display: flex;
+                border-bottom: 1px solid lightgray;
+                div.calendar-day {
+                    flex: auto;
+                    display: inline-block;
+                    height: 3em;
+                    line-height: 3em;
+                    text-align: center;
+                    font-size: 14px;
+                    &:first-of-type { padding-left: 15px; }
+                    &:last-of-type { padding-right: 15px; }
+                }
+            }
+        }
+    }
 }
