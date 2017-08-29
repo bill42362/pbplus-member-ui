@@ -1,6 +1,6 @@
 // App.react.js
 import React from 'react';
-// import FooterSection from 'footer-section';
+// import PBPlusMemberUi from 'pbplus-member-ui';
 import { Calendar } from '../../../../src/js/index.js';
 import '../css/app.less';
 
@@ -8,6 +8,7 @@ class App extends React.Component {
     constructor(props) { super(props); }
     render() {
         return <div className='app'>
+            <Calendar />
         </div>;
     }
 }

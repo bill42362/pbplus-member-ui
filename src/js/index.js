@@ -1,5 +1,8 @@
 // index.js
 'use strict';
-import Calendar from './Calendar.react.js';
+import CalendarComponent from './Calendar.react.js';
 
-export default { Calendar };
+export const Calendar = CalendarComponent;
+export default {
+    Calendar: CalendarComponent
+};
