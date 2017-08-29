@@ -1,7 +1,6 @@
 // pbplus-calendar.less
 
 div.pbplus-calendar {
-    width: 500px; height: 400px;
     margin-top: 10px;
     background-color: white;
     color: dimgray;
@@ -14,6 +13,7 @@ div.pbplus-calendar {
                 display: inline-block;
                 font-size: 20px;
                 letter-spacing: 1px;
+                cursor: pointer;
             }
             div.calendar-month-display {
                 display: inline-block;
@@ -25,6 +25,7 @@ div.pbplus-calendar {
                 display: inline-block;
                 font-size: 20px;
                 letter-spacing: 1px;
+                cursor: pointer;
             }
         }
         div.calendar-legend {
@@ -57,7 +58,11 @@ div.pbplus-calendar {
                     line-height: 3em;
                     text-align: center;
                     font-size: 14px;
-                    &.not-this-month { color: silver; }
+                    &.not-this-month {
+                        opacity: 0;
+                        transition: opacity .6s ease;
+                        &:hover { opacity: 0.5; }
+                    }
                     &:first-of-type { padding-left: 15px; }
                     &:last-of-type { padding-right: 15px; }
                 }

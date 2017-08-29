@@ -21,8 +21,7 @@ class PbplusCalendar extends React.Component {
         return new Array(dayCountAfterLastDate).fill(0).map((omit, index) => index + 1);
     }
     render() {
-        //const { month, year } = this.props;
-        const { month, year } = {month: 8, year: 2017};
+        const { month, year, goPreviousMonth, goNextMonth } = this.props;
         const date = new Date(year, month);
         const monthString = date.toDateString().substr(4, 3);
 
@@ -42,9 +41,9 @@ class PbplusCalendar extends React.Component {
         return <div className='pbplus-calendar'>
             <div className='calendar-header'>
                 <div className='calendar-month-selector'>
-                    <div className='calendar-last-month-button' role='button'>{'<'}</div>
+                    <div className='calendar-last-month-button' role='button' onClick={goPreviousMonth}>{'<'}</div>
                     <div className='calendar-month-display'>{`${monthString} ${year}`}</div>
-                    <div className='calendar-next-month-button' role='button'>{'>'}</div>
+                    <div className='calendar-next-month-button' role='button' onClick={goNextMonth}>{'>'}</div>
                 </div>
                 <div className='calendar-legend'>
                     <div className='calendar-legend-item'>即將來臨的活動/優惠</div>
