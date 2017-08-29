@@ -1,8 +1,8 @@
 // index.js
 'use strict';
-import CalendarComponent from './Calendar.react.js';
+import PbplusCalendarComponent from './PbplusCalendar.react.js';
 
-export const Calendar = CalendarComponent;
+export const PbplusCalendar = PbplusCalendarComponent;
 export default {
-    Calendar: CalendarComponent
+    PbplusCalendar: PbplusCalendarComponent
 };
