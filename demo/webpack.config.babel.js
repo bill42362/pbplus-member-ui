@@ -1,16 +1,16 @@
 // webpack.config.babel.js
 
 const isProd = process.env.NODE_ENV === 'production';
+const WDS_PORT = 7000;
 
 export default {
     entry: [
-        './src/js/index.js',
+        './src/client/js',
     ],
     output: {
-        filename: 'js/index.js',
-        path: `${__dirname}/dist/`,
+        filename: 'js/bundle.js',
+        path: `${__dirname}/dist/client/`,
         publicPath: isProd ? `/` : `http://localhost:${WDS_PORT}/`,
-        libraryTarget: 'commonjs2',
     },
     module: {
         rules: [
@@ -40,7 +40,7 @@ export default {
           react: `${__dirname}/node_modules/react`,
         },
     },
-    externals: {
-        react: 'commonjs react'
+    devServer: {
+        port: WDS_PORT,
     }
-};
+}
