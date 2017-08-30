@@ -29,13 +29,13 @@ class PbplusMemberCenter extends React.Component {
                         <PbplusTabPanels activeKey='calendar'>
                             <div
                                 className='interaction'
-                                data-key='calendar' data-display='日曆中心' data-icon='/img/calendar.svg'
+                                data-key='calendar' data-display='日曆中心' data-icon='https://tv.pbplus.me/img/facebook.svg'
                             >
                                 <PbplusCalendar year={2017} month={7} />
                             </div>
                             <div
                                 className='interaction'
-                                data-key='personal-data' data-display='個人資料' data-icon='/img/personal-data.svg'
+                                data-key='personal-data' data-display='個人資料' data-icon='https://tv.pbplus.me/img/facebook.svg'
                             >
                                 <div className='personal-data'>
                                     個人資料

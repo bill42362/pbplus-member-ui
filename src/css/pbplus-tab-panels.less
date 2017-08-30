@@ -14,8 +14,10 @@ div.pbplus-tab-panels {
         overflow-x: scroll;
         span.tab-panels-tab {
             flex: 1;
+            position: relative;
             border: 1px solid white;
-            padding: 0.5em 1em;
+            border-bottom: none;
+            padding: 0.5em 1em 0;
             background-color: white;
             text-align: center;
             font-size: 10px;
@@ -26,11 +28,19 @@ div.pbplus-tab-panels {
                 background-color: black;
                 color: white;
                 cursor: default;
+                &:after {
+                    display: inline-block;
+                    content: '';
+                    border-left: 6px solid black;
+                    border-right: 6px solid black;
+                    border-bottom: 6px solid white;
+                    transform: translate(0px, 2px);
+                }
             }
             &:hover { background-color: silver; }
             &.active:hover { background-color: black; }
             img.tab-panels-tab-icon {
-                display: block;
+                display: inline-block;
                 margin-top: 5px;
                 height: 2em; width: auto;
                 background-color: dimgray;
