@@ -79,10 +79,11 @@ class PbplusCalendar extends React.Component {
                         return <div className='calendar-week' key={weekIndex}>
                             {calendarWeek.map((calendarDay, index) => {
                                 const notThisMonthClassName = calendarDay.isThisMonth ? '' : ' not-this-month';
-                                const isToday = year === todayYear
+                                const isToday = calendarDay.isThisMonth
+                                    && year === todayYear
                                     && month === todayMonth
                                     && calendarDay.date === todayDate;
-                                const dateString = isToday ? '今天' : `${('0' + calendarDay.date).slice(-2)}`;
+                                const dateString = isToday ? '今天' : ('0' + calendarDay.date).slice(-2);
                                 return <div className={`calendar-day${notThisMonthClassName}`} key={index}>
                                     {dateString}
                                 </div>;
