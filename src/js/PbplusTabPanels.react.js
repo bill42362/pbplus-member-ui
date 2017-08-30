@@ -14,8 +14,8 @@ class PbplusTabPanels extends React.Component {
             if(currentTarget.getAttribute('data-key')) { target = currentTarget; }
             currentTarget = currentTarget.parentNode;
         }
-        if(target && this.props.setInteractionKey) {
-            this.props.setInteractionKey({key: target.getAttribute('data-key')});
+        if(target && this.props.setActiveKey) {
+            this.props.setActiveKey({key: target.getAttribute('data-key')});
         }
     }
     render() {

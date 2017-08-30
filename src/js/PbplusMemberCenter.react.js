@@ -6,7 +6,14 @@ import PbplusCalendar from './PbplusCalendar.react.js';
 import '../css/pbplus-member-center.less';
 
 class PbplusMemberCenter extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {activeKey: 'personal-data'};
+        this.setActiveKey = this.setActiveKey.bind(this);
+    }
+    setActiveKey({ key }) { this.setState({activeKey: key}); }
     render() {
+        const { activeKey } = this.state;
         const { displayState, hide } = this.props;
         let displayClassName = '';
         if('hiding' === displayState) { displayClassName = ' pbplus-hiding'; }
@@ -26,7 +33,7 @@ class PbplusMemberCenter extends React.Component {
                 <div className='pbplus-member-center-body'>
                     <div className='pbplus-member-center-summary'></div>
                     <div className='pbplus-member-center-interactions'>
-                        <PbplusTabPanels activeKey='calendar'>
+                        <PbplusTabPanels activeKey={activeKey} setActiveKey={this.setActiveKey}>
                             <div
                                 className='interaction'
                                 data-key='calendar' data-display='日曆中心' data-icon='https://tv.pbplus.me/img/facebook.svg'
