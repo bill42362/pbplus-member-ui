@@ -1,0 +1,48 @@
+// pbplus-tab-panels.less
+
+div.pbplus-tab-panels {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%; height: 100%;
+    div.tab-panels-tabs {
+        display: flex;
+        flex: none;
+        background-color: white;
+        border-bottom: 1px solid whitesmoke;
+        white-space: nowrap;
+        overflow-x: scroll;
+        span.tab-panels-tab {
+            flex: 1;
+            border: 1px solid white;
+            padding: 0.5em 1em;
+            background-color: white;
+            text-align: center;
+            font-size: 10px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: background-color .6s ease, color .6s ease;
+            &.active {
+                background-color: black;
+                color: white;
+                cursor: default;
+            }
+            &:hover { background-color: silver; }
+            &.active:hover { background-color: black; }
+            img.tab-panels-tab-icon {
+                display: block;
+                margin-top: 5px;
+                height: 2em; width: auto;
+                background-color: dimgray;
+            }
+            span.tab-panels-tab-display {
+                display: block;
+                margin-top: 5px;
+            }
+        }
+    }
+    div.tab-panels-panels {
+        flex: auto;
+        position: relative;
+    }
+}

@@ -1,0 +1,111 @@
+// utils.less
+
+.transform(@string){
+    -webkit-transform: @string;
+    -moz-transform: @string;
+    -ms-transform: @string;
+    -o-transform: @string;
+    transform: @string;
+}
+.transparent(@ratio) {
+    zoom: 1;
+    -ms-filter: e("progid:DXImageTransform.Microsoft.Alpha(Opacity=")(100*@ratio)e(");");
+    filter: e("alpha(opacity=")(100*@ratio)e(");");
+    -moz-opacity: @ratio;
+    -khtml-opacity: @ratio;
+    opacity: @ratio;
+}
+.blur(@px) {
+    filter: blur(@px);
+    -webkit-filter: blur(@px);
+    -moz-filter: blur(@px); 
+    -o-filter: blur(@px); 
+    -ms-filter: blur(@px); 
+    filter: e("progid:DXImageTransform.Microsoft.Blur(PixelRadius='")unit(@px)e("');");
+}
+.filter(@string){
+    -webkit-filter: @string;
+    -moz-filter: @string;
+    -ms-filter: @string;
+    -o-filter: @string;
+    filter: @string;
+}
+.animation(@name, @duration: 3s, @delay: 0s, @ease: ease-out, @iterationCount: infinite, @fillMode: normal) {
+    -webkit-animation: @name @duration @ease @delay @iterationCount @fillMode;
+    -moz-animation:    @name @duration @ease @delay @iterationCount @fillMode;
+    -ms-animation:     @name @duration @ease @delay @iterationCount @fillMode;
+    -o-animation:     @name @duration @ease @delay @iterationCount @fillMode;
+    animation:     @name @duration @ease @delay @iterationCount @fillMode;
+}
+.transition(@name, @duration: 1s, @delay: 0s, @ease: ease-out) {
+    -webkit-transition: @name @duration @ease @delay;
+    -moz-transition:    @name @duration @ease @delay;
+    -ms-transition:     @name @duration @ease @delay;
+    -o-transition:     @name @duration @ease @delay;
+    transition:     @name @duration @ease @delay;
+}
+.keyframes (@name, @rules) {
+    @-webkit-keyframes ~'@{name}' { @rules(); }
+    @-moz-keyframes ~'@{name}' { @rules(); }
+    @-ms-keyframes ~'@{name}' { @rules(); }
+    @-o-keyframes ~'@{name}' { @rules(); }
+    @keyframes ~'@{name}' { @rules(); }
+}
+.keyframes(shake, {
+    35% { .transform(rotate(0deg)); }
+    100% { .transform(rotate(0deg)); }
+});
+div.ratio-wrap-4-1 {
+    width: 100%;
+    padding-bottom: 25%;
+    position: relative;
+}
+div.ratio-wrap-16-9 {
+    width: 100%;
+    padding-bottom: 56.25%;
+    position: relative;
+}
+div.ratio-wrap-36-13 {
+    width: 100%;
+    padding-bottom: 36.11%;
+    position: relative;
+}
+div.ratio-wrap-9-5 {
+    width: 100%;
+    padding-bottom: 55.55%;
+    position: relative;
+}
+div.ratio-wrap-75-16 {
+    width: 100%;
+    padding-bottom: 21.33%;
+    position: relative;
+}
+div.ratio-wrap-30-13 {
+    width: 100%;
+    padding-bottom: 43.33%;
+    position: relative;
+}
+div.ratio-wrap-107-33 {
+    width: 100%;
+    padding-bottom: 30.84%;
+    position: relative;
+}
+a, input {
+    text-decoration: none;
+    &:hover { text-decoration: none; }
+    &:visited { text-decoration: none; }
+    &:focus {
+        outline: none;
+        text-decoration: none;
+    }
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
