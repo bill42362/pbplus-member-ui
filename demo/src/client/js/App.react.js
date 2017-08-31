@@ -1,7 +1,7 @@
 // App.react.js
 import React from 'react';
 // import PBPlusMemberUi from 'pbplus-member-ui';
-import { PbplusMemberCenter } from '../../../../src/js/index.js';
+import { PbplusMemberCenter, PbplusCalendar } from '../../../../src/js/index.js';
 import '../css/app.less';
 
 class App extends React.Component {

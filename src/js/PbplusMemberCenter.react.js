@@ -3,6 +3,7 @@
 import React from 'react';
 import PbplusTabPanels from './PbplusTabPanels.react.js';
 import PbplusCalendar from './PbplusCalendar.react.js';
+import PbplusPersonalData from './PbplusPersonalData.react.js';
 import '../css/pbplus-member-center.less';
 
 class PbplusMemberCenter extends React.Component {
@@ -44,9 +45,7 @@ class PbplusMemberCenter extends React.Component {
                                 className='interaction'
                                 data-key='personal-data' data-display='個人資料' data-icon='https://tv.pbplus.me/img/facebook.svg'
                             >
-                                <div className='personal-data'>
-                                    個人資料
-                                </div>
+                                <PbplusPersonalData />
                             </div>
                         </PbplusTabPanels>
                     </div>
