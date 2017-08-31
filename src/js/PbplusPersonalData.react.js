@@ -2,9 +2,42 @@
 'use strict';
 import React from 'react';
 import InputUnit from './InputUnit.react.js';
+import ImageInputBox from './ImageInputBox.react.js';
 import '../css/pbplus-personal-data.less';
 
+const DEFAULT_SIZE = 120;
+const initedImage = new Image();
+initedImage.crossOrigin = 'anonymous';
+const defaultImageEditorState = {
+    top: 0, left: 0, width: DEFAULT_SIZE, height: DEFAULT_SIZE,
+    image: initedImage, resultSource: '',
+};
+
 class PbplusPersonalData extends React.Component {
+    constructor(props) {
+        super(props);
+        this.imageType = /^image\//;
+        this.selectFile = this.selectFile.bind(this);
+        this.onFileChange = this.onFileChange.bind(this);
+    }
+    selectFile(e) {
+        const enableSelectFile = e.target.getAttribute('data-enable_select_file');
+        if(!enableSelectFile) { return ;}
+        const input = this.refs.fileSelector;
+        if(input) {
+            const event = new MouseEvent('click', {
+                'view': window, 'bubbles': false, 'cancelable': true
+            });
+            input.dispatchEvent(event);
+        }
+    }
+    onFileChange(e) {
+        var files = e.target.files;
+        if(files[0] && files[0].type && this.imageType.test(files[0].type)) {
+            let url = URL.createObjectURL(files[0]);
+            this.props.updateImageSource(url);
+        }
+    }
     render() {
         const {
             name = '陳阿寶', gender,
@@ -13,7 +46,27 @@ class PbplusPersonalData extends React.Component {
             email = 'abawchen123@gmail.com', zipcode, address
         } = this.props;
         return <div className='pbplus-personal-data'>
-            <div className='pbplus-personal-data-photo'></div>
+            <div className='pbplus-personal-data-photo'>
+                <div className='pbplus-personal-data-photo-image-input-box-wrapper'>
+                    <ImageInputBox editorState={defaultImageEditorState} selectFile={this.selectFile} />
+                </div>
+                <div className='pbplus-personal-data-photo-functions'>
+                    <input
+                        type='file' ref='fileSelector' className='file-input'
+                        accept='image/*' multiple={false}
+                        onChange={this.onFileChange} aria-label='file-selector'
+                    />
+                    <div
+                        className='pbplus-personal-data-photo-select-file-button' role='button'
+                        data-enable_select_file={true} onClick={this.selectFile}
+                    >
+                        上傳個人照
+                        <div className='pbplus-personal-data-photo-edit-description'>
+                            點一下圖片進行編輯
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-name-wrapper'>
                     <InputUnit title='姓名' value={name} />
