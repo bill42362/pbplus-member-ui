@@ -1,4 +1,6 @@
 // pbplus-tab-panels.less
+@import './base.less';
+@pbplusTabColor: rgb(150, 150, 150);
 
 div.pbplus-tab-panels {
     display: flex;
@@ -8,18 +10,19 @@ div.pbplus-tab-panels {
     div.tab-panels-tabs {
         display: flex;
         flex: none;
-        background-color: white;
+        background-color: @pbplusBackgroundColor;
         border-bottom: 1px solid whitesmoke;
         white-space: nowrap;
         overflow-x: scroll;
         span.tab-panels-tab {
             flex: 1;
             position: relative;
-            border: 1px solid white;
+            border: 1px solid @pbplusBackgroundColor;
             border-bottom: none;
             padding: 0.5em 1em 0;
-            background-color: white;
+            background-color: transparent;
             text-align: center;
+            color: @pbplusTabColor;
             font-size: 10px;
             letter-spacing: 2px;
             cursor: pointer;
@@ -33,7 +36,7 @@ div.pbplus-tab-panels {
                     content: '';
                     border-left: 6px solid transparent;
                     border-right: 6px solid transparent;
-                    border-bottom: 6px solid white;
+                    border-bottom: 6px solid @pbplusBackgroundColor;
                     transform: translate(0px, 2px);
                 }
             }
