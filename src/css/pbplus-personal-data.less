@@ -6,6 +6,24 @@ div.pbplus-personal-data {
         display: flex;
         margin-top: 1em;
     }
+    input {
+        border: 1px solid lightgray;
+        padding: 0.5em 0.5em 0.5em 1.2em;
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+    div[role="button"] {
+        height: 2.5em;
+        border: 1px solid black;
+        border-radius: 2px;
+        padding: 0em 1.3em;
+        line-height: 2.4em;
+        font-size: 14px;
+        font-weight: 900;
+        cursor: pointer;
+        transition: background-color .6s ease, color .6s ease;
+        &:hover { color: white; background-color: black; }
+    }
     div.pbplus-personal-data-name-wrapper { flex: auto; }
     div.pbplus-personal-data-gender-wrapper {
         flex: none;
@@ -46,15 +64,38 @@ div.pbplus-personal-data {
                     &.birthday-year { flex: 3; }
                     input {
                         width: 100%;
-                        border: 1px solid lightgray;
                         margin-right: 0.5em;
-                        padding: 0.5em 0.5em 0.5em 1.2em;
-                        font-size: 14px;
                         text-align: center;
-                        letter-spacing: 2px;
                     }
                 }
             }
+        }
+    }
+    div.pbplus-personal-data-country-wrapper { flex: 1; }
+    div.pbplus-personal-data-mobile-wrapper { flex: 3; margin-left: 0.5em; }
+    div.pbplus-personal-data-mobile-verify-code-wrapper { flex: auto; }
+    div.pbplus-personal-data-mobile-verify-code-button-wrapper {
+        display: flex;
+        flex: none;
+        margin-left: 0.5em;
+        div.pbplus-personal-data-mobile-verify-code-button {
+            align-self: flex-end;
+        }
+    }
+    div.pbplus-personal-data-email-wrapper { flex: auto; }
+    div.pbplus-personal-data-zipcode-wrapper {
+        flex: none;
+        width: 6em;
+    }
+    div.pbplus-personal-data-address-wrapper {
+        flex: auto;
+        margin-left: 0.5em;
+    }
+    div.pbplus-personal-data-submit-button-wrapper {
+        margin-top: 2em;
+        text-align: right;
+        div.pbplus-personal-data-submit-button {
+            display: inline-block;
         }
     }
 }

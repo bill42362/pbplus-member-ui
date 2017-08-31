@@ -9,8 +9,8 @@ class PbplusPersonalData extends React.Component {
         const {
             name = '陳阿寶', gender,
             birthYear, birthMonth, birthDay,
-            country, mobile, mobileVarifyCode,
-            email = 'abawchen123@gmail.com', zipCode, address
+            country, mobile, mobileVerifyCode,
+            email = 'abawchen123@gmail.com', zipcode, address
         } = this.props;
         return <div className='pbplus-personal-data'>
             <div className='pbplus-personal-data-photo'></div>
@@ -46,15 +46,21 @@ class PbplusPersonalData extends React.Component {
                     <InputUnit title='國家' value={country} />
                 </div>
                 <div className='pbplus-personal-data-mobile-wrapper'>
-                    <InputUnit title='手機號碼' value={mobile} inputProps={{placeholder: '0912345678'}}/>
+                    <InputUnit
+                        title='手機號碼' value={mobile}
+                        inputProps={{
+                            placeholder: '0912345678',
+                            type: 'number'
+                        }}
+                    />
                 </div>
             </div>
             <div className='pbplus-personal-data-row'>
-                <div className='pbplus-personal-data-mobile-varify-code-wrapper'>
-                    <InputUnit title='手機驗證碼' value={mobileVarifyCode} />
+                <div className='pbplus-personal-data-mobile-verify-code-wrapper'>
+                    <InputUnit title='手機驗證碼' value={mobileVerifyCode} />
                 </div>
-                <div className='pbplus-personal-data-mobile-varify-code-button-wrapper'>
-                    <div className='pbplus-personal-data-mobile-varify-code-button' role='button'>
+                <div className='pbplus-personal-data-mobile-verify-code-button-wrapper'>
+                    <div className='pbplus-personal-data-mobile-verify-code-button' role='button'>
                         發送驗證碼
                     </div>
                 </div>
@@ -66,17 +72,15 @@ class PbplusPersonalData extends React.Component {
             </div>
             <div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-zipcode-wrapper'>
-                    <InputUnit title='郵遞區號' value={zipCode} inputProps={{type: 'number'}}/>
+                    <InputUnit title='郵遞區號' value={zipcode} inputProps={{type: 'number'}}/>
                 </div>
-                <div className='pbplus-personal-data-adderess-wrapper'>
+                <div className='pbplus-personal-data-address-wrapper'>
                     <InputUnit title='地址' value={address} />
                 </div>
             </div>
-            <div className='pbplus-personal-data-row'>
-                <div className='pbplus-personal-data-submit-button-wrapper'>
-                    <div className='pbplus-personal-data-submit-button' role='button'>
-                        更新資料
-                    </div>
+            <div className='pbplus-personal-data-submit-button-wrapper'>
+                <div className='pbplus-personal-data-submit-button' role='button'>
+                    更新資料
                 </div>
             </div>
         </div>;
