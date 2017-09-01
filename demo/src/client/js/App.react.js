@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import React from 'react';
 import Calendar from './Calendar.js';
 import MemberCenter from './MemberCenter.js';
-// import PBPlusMemberUi from 'pbplus-member-ui';
-import { PbplusMemberCenter, PbplusCalendar } from '../../../../src/js/index.js';
+import PersonalData from './PersonalData.js';
+// import { PbplusMemberCenter, PbplusCalendar, PbplusPersonalData } from 'pbplus-member-ui';
+import { PbplusMemberCenter, PbplusCalendar, PbplusPersonalData } from '../../../../src/js/index.js';
 import '../css/app.less';
 
 const ConnectedPbplusMemberCenter = connect(
@@ -18,6 +19,15 @@ const ConnectedPbplusMemberCenter = connect(
         },
     }; }
 )(PbplusMemberCenter);
+
+const ConnectedPbplusPersonalData = connect(
+    (state, ownProps) => { return Object.assign({}, state.pbplusPersonalData); },
+    (dispatch, ownProps) => { return {
+        updateValue: ({ newValueMap }) => {
+            dispatch(PersonalData.Actions.updateValue({ newValueMap }));
+        },
+    }; }
+)(PbplusPersonalData);
 
 const ConnectedPbplusCalendar = connect(
     (state, ownProps) => { return Object.assign({}, state.pbplusCalendar); },
@@ -61,6 +71,7 @@ class App extends React.Component {
             </div>
             <ConnectedPbplusMemberCenter
                 calendar={<ConnectedPbplusCalendar />}
+                personalData={<ConnectedPbplusPersonalData />}
             />
         </div>;
     }
