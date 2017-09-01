@@ -1,0 +1,98 @@
+// pbplus-member-center.less
+@import './utils.less';
+@import './base.less';
+
+.keyframes(pbplusMemberFullscreenFadeIn, {
+    0% { opacity: 0; }
+    100% { opacity: 0.5; }
+});
+.keyframes(pbplusMemberFullscreenFadeOut, {
+    0% { opacity: 0.5; }
+    100% { opacity: 0; }
+});
+.keyframes(pbplusMemberSlideIn, {
+    0% { right: -435px; }
+    100% { right: 0px; }
+});
+.keyframes(pbplusMemberSlideOut, {
+    0% { right: 0px; }
+    100% { right: -435px; }
+});
+
+div.pbplus-member-center {
+    position: fixed;
+    top: 0; right: 0;
+    width: 100%; height: 100%;
+    box-sizing: border-box;
+    * { box-sizing: border-box; }
+    &.pbplus-hiding {
+        div.pbplus-member-center-fullscreen-background {
+            .animation(pbplusMemberFullscreenFadeOut, .6s, 0s, ease, 1, forwards);
+        }
+        div.pbplus-member-center-content {
+            .animation(pbplusMemberSlideOut, .6s, 0s, ease, 1, forwards);
+        }
+    }
+    &.pbplus-hidden { display: none; }
+    div.pbplus-member-center-fullscreen-background {
+        position: absolute;
+        width: 100%; height: 100%;
+        background-color: white;
+        opacity: 0;
+        cursor: pointer;
+        .animation(pbplusMemberFullscreenFadeIn, .6s, 0s, ease, 1, forwards);
+    }
+    div.pbplus-member-center-content {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 0px; right: 0px;
+        width: 435px; height: 100%;
+        max-width: 100%;
+        padding: 15px 25px;
+        background-color: black;
+        color: white;
+        .animation(pbplusMemberSlideIn, .6s, 0s, ease, 1, forwards);
+        div.pbplus-member-center-header {
+            flex: none;
+            display: flex;
+            div.pbplus-member-center-close-button {
+                flex: none;
+                cursor: pointer;
+            }
+            div.pbplus-member-center-branding {
+                flex: 1;
+                font-size: 12px;
+                text-align: right;
+                img.pbplus-member-center-logo {
+                    display: inline-block;
+                    height: 1em; width: auto;
+                }
+                div.pbplus-member-center-brand-display {
+                    display: inline-block;
+                    margin-left: 0.5em;
+                }
+            }
+        }
+        div.pbplus-member-center-body {
+            flex: auto;
+            display: flex;
+            flex-direction: column;
+            div.pbplus-member-center-summary { flex: none; }
+            div.pbplus-member-center-interactions {
+                flex: auto;
+                display: block;
+                position: relative;
+                margin-top: 10px;
+                color: black;
+                div.interaction {
+                    position: absolute;
+                    border-radius: 0 0 4px 4px;
+                    width: 100%; height: 100%;
+                    background-color: @pbplusBackgroundColor;
+                    overflow-y: scroll;
+                }
+            }
+        }
+    }
+}

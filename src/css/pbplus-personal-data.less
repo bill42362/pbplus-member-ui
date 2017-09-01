@@ -1,0 +1,128 @@
+// pbplus-personal-data.less
+
+div.pbplus-personal-data {
+    padding: 20px;
+    div.pbplus-personal-data-row {
+        display: flex;
+        margin-top: 1em;
+    }
+    input {
+        border: 1px solid lightgray;
+        background-color: transparent;
+        padding: 0.5em 0.5em 0.5em 1.2em;
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+    div[role="button"] {
+        height: 2.4em;
+        border: 1px solid black;
+        border-radius: 2px;
+        padding: 0em 1.3em;
+        line-height: 2.3em;
+        font-size: 14px;
+        font-weight: 900;
+        cursor: pointer;
+        transition: background-color .6s ease, color .6s ease;
+        &:hover { color: white; background-color: black; }
+    }
+    div.pbplus-personal-data-photo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        div.pbplus-personal-data-photo-image-input-box-wrapper { flex: none; }
+        div.pbplus-personal-data-photo-functions {
+            flex: none;
+            margin-left: 1em;
+            input.file-input { display: none; }
+            div.pbplus-personal-data-photo-select-file-button {
+                position: relative;
+                padding-left: 2em;
+                padding-right: 2em;
+                div.pbplus-personal-data-photo-edit-description {
+                    position: absolute;
+                    left: 0px;
+                    width: 100%;
+                    text-align: center;
+                    font-size: 12px;
+                    font-weight: 500;
+                    color: gray;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+    div.pbplus-personal-data-name-wrapper { flex: auto; }
+    div.pbplus-personal-data-gender-wrapper {
+        flex: none;
+        div.pbplus-personal-data-gender {
+            margin-left: 1.5em;
+            div.pbplus-personal-data-gender-title {
+                font-size: 14px;
+                font-weight: 900;
+                letter-spacing: 1px;
+            }
+            label {
+                margin-right: 1em;
+                color: dimgray;
+                font-size: 14px;
+                line-height: 3em;
+                input { margin-left: 0.5em; }
+            }
+        }
+    }
+    div.pbplus-personal-data-birthday-wrapper {
+        width: 100%;
+        div.pbplus-personal-data-birthday {
+            div.pbplus-personal-data-birthday-title {
+                font-size: 14px;
+                font-weight: 900;
+                letter-spacing: 1px;
+            }
+            div.pbplus-personal-data-birthday-row {
+                display: flex;
+                margin-top: 0.4em;
+                label {
+                    display: flex;
+                    flex: 2;
+                    margin-right: 0.8em;
+                    color: dimgray;
+                    font-size: 14px;
+                    line-height: 2.5em;
+                    &.birthday-year { flex: 3; }
+                    input {
+                        width: 100%;
+                        margin-right: 0.8em;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+    div.pbplus-personal-data-country-wrapper { flex: 1; }
+    div.pbplus-personal-data-mobile-wrapper { flex: 3; margin-left: 0.5em; }
+    div.pbplus-personal-data-mobile-verify-code-wrapper { flex: auto; }
+    div.pbplus-personal-data-mobile-verify-code-button-wrapper {
+        display: flex;
+        flex: none;
+        margin-left: 0.5em;
+        div.pbplus-personal-data-mobile-verify-code-button {
+            align-self: flex-end;
+        }
+    }
+    div.pbplus-personal-data-email-wrapper { flex: auto; }
+    div.pbplus-personal-data-zipcode-wrapper {
+        flex: none;
+        width: 6em;
+    }
+    div.pbplus-personal-data-address-wrapper {
+        flex: auto;
+        margin-left: 0.5em;
+    }
+    div.pbplus-personal-data-submit-button-wrapper {
+        margin-top: 1.5em;
+        text-align: right;
+        div.pbplus-personal-data-submit-button {
+            display: inline-block;
+        }
+    }
+}
