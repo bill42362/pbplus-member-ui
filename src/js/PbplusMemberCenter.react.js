@@ -1,5 +1,6 @@
 // PbplusMemberCenter.react.js
 'use strict';
+import PropTypes from 'prop-types';
 import React from 'react';
 import PbplusTabPanels from './PbplusTabPanels.react.js';
 import PbplusCalendar from './PbplusCalendar.react.js';
@@ -54,5 +55,10 @@ class PbplusMemberCenter extends React.Component {
         </div>;
     }
 }
+
+PbplusMemberCenter.propTypes = {
+    displayState: PropTypes.oneOf(['display', 'hiding', 'hidden']).isRequired,
+    hide: PropTypes.func.isRequired,
+};
 
 export default PbplusMemberCenter;
