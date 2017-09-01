@@ -1,6 +1,7 @@
 // App.react.js
 import { connect } from 'react-redux';
 import React from 'react';
+import Calendar from './Calendar.js';
 import MemberCenter from './MemberCenter.js';
 // import PBPlusMemberUi from 'pbplus-member-ui';
 import { PbplusMemberCenter, PbplusCalendar } from '../../../../src/js/index.js';
@@ -18,6 +19,32 @@ const ConnectedPbplusMemberCenter = connect(
     }; }
 )(PbplusMemberCenter);
 
+const ConnectedPbplusCalendar = connect(
+    (state, ownProps) => { return Object.assign({}, state.pbplusCalendar); },
+    (dispatch, ownProps) => {
+        return {
+            goThisMonth: () => {
+                const today = new Date();
+                dispatch(Calendar.Actions.updateMonth({month: today.getMonth(), year: today.getFullYear()}));
+            },
+            goPreviousMonth: ({ currentYear, currentMonth }) => {
+                const previousMonthDate = new Date(currentYear, currentMonth - 1);
+                dispatch(Calendar.Actions.updateMonth({
+                    month: previousMonthDate.getMonth(),
+                    year: previousMonthDate.getFullYear()
+                }));
+            },
+            goNextMonth: ({ currentYear, currentMonth }) => {
+                const nextMonthDate = new Date(currentYear, currentMonth + 1);
+                dispatch(Calendar.Actions.updateMonth({
+                    month: nextMonthDate.getMonth(),
+                    year: nextMonthDate.getFullYear()
+                }));
+            },
+        };
+    }
+)(PbplusCalendar);
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -32,7 +59,9 @@ class App extends React.Component {
             <div className='open-member-center-button' role='button' onClick={this.showMemberCenter}>
                 使用者中心
             </div>
-            <ConnectedPbplusMemberCenter />
+            <ConnectedPbplusMemberCenter
+                calendar={<ConnectedPbplusCalendar />}
+            />
         </div>;
     }
 }

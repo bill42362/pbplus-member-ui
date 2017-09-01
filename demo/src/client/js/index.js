@@ -5,11 +5,13 @@ import { connect, Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MemberCenter from './MemberCenter.js';
+import Calendar from './Calendar.js';
 import App from './App.react.js';
 import '../css/index.less';
 
 const reducer = combineReducers({
     pbplusMemberCenter: MemberCenter.Reducer,
+    pbplusCalendar: Calendar.Reducer,
 })
 const store = createStore(reducer);
 
