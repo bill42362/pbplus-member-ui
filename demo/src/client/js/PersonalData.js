@@ -3,7 +3,7 @@
 
 const defaultState = {
     name: '', gendar: '',
-    birthYear: undefined, birthMonth: undefined, birthDay: undefined,
+    birthYear: '', birthMonth: '', birthDay: '',
     country: undefined, mobile: '',
     mobileVerifyCode: '',
     email: '',

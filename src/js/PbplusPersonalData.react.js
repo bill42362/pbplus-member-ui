@@ -53,9 +53,9 @@ class PbplusPersonalData extends React.Component {
         const gender = e.target.getAttribute('data-gender');
         this.props.updateValue({newValueMap: { gender }});
     }
-    onChangeBirthYear(e) { this.props.updateValue({newValueMap: {year: e.target.value}}); }
-    onChangeBirthMonth(e) { this.props.updateValue({newValueMap: {year: e.target.value}}); }
-    onChangeBirthDay(e) { this.props.updateValue({newValueMap: {year: e.target.value}}); }
+    onChangeBirthYear(e) { this.props.updateValue({newValueMap: {birthYear: e.target.value}}); }
+    onChangeBirthMonth(e) { this.props.updateValue({newValueMap: {birthMonth: e.target.value}}); }
+    onChangeBirthDay(e) { this.props.updateValue({newValueMap: {birthDay: e.target.value}}); }
     onChangeMobile({ value }) { this.props.updateValue({newValueMap: {mobile: value}}); }
     onChangeMobileVarifyCode({ value }) { this.props.updateValue({newValueMap: {mobileVerifyCode: value}}); }
     onChangeEmail({ value }) { this.props.updateValue({newValueMap: {email: value}}); }
