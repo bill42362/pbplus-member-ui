@@ -1,5 +1,6 @@
 // ImageInputBox.react.js
 'use strict';
+import PropTypes from 'prop-types';
 import React from 'react';
 import MouseTracker from './MouseTracker.react.js';
 import '../css/image-input-box.less';
@@ -141,7 +142,7 @@ class ImageInputBox extends React.Component {
     }
     render() {
         const { isEditing, mouseCursor } = this.state;
-        const { editorState, selectFile } = this.props;
+        const { editorState } = this.props;
         const { top, left, width, height, image } = editorState;
         return <div
             className='image-input-box'
@@ -162,6 +163,7 @@ class ImageInputBox extends React.Component {
                 data-enable_select_file={true}
             />
             {isEditing && <div
+                className='mouse-tracker-wrapper'
                 style={{
                     width: 2*moverSize.width,
                     height: 2*moverSize.height,
@@ -180,5 +182,19 @@ class ImageInputBox extends React.Component {
         </div>;
     }
 }
+
+ImageInputBox.propTypes = {
+    editorState: PropTypes.shape({
+        top: PropTypes.number.isRequired,
+        left: PropTypes.number.isRequired,
+        width: PropTypes.number.isRequired,
+        height: PropTypes.number.isRequired,
+        resultSource: PropTypes.string.isRequired,
+        image: PropTypes.object.isRequired,
+    }),
+    updateImageSource: PropTypes.func.isRequired,
+    stretchPicture: PropTypes.func.isRequired,
+    movePicture: PropTypes.func.isRequired,
+};
 
 export default ImageInputBox;

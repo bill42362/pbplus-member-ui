@@ -1,9 +1,8 @@
 // PbplusMemberCenter.react.js
 'use strict';
+import PropTypes from 'prop-types';
 import React from 'react';
 import PbplusTabPanels from './PbplusTabPanels.react.js';
-import PbplusCalendar from './PbplusCalendar.react.js';
-import PbplusPersonalData from './PbplusPersonalData.react.js';
 import '../css/pbplus-member-center.less';
 
 class PbplusMemberCenter extends React.Component {
@@ -15,7 +14,7 @@ class PbplusMemberCenter extends React.Component {
     setActiveKey({ key }) { this.setState({activeKey: key}); }
     render() {
         const { activeKey } = this.state;
-        const { displayState, hide } = this.props;
+        const { displayState, hide, calendar, personalData } = this.props;
         let displayClassName = '';
         if('hiding' === displayState) { displayClassName = ' pbplus-hiding'; }
         else if('hidden' == displayState) { displayClassName = ' pbplus-hidden'; }
@@ -39,13 +38,13 @@ class PbplusMemberCenter extends React.Component {
                                 className='interaction'
                                 data-key='calendar' data-display='日曆中心' data-icon='https://tv.pbplus.me/img/facebook.svg'
                             >
-                                <PbplusCalendar year={2017} month={7} />
+                                {calendar}
                             </div>
                             <div
                                 className='interaction'
                                 data-key='personal-data' data-display='個人資料' data-icon='https://tv.pbplus.me/img/facebook.svg'
                             >
-                                <PbplusPersonalData />
+                                {personalData}
                             </div>
                         </PbplusTabPanels>
                     </div>
@@ -54,5 +53,12 @@ class PbplusMemberCenter extends React.Component {
         </div>;
     }
 }
+
+PbplusMemberCenter.propTypes = {
+    displayState: PropTypes.oneOf(['display', 'hiding', 'hidden']).isRequired,
+    hide: PropTypes.func.isRequired,
+    calendar: PropTypes.element.isRequired,
+    personalData: PropTypes.element.isRequired,
+};
 
 export default PbplusMemberCenter;

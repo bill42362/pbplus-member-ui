@@ -1,11 +1,17 @@
 // PbplusCalendar.react.js
 'use strict';
+import PropTypes from 'prop-types';
 import React from 'react';
 import '../css/pbplus-calendar.less';
 
 const monthStringMap = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十' , '十一', '十二'];
 
 class PbplusCalendar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.goPreviousMonth = this.goPreviousMonth.bind(this);
+        this.goNextMonth = this.goNextMonth.bind(this);
+    }
     getDatesOfPreviousMonth(date) {
         const dayCountBeforeFirstDate = date.getDay();
         const lastDateOfPreviousMonth = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
@@ -22,9 +28,17 @@ class PbplusCalendar extends React.Component {
         const dayCountAfterLastDate = 6 - lastDate.getDay();
         return new Array(dayCountAfterLastDate).fill(0).map((omit, index) => index + 1);
     }
+    goPreviousMonth() {
+        const { month, year, goPreviousMonth } = this.props;
+        goPreviousMonth({currentYear: year, currentMonth: month});
+    }
+    goNextMonth() {
+        const { month, year, goNextMonth } = this.props;
+        goNextMonth({currentYear: year, currentMonth: month});
+    }
     preventSelect(e) { e.preventDefault(); }
     render() {
-        const { month, year, goThisMonth, goPreviousMonth, goNextMonth } = this.props;
+        const { month, year, goThisMonth } = this.props;
         const today = new Date();
         const todayYear = today.getFullYear(), todayMonth = today.getMonth(), todayDate = today.getDate();
         const date = new Date(year, month);
@@ -48,7 +62,7 @@ class PbplusCalendar extends React.Component {
                 <div className='calendar-month-selector'>
                     <div
                         className='calendar-last-month-button' role='button'
-                        onClick={goPreviousMonth} onMouseDown={this.preventSelect}
+                        onClick={this.goPreviousMonth} onMouseDown={this.preventSelect}
                     >{'<'}</div>
                     <div
                         className='calendar-month-display' role='button'
@@ -56,7 +70,7 @@ class PbplusCalendar extends React.Component {
                     >{`${monthString}月 ${year}`}</div>
                     <div
                         className='calendar-next-month-button' role='button'
-                        onClick={goNextMonth} onMouseDown={this.preventSelect}
+                        onClick={this.goNextMonth} onMouseDown={this.preventSelect}
                     >{'>'}</div>
                 </div>
                 <div className='calendar-legend'>
@@ -95,5 +109,13 @@ class PbplusCalendar extends React.Component {
         </div>;
     }
 }
+
+PbplusCalendar.propTypes = {
+    month: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]).isRequired,
+    year: PropTypes.number.isRequired,
+    goThisMonth: PropTypes.func.isRequired,
+    goNextMonth: PropTypes.func.isRequired,
+    goPreviousMonth: PropTypes.func.isRequired,
+};
 
 export default PbplusCalendar;
