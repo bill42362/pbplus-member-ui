@@ -53,9 +53,9 @@ class PbplusPersonalData extends React.Component {
         const gender = e.target.getAttribute('data-gender');
         this.props.updateValue({newValueMap: { gender }});
     }
-    onChangeBirthYear(e) { this.props.updateValue({newValueMap: {year: e.target.value}}); }
-    onChangeBirthMonth(e) { this.props.updateValue({newValueMap: {year: e.target.value}}); }
-    onChangeBirthDay(e) { this.props.updateValue({newValueMap: {year: e.target.value}}); }
+    onChangeBirthYear(e) { this.props.updateValue({newValueMap: {birthYear: e.target.value}}); }
+    onChangeBirthMonth(e) { this.props.updateValue({newValueMap: {birthMonth: e.target.value}}); }
+    onChangeBirthDay(e) { this.props.updateValue({newValueMap: {birthDay: e.target.value}}); }
     onChangeMobile({ value }) { this.props.updateValue({newValueMap: {mobile: value}}); }
     onChangeMobileVarifyCode({ value }) { this.props.updateValue({newValueMap: {mobileVerifyCode: value}}); }
     onChangeEmail({ value }) { this.props.updateValue({newValueMap: {email: value}}); }
@@ -63,11 +63,11 @@ class PbplusPersonalData extends React.Component {
     onChangeAddress({ value }) { this.props.updateValue({newValueMap: {address: value}}); }
     render() {
         const {
-            name, gender,
+            photo, name, gender,
             birthYear, birthMonth, birthDay,
             country, mobile, mobileVerifyCode,
             email, zipcode, address,
-            imageInputBox
+            imageInputBox, submit
         } = this.props;
         return <div className='pbplus-personal-data'>
             <div className='pbplus-personal-data-photo'>
@@ -180,9 +180,15 @@ class PbplusPersonalData extends React.Component {
                 </div>
             </div>
             <div className='pbplus-personal-data-submit-button-wrapper'>
-                <div className='pbplus-personal-data-submit-button' role='button'>
-                    更新資料
-                </div>
+                <div
+                    className='pbplus-personal-data-submit-button' role='button'
+                    onClick={() => { submit({
+                        photo, name, gender,
+                        birthYear, birthMonth, birthDay,
+                        country, mobile, mobileVerifyCode,
+                        email, zipcode, address
+                    }); }}
+                >更新資料</div>
             </div>
         </div>;
     }
@@ -192,6 +198,7 @@ PbplusPersonalData.propTypes = {
     updateValue: PropTypes.func.isRequired,
     imageInputBox: PropTypes.element.isRequired,
     updateImageSource: PropTypes.func.isRequired,
+    submit: PropTypes.func.isRequired,
 };
 
 export default PbplusPersonalData;
