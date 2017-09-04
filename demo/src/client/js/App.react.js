@@ -40,6 +40,7 @@ const ConnectedPbplusImageInputBox = connect(
 const ConnectedPbplusPersonalData = connect(
     (state, ownProps) => {
         return Object.assign({}, state.pbplusPersonalData, {
+            photo: state.pbplusPictureEditor.resultSource,
             imageInputBox: <ConnectedPbplusImageInputBox />,
         });
     },
@@ -48,6 +49,20 @@ const ConnectedPbplusPersonalData = connect(
             dispatch(PersonalData.Actions.updateValue({ newValueMap }));
         },
         updateImageSource: (url) => { dispatch(PictureEditor.Actions.updateImageSource(url)); },
+        submit: ({
+            photo, name, gender,
+            birthYear, birthMonth, birthDay,
+            country, mobile, mobileVerifyCode,
+            email, zipcode, address
+        }) => {
+            console.log(
+                'submit()',
+                photo, name, gender,
+                birthYear, birthMonth, birthDay,
+                country, mobile, mobileVerifyCode,
+                email, zipcode, address
+            );
+        },
     }; }
 )(PbplusPersonalData);
 
