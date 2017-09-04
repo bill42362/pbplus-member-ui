@@ -4,8 +4,11 @@ import React from 'react';
 import Calendar from './Calendar.js';
 import MemberCenter from './MemberCenter.js';
 import PersonalData from './PersonalData.js';
+import PictureEditor from './PictureEditor.js';
 // import { PbplusMemberCenter, PbplusCalendar, PbplusPersonalData } from 'pbplus-member-ui';
-import { PbplusMemberCenter, PbplusCalendar, PbplusPersonalData } from '../../../../src/js/index.js';
+import {
+    PbplusMemberCenter, PbplusCalendar, PbplusPersonalData, PbplusImageInputBox
+} from '../../../../src/js/index.js';
 import '../css/app.less';
 
 const ConnectedPbplusMemberCenter = connect(
@@ -20,12 +23,31 @@ const ConnectedPbplusMemberCenter = connect(
     }; }
 )(PbplusMemberCenter);
 
+const ConnectedPbplusImageInputBox = connect(
+    (state, ownProps) => { return {
+        editorState: state.pbplusPictureEditor,
+    }; },
+    (dispatch, ownProps) => { return {
+        updateImageSource: (url) => { dispatch(PictureEditor.Actions.updateImageSource(url)); },
+        movePicture: (move) => {
+            console.log('movePicture() move:', move);
+            dispatch(PictureEditor.Actions.movePicture(move));
+        },
+        stretchPicture: (stretch) => { dispatch(PictureEditor.Actions.stretchPicture(stretch)); },
+    }; }
+)(PbplusImageInputBox);
+
 const ConnectedPbplusPersonalData = connect(
-    (state, ownProps) => { return Object.assign({}, state.pbplusPersonalData); },
+    (state, ownProps) => {
+        return Object.assign({}, state.pbplusPersonalData, {
+            imageInputBox: <ConnectedPbplusImageInputBox />,
+        });
+    },
     (dispatch, ownProps) => { return {
         updateValue: ({ newValueMap }) => {
             dispatch(PersonalData.Actions.updateValue({ newValueMap }));
         },
+        updateImageSource: (url) => { dispatch(PictureEditor.Actions.updateImageSource(url)); },
     }; }
 )(PbplusPersonalData);
 

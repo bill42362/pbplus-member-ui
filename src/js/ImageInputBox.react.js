@@ -141,7 +141,7 @@ class ImageInputBox extends React.Component {
     }
     render() {
         const { isEditing, mouseCursor } = this.state;
-        const { editorState, selectFile } = this.props;
+        const { editorState } = this.props;
         const { top, left, width, height, image } = editorState;
         return <div
             className='image-input-box'
@@ -162,6 +162,7 @@ class ImageInputBox extends React.Component {
                 data-enable_select_file={true}
             />
             {isEditing && <div
+                className='mouse-tracker-wrapper'
                 style={{
                     width: 2*moverSize.width,
                     height: 2*moverSize.height,

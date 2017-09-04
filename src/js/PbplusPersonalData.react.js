@@ -3,7 +3,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import InputUnit from './InputUnit.react.js';
-import ImageInputBox from './ImageInputBox.react.js';
 import '../css/pbplus-personal-data.less';
 
 const DEFAULT_SIZE = 120;
@@ -67,12 +66,13 @@ class PbplusPersonalData extends React.Component {
             name, gender,
             birthYear, birthMonth, birthDay,
             country, mobile, mobileVerifyCode,
-            email, zipcode, address
+            email, zipcode, address,
+            imageInputBox
         } = this.props;
         return <div className='pbplus-personal-data'>
             <div className='pbplus-personal-data-photo'>
                 <div className='pbplus-personal-data-photo-image-input-box-wrapper'>
-                    <ImageInputBox editorState={defaultImageEditorState} selectFile={this.selectFile} />
+                    {imageInputBox}
                 </div>
                 <div className='pbplus-personal-data-photo-functions'>
                     <input
@@ -190,6 +190,8 @@ class PbplusPersonalData extends React.Component {
 
 PbplusPersonalData.propTypes = {
     updateValue: PropTypes.func.isRequired,
+    imageInputBox: PropTypes.element.isRequired,
+    updateImageSource: PropTypes.func.isRequired,
 };
 
 export default PbplusPersonalData;
