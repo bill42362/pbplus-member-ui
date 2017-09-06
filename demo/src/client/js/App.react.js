@@ -80,6 +80,7 @@ const ConnectedPbplusCalendar = connect(
     (dispatch, ownProps) => {
         return {
             fetchCommingEvents: () => { dispatch(Calendar.Actions.fetchCommingEvents()); },
+            selectDate: ({ date }) => { dispatch(Calendar.Actions.updateSelectedDate({ date})); },
             goThisMonth: () => {
                 const today = new Date();
                 dispatch(Calendar.Actions.updateMonth({month: today.getMonth(), year: today.getFullYear()}));

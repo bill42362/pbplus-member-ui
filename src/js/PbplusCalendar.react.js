@@ -39,7 +39,7 @@ class PbplusCalendar extends React.Component {
     preventSelect(e) { e.preventDefault(); }
     componentDidMount() { this.props.fetchCommingEvents(); }
     render() {
-        const { month, year, events, promotions, goThisMonth } = this.props;
+        const { selectedDate, month, year, events, promotions, selectDate, goThisMonth } = this.props;
         const today = new Date();
         const todayYear = today.getFullYear(), todayMonth = today.getMonth(), todayDate = today.getDate();
         const date = new Date(year, month);
@@ -100,12 +100,15 @@ class PbplusCalendar extends React.Component {
                         return <div className='calendar-week' key={weekIndex}>
                             {calendarWeek.map((calendarDay, index) => {
                                 const notThisMonthClassName = month === calendarDay.month ? '' : ' not-this-month';
-                                const isToday = calendarDay.isThisMonth
+                                const isToday = month === calendarDay.month
                                     && year === todayYear
                                     && month === todayMonth
                                     && calendarDay.date === todayDate;
                                 const dateString = isToday ? '今天' : ('0' + calendarDay.date).slice(-2);
-                                const calendarDateString = new Date(year, calendarDay.month, calendarDay.date).toDateString();
+                                const calendarDateObject = new Date(year, calendarDay.month, calendarDay.date);
+                                const calendarDateString = calendarDateObject.toDateString();
+                                const isSelectedDay = selectedDate.toDateString() === calendarDateString;
+                                const selectedDayClassName = isSelectedDay ? ' selected-day' : '';
                                 const todayEvents = events.filter(event => {
                                     return calendarDateString === event.date.toDateString();
                                 });
@@ -116,7 +119,10 @@ class PbplusCalendar extends React.Component {
                                 let noticeClassName = '';
                                 if(hasEvent) { noticeClassName = ' has-event'; }
                                 else if(hasPromotion) { noticeClassName = ' has-promotion'; }
-                                return <div className={`calendar-day${notThisMonthClassName}`} key={index}>
+                                return <div
+                                    className={`calendar-day${notThisMonthClassName}${selectedDayClassName}`} key={index}
+                                    onClick={() => { selectDate({date: calendarDateObject}); }}
+                                >
                                     {dateString}
                                     {(hasEvent || hasPromotion) && <div
                                         className={`calendar-day-notice${noticeClassName}`}
@@ -132,10 +138,12 @@ class PbplusCalendar extends React.Component {
 }
 
 PbplusCalendar.propTypes = {
+    selectedDate: PropTypes.object.isRequired,
     month: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]).isRequired,
     year: PropTypes.number.isRequired,
     events: PropTypes.array.isRequired,
     promotions: PropTypes.array.isRequired,
+    selectDate: PropTypes.func.isRequired,
     goThisMonth: PropTypes.func.isRequired,
     goNextMonth: PropTypes.func.isRequired,
     goPreviousMonth: PropTypes.func.isRequired,

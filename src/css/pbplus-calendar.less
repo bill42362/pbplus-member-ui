@@ -74,11 +74,15 @@ div.pbplus-calendar {
                     line-height: 3em;
                     text-align: center;
                     font-size: 14px;
+                    cursor: pointer;
                     &.not-this-month {
                         opacity: 0;
                         transition: opacity .6s ease;
                         &:hover { opacity: 0.5; }
                     }
+                    &.selected-day { background-color: #d5d4d9; }
+                    &:hover { background-color: lighten(#d5d4d9, 10%); }
+                    &.selected-day:hover { background-color: darken(#d5d4d9, 10%); }
                     &:first-of-type { margin-left: 15px; }
                     &:last-of-type { margin-right: 15px; }
                     div.calendar-day-notice {

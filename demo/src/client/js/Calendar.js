@@ -4,6 +4,7 @@ import 'isomorphic-fetch';
 
 const today = new Date();
 const defaultState = {
+    selectedDate: today,
     month: today.getMonth(),
     year: today.getFullYear(),
     events: [],
@@ -12,6 +13,9 @@ const defaultState = {
 
 const Reducer = (state = defaultState, action) => {
     switch(action.type) {
+        case 'UPDATE_CALENDAR_SELECTED_DATE':
+            return Object.assign({}, state, action.payload);
+            break;
         case 'UPDATE_CALENDAR_MONTH':
             return Object.assign({}, state, action.payload);
             break;
@@ -22,6 +26,10 @@ const Reducer = (state = defaultState, action) => {
             return state;
     }
 }
+
+const updateSelectedDate = ({ date }) => {
+    return {type: 'UPDATE_CALENDAR_SELECTED_DATE', payload: {selectedDate: date}};
+};
 
 const updateMonth = ({ year, month }) => {
     return {type: 'UPDATE_CALENDAR_MONTH', payload: { year, month }};
@@ -44,6 +52,6 @@ const fetchCommingEvents = () => { return (dispatch, getState) => {
     .catch(error => { console.log(error); });
 }; };
 
-const Actions = { updateMonth, fetchCommingEvents };
+const Actions = { updateSelectedDate, updateMonth, fetchCommingEvents };
 
 export default { Reducer, Actions };
