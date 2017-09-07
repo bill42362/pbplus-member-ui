@@ -8,7 +8,7 @@ import '../css/pbplus-member-center.less';
 class PbplusMemberCenter extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {activeKey: 'personal-data'};
+        this.state = {activeKey: 'calendar'};
         this.setActiveKey = this.setActiveKey.bind(this);
     }
     setActiveKey({ key }) { this.setState({activeKey: key}); }

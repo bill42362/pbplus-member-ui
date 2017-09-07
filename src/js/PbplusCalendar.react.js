@@ -2,6 +2,7 @@
 'use strict';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { getDateStringWithFormat } from './utils.js';
 import '../css/pbplus-calendar.less';
 
 const monthStringMap = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十' , '十一', '十二'];
@@ -37,8 +38,9 @@ class PbplusCalendar extends React.Component {
         goNextMonth({currentYear: year, currentMonth: month});
     }
     preventSelect(e) { e.preventDefault(); }
+    componentDidMount() { this.props.fetchCommingEvents(); }
     render() {
-        const { month, year, goThisMonth } = this.props;
+        const { selectedDate, month, year, events, promotions, selectDate, goThisMonth } = this.props;
         const today = new Date();
         const todayYear = today.getFullYear(), todayMonth = today.getMonth(), todayDate = today.getDate();
         const date = new Date(year, month);
@@ -48,14 +50,23 @@ class PbplusCalendar extends React.Component {
         const datesOfThisMonth = this.getDatesOfThisMonth(date);
         const datesOfNextMonth = this.getDatesOfNextMonth(date);
 
-        const previousMonthDateObjects = datesOfPreviousMonth.map(date => ({isThisMonth: false, date}));
-        const thisMonthDateObjects = datesOfThisMonth.map(date => ({isThisMonth: true, date}));
-        const nextMonthDateObjects = datesOfNextMonth.map(date => ({isThisMonth: false, date}));
+        const previousMonthDateObjects = datesOfPreviousMonth.map(date => ({month: month - 1, date }));
+        const thisMonthDateObjects = datesOfThisMonth.map(date => ({ month, date }));
+        const nextMonthDateObjects = datesOfNextMonth.map(date => ({month: month + 1, date }));
 
         const calendarDates = [...previousMonthDateObjects, ...thisMonthDateObjects, ...nextMonthDateObjects];
         const tempArray = [...calendarDates];
         const calendarWeeks = [];
         while(0 < tempArray.length) { calendarWeeks.push(tempArray.splice(0, 7)); }
+
+        const selectedDateString = selectedDate.toDateString();
+        const selectedDateEvents = events
+            .filter(event => selectedDateString === event.date.toDateString())
+            .map(event => Object.assign({}, event, {type: 'event'}));
+        const selectedDatePromotions = promotions
+            .filter(promotion => selectedDateString === promotion.date.toDateString())
+            .map(promotion => Object.assign({}, promotion, {type: 'promotion'}));
+        const selectedDateItems = [...selectedDateEvents, ...selectedDatePromotions];
 
         return <div className='pbplus-calendar'>
             <div className='calendar-header'>
@@ -74,8 +85,14 @@ class PbplusCalendar extends React.Component {
                     >{'>'}</div>
                 </div>
                 <div className='calendar-legend'>
-                    <div className='calendar-legend-item'>即將來臨的活動/優惠</div>
-                    <div className='calendar-legend-item'>已報名之活動</div>
+                    <div className='calendar-legend-item'>
+                        <div className='calendar-day-notice has-promotion' />
+                        即將來臨的活動/優惠
+                    </div>
+                    <div className='calendar-legend-item'>
+                        <div className='calendar-day-notice has-event' />
+                        已報名之活動
+                    </div>
                 </div>
             </div>
             <div className='calendar-body'>
@@ -92,17 +109,70 @@ class PbplusCalendar extends React.Component {
                     {calendarWeeks.map((calendarWeek, weekIndex) => {
                         return <div className='calendar-week' key={weekIndex}>
                             {calendarWeek.map((calendarDay, index) => {
-                                const notThisMonthClassName = calendarDay.isThisMonth ? '' : ' not-this-month';
-                                const isToday = calendarDay.isThisMonth
+                                const notThisMonthClassName = month === calendarDay.month ? '' : ' not-this-month';
+                                const isToday = month === calendarDay.month
                                     && year === todayYear
                                     && month === todayMonth
                                     && calendarDay.date === todayDate;
                                 const dateString = isToday ? '今天' : ('0' + calendarDay.date).slice(-2);
-                                return <div className={`calendar-day${notThisMonthClassName}`} key={index}>
+                                const calendarDateObject = new Date(year, calendarDay.month, calendarDay.date);
+                                const calendarDateString = calendarDateObject.toDateString();
+                                const isSelectedDay = selectedDateString === calendarDateString;
+                                const selectedDayClassName = isSelectedDay ? ' selected-day' : '';
+                                const todayEvents = events.filter(event => {
+                                    return calendarDateString === event.date.toDateString();
+                                });
+                                const hasEvent = !!todayEvents[0];
+                                const hasPromotion = !!promotions.filter(event => {
+                                    return calendarDateString === event.date.toDateString();
+                                })[0];
+                                let noticeClassName = '';
+                                if(hasEvent) { noticeClassName = ' has-event'; }
+                                else if(hasPromotion) { noticeClassName = ' has-promotion'; }
+                                return <div
+                                    className={`calendar-day${notThisMonthClassName}${selectedDayClassName}`} key={index}
+                                    onClick={() => { selectDate({date: calendarDateObject}); }}
+                                >
                                     {dateString}
+                                    {(hasEvent || hasPromotion) && <div
+                                        className={`calendar-day-notice${noticeClassName}`}
+                                    />}
                                 </div>;
                             })}
                         </div>;
+                    })}
+                </div>
+                <div className='calendar-items'>
+                    {selectedDateItems.map((item, index) => {
+                        const defaultBanner = 'event' === item.type
+                            ? 'https://tv.pbplus.me/img/facebook.svg'
+                            : 'https://tv.pbplus.me/img/youtube.svg';
+                        return <a className='calendar-item' href={item.link} key={index}>
+                            <div className='calendar-item-banner-wrapper'>
+                                <img
+                                    className='calendar-item-banner'
+                                    src={item.banner || defaultBanner}
+                                    title={item.title}
+                                />
+                            </div>
+                            <div className='calendar-item-info'>
+                                <div className='calendar-item-info-title'>{item.title}</div>
+                                <div className='calendar-item-info-date'>
+                                    <span className='calendar-item-info-date-date'>
+                                        {getDateStringWithFormat({
+                                            timestamp: item.date.getTime(),
+                                            format: 'YYYY / MM / DD',
+                                        })}
+                                    </span>
+                                    <span className='calendar-item-info-date-time'>
+                                        {getDateStringWithFormat({
+                                            timestamp: item.date.getTime(),
+                                            format: 'hh:mm',
+                                        })}
+                                    </span>
+                                </div>
+                            </div>
+                        </a>;
                     })}
                 </div>
             </div>
@@ -111,11 +181,16 @@ class PbplusCalendar extends React.Component {
 }
 
 PbplusCalendar.propTypes = {
+    selectedDate: PropTypes.object.isRequired,
     month: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]).isRequired,
     year: PropTypes.number.isRequired,
+    events: PropTypes.array.isRequired,
+    promotions: PropTypes.array.isRequired,
+    selectDate: PropTypes.func.isRequired,
     goThisMonth: PropTypes.func.isRequired,
     goNextMonth: PropTypes.func.isRequired,
     goPreviousMonth: PropTypes.func.isRequired,
+    fetchCommingEvents: PropTypes.func.isRequired,
 };
 
 export default PbplusCalendar;

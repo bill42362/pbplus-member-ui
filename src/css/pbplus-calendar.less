@@ -36,6 +36,17 @@ div.pbplus-calendar {
             flex: auto;
             font-size: 12px;
             text-align: right;
+            div.calendar-legend-item {
+                div.calendar-day-notice {
+                    display: inline-block;
+                    border-radius: 0.25em;
+                    margin: 0 0.25em 0.15em 0;
+                    background-color: dimgray;
+                    width: 0.5em; height: 0.5em;
+                    &.has-event { background-color: #f1632b; }
+                    &.has-promotion { background-color: #1895c8; }
+                }
+            }
         }
     }
     div.calendar-body {
@@ -57,18 +68,56 @@ div.pbplus-calendar {
                 border-bottom: 1px solid lightgray;
                 div.calendar-day {
                     flex: 1;
+                    position: relative;
                     display: inline-block;
                     height: 3em;
                     line-height: 3em;
                     text-align: center;
                     font-size: 14px;
+                    cursor: pointer;
                     &.not-this-month {
                         opacity: 0;
                         transition: opacity .6s ease;
                         &:hover { opacity: 0.5; }
                     }
-                    &:first-of-type { padding-left: 15px; }
-                    &:last-of-type { padding-right: 15px; }
+                    &.selected-day { background-color: #d5d4d9; }
+                    &:hover { background-color: lighten(#d5d4d9, 10%); }
+                    &.selected-day:hover { background-color: darken(#d5d4d9, 10%); }
+                    &:first-of-type { margin-left: 15px; }
+                    &:last-of-type { margin-right: 15px; }
+                    div.calendar-day-notice {
+                        position: absolute;
+                        border-radius: 0.25em;
+                        background-color: dimgray;
+                        width: 0.5em; height: 0.5em;
+                        bottom: 0.3em; left: 50%;
+                        transform: translateX(-0.25em);
+                        &.has-event { background-color: #f1632b; }
+                        &.has-promotion { background-color: #1895c8; }
+                    }
+                }
+            }
+        }
+    }
+    div.calendar-items {
+        margin-top: 3em;
+        a.calendar-item {
+            display: flex;
+            margin: 1.5em;
+            color: inherit;
+            div.calendar-item-banner-wrapper {
+                flex: none;
+                img.calendar-item-banner {
+                    background-color: dimgray;
+                    width: 5em; height: 5em;
+                }
+            }
+            div.calendar-item-info {
+                flex: auto;
+                margin-left: 1.5em;
+                line-height: 1.7em;
+                div.calendar-item-info-date {
+                    span.calendar-item-info-date-time { margin-left: 0.8em; }
                 }
             }
         }
