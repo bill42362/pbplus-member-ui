@@ -69,13 +69,11 @@ const ConnectedPbplusPersonalData = connect(
 const ConnectedPbplusCalendar = connect(
     (state, ownProps) => {
         const { month, year, events, promotions } = state.pbplusCalendar;
-        const thisMonthEvents = state.pbplusCalendar.events
-        .map(event => Object.assign({}, event, {date: new Date(event.event_start_date)}))
-        .filter(event => month === event.date.getMonth() && year === event.date.getFullYear());
-        const thisMonthPromotions = state.pbplusCalendar.promotions
-        .map(promotion => Object.assign({}, promotion, {date: new Date(promotion.event_start_date)}))
-        .filter(promotion => month === promotion.date.getMonth() && year === promotion.date.getFullYear());
-        return Object.assign({}, state.pbplusCalendar, {events: thisMonthEvents, promotions: thisMonthPromotions});
+        const eventsWithDate = state.pbplusCalendar.events
+        .map(event => Object.assign({}, event, {date: new Date(event.event_start_date)}));
+        const promotionsWithDate = state.pbplusCalendar.promotions
+        .map(promotion => Object.assign({}, promotion, {date: new Date(promotion.event_start_date)}));
+        return Object.assign({}, state.pbplusCalendar, {events: eventsWithDate, promotions: promotionsWithDate});
     },
     (dispatch, ownProps) => {
         return {

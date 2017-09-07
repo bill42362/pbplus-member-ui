@@ -99,4 +99,27 @@ div.pbplus-calendar {
             }
         }
     }
+    div.calendar-items {
+        margin-top: 3em;
+        a.calendar-item {
+            display: flex;
+            margin: 1.5em;
+            color: inherit;
+            div.calendar-item-banner-wrapper {
+                flex: none;
+                img.calendar-item-banner {
+                    background-color: dimgray;
+                    width: 5em; height: 5em;
+                }
+            }
+            div.calendar-item-info {
+                flex: auto;
+                margin-left: 1.5em;
+                line-height: 1.7em;
+                div.calendar-item-info-date {
+                    span.calendar-item-info-date-time { margin-left: 0.8em; }
+                }
+            }
+        }
+    }
 }

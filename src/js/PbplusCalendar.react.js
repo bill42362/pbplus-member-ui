@@ -2,6 +2,7 @@
 'use strict';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { getDateStringWithFormat } from './utils.js';
 import '../css/pbplus-calendar.less';
 
 const monthStringMap = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十' , '十一', '十二'];
@@ -58,6 +59,15 @@ class PbplusCalendar extends React.Component {
         const calendarWeeks = [];
         while(0 < tempArray.length) { calendarWeeks.push(tempArray.splice(0, 7)); }
 
+        const selectedDateString = selectedDate.toDateString();
+        const selectedDateEvents = events
+            .filter(event => selectedDateString === event.date.toDateString())
+            .map(event => Object.assign({}, event, {type: 'event'}));
+        const selectedDatePromotions = promotions
+            .filter(promotion => selectedDateString === promotion.date.toDateString())
+            .map(promotion => Object.assign({}, promotion, {type: 'promotion'}));
+        const selectedDateItems = [...selectedDateEvents, ...selectedDatePromotions];
+
         return <div className='pbplus-calendar'>
             <div className='calendar-header'>
                 <div className='calendar-month-selector'>
@@ -107,7 +117,7 @@ class PbplusCalendar extends React.Component {
                                 const dateString = isToday ? '今天' : ('0' + calendarDay.date).slice(-2);
                                 const calendarDateObject = new Date(year, calendarDay.month, calendarDay.date);
                                 const calendarDateString = calendarDateObject.toDateString();
-                                const isSelectedDay = selectedDate.toDateString() === calendarDateString;
+                                const isSelectedDay = selectedDateString === calendarDateString;
                                 const selectedDayClassName = isSelectedDay ? ' selected-day' : '';
                                 const todayEvents = events.filter(event => {
                                     return calendarDateString === event.date.toDateString();
@@ -130,6 +140,39 @@ class PbplusCalendar extends React.Component {
                                 </div>;
                             })}
                         </div>;
+                    })}
+                </div>
+                <div className='calendar-items'>
+                    {selectedDateItems.map((item, index) => {
+                        const defaultBanner = 'event' === item.type
+                            ? 'https://tv.pbplus.me/img/facebook.svg'
+                            : 'https://tv.pbplus.me/img/youtube.svg';
+                        return <a className='calendar-item' href={item.link} key={index}>
+                            <div className='calendar-item-banner-wrapper'>
+                                <img
+                                    className='calendar-item-banner'
+                                    src={item.banner || defaultBanner}
+                                    title={item.title}
+                                />
+                            </div>
+                            <div className='calendar-item-info'>
+                                <div className='calendar-item-info-title'>{item.title}</div>
+                                <div className='calendar-item-info-date'>
+                                    <span className='calendar-item-info-date-date'>
+                                        {getDateStringWithFormat({
+                                            timestamp: item.date.getTime(),
+                                            format: 'YYYY / MM / DD',
+                                        })}
+                                    </span>
+                                    <span className='calendar-item-info-date-time'>
+                                        {getDateStringWithFormat({
+                                            timestamp: item.date.getTime(),
+                                            format: 'hh:mm',
+                                        })}
+                                    </span>
+                                </div>
+                            </div>
+                        </a>;
                     })}
                 </div>
             </div>
