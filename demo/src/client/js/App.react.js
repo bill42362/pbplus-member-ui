@@ -7,7 +7,7 @@ import PersonalData from './PersonalData.js';
 import PictureEditor from './PictureEditor.js';
 // import { PbplusMemberCenter, PbplusCalendar, PbplusPersonalData } from 'pbplus-member-ui';
 import {
-    PbplusMemberCenter, PbplusCalendar, PbplusPersonalData, PbplusImageInputBox
+    PbplusMemberCenter, PbplusCalendar, PbplusPointCounter, PbplusPersonalData, PbplusImageInputBox
 } from '../../../../src/js/index.js';
 import '../css/app.less';
 
@@ -22,6 +22,13 @@ const ConnectedPbplusMemberCenter = connect(
         },
     }; }
 )(PbplusMemberCenter);
+
+const ConnectedPbplusPointCounter = connect(
+    (state, ownProps) => { return {
+    }; },
+    (dispatch, ownProps) => { return {
+    }; }
+)(PbplusPointCounter);
 
 const ConnectedPbplusImageInputBox = connect(
     (state, ownProps) => { return {
@@ -114,6 +121,7 @@ class App extends React.Component {
             </div>
             <ConnectedPbplusMemberCenter
                 calendar={<ConnectedPbplusCalendar />}
+                pointCounter={<ConnectedPbplusPointCounter />}
                 personalData={<ConnectedPbplusPersonalData />}
             />
         </div>;

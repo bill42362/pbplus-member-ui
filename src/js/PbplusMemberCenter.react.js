@@ -14,7 +14,7 @@ class PbplusMemberCenter extends React.Component {
     setActiveKey({ key }) { this.setState({activeKey: key}); }
     render() {
         const { activeKey } = this.state;
-        const { displayState, hide, calendar, personalData } = this.props;
+        const { displayState, hide, calendar, pointCounter, personalData } = this.props;
         let displayClassName = '';
         if('hiding' === displayState) { displayClassName = ' pbplus-hiding'; }
         else if('hidden' == displayState) { displayClassName = ' pbplus-hidden'; }
@@ -42,6 +42,12 @@ class PbplusMemberCenter extends React.Component {
                             </div>
                             <div
                                 className='interaction'
+                                data-key='point-counter' data-display='兌換點數' data-icon='https://tv.pbplus.me/img/facebook.svg'
+                            >
+                                {pointCounter}
+                            </div>
+                            <div
+                                className='interaction'
                                 data-key='personal-data' data-display='個人資料' data-icon='https://tv.pbplus.me/img/facebook.svg'
                             >
                                 {personalData}
@@ -58,6 +64,7 @@ PbplusMemberCenter.propTypes = {
     displayState: PropTypes.oneOf(['display', 'hiding', 'hidden']).isRequired,
     hide: PropTypes.func.isRequired,
     calendar: PropTypes.element.isRequired,
+    pointCounter: PropTypes.element.isRequired,
     personalData: PropTypes.element.isRequired,
 };
 
