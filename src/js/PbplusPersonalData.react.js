@@ -61,6 +61,7 @@ class PbplusPersonalData extends React.Component {
     onChangeEmail({ value }) { this.props.updateValue({newValueMap: {email: value}}); }
     onChangeZipcode({ value }) { this.props.updateValue({newValueMap: {zipcode: value}}); }
     onChangeAddress({ value }) { this.props.updateValue({newValueMap: {address: value}}); }
+    componentDidMount() { this.props.fetchPersonalData(); }
     render() {
         const {
             photo, name, gender,
@@ -199,6 +200,7 @@ PbplusPersonalData.propTypes = {
     imageInputBox: PropTypes.element.isRequired,
     updateImageSource: PropTypes.func.isRequired,
     submit: PropTypes.func.isRequired,
+    fetchPersonalData: PropTypes.func.isRequired,
 };
 
 export default PbplusPersonalData;

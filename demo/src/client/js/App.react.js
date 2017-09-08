@@ -49,6 +49,7 @@ const ConnectedPbplusPersonalData = connect(
             dispatch(PersonalData.Actions.updateValue({ newValueMap }));
         },
         updateImageSource: (url) => { dispatch(PictureEditor.Actions.updateImageSource(url)); },
+        fetchPersonalData: () => { dispatch(PersonalData.Actions.fetchPersonalData()); },
         submit: ({
             photo, name, gender,
             birthYear, birthMonth, birthDay,
