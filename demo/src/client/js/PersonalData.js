@@ -58,6 +58,34 @@ const fetchPersonalData = () => { return (dispatch, getState) => {
     .catch(error => { console.log(error); });
 }; };
 
-const Actions = { updateValue, fetchPersonalData };
+const submit = ({
+    photo, name, gender,
+    birthYear, birthMonth, birthDay,
+    country, mobile, mobileVerifyCode,
+    email, zipcode, address
+}) => { return (dispatch, getState) => {
+    const putData = Object.assign({uuid: getUrlSearches().token_id}, {
+        birthday: `${birthYear}-${birthMonth}-${birthDay}`,
+        picture: photo,
+        name, gender,
+        country, mobile, mobileVerifyCode,
+        email, zipcode, address
+    });
+    fetch(`${MEMBER_CENTER_BASE_URL}/member_data/edit`, {
+        method: 'put',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(putData)
+    })
+    .then(response => {
+        if(response.status >= 400) { throw new Error("Bad response from server"); }
+        return response.json();
+    })
+    .then(response => {
+        console.log('response:', response);
+    })
+    .catch(error => { console.log(error); });
+}; };
+
+const Actions = { updateValue, fetchPersonalData, submit };
 
 export default { Reducer, Actions };
