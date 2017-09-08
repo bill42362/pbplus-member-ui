@@ -29,10 +29,7 @@ const ConnectedPbplusImageInputBox = connect(
     }; },
     (dispatch, ownProps) => { return {
         updateImageSource: (url) => { dispatch(PictureEditor.Actions.updateImageSource(url)); },
-        movePicture: (move) => {
-            console.log('movePicture() move:', move);
-            dispatch(PictureEditor.Actions.movePicture(move));
-        },
+        movePicture: (move) => { dispatch(PictureEditor.Actions.movePicture(move)); },
         stretchPicture: (stretch) => { dispatch(PictureEditor.Actions.stretchPicture(stretch)); },
     }; }
 )(PbplusImageInputBox);
@@ -49,19 +46,19 @@ const ConnectedPbplusPersonalData = connect(
             dispatch(PersonalData.Actions.updateValue({ newValueMap }));
         },
         updateImageSource: (url) => { dispatch(PictureEditor.Actions.updateImageSource(url)); },
+        fetchPersonalData: () => { dispatch(PersonalData.Actions.fetchPersonalData()); },
         submit: ({
             photo, name, gender,
             birthYear, birthMonth, birthDay,
             country, mobile, mobileVerifyCode,
             email, zipcode, address
         }) => {
-            console.log(
-                'submit()',
+            dispatch(PersonalData.Actions.submit({
                 photo, name, gender,
                 birthYear, birthMonth, birthDay,
                 country, mobile, mobileVerifyCode,
                 email, zipcode, address
-            );
+            }));
         },
     }; }
 )(PbplusPersonalData);

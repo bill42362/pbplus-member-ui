@@ -43,8 +43,8 @@ div.pbplus-calendar {
                     margin: 0 0.25em 0.15em 0;
                     background-color: dimgray;
                     width: 0.5em; height: 0.5em;
-                    &.has-event { background-color: #f1632b; }
-                    &.has-promotion { background-color: #1895c8; }
+                    &.has-participated-event { background-color: #f1632b; }
+                    &.has-item { background-color: #1895c8; }
                 }
             }
         }
@@ -92,8 +92,8 @@ div.pbplus-calendar {
                         width: 0.5em; height: 0.5em;
                         bottom: 0.3em; left: 50%;
                         transform: translateX(-0.25em);
-                        &.has-event { background-color: #f1632b; }
-                        &.has-promotion { background-color: #1895c8; }
+                        &.has-participated-event { background-color: #f1632b; }
+                        &.has-item { background-color: #1895c8; }
                     }
                 }
             }
@@ -108,6 +108,7 @@ div.pbplus-calendar {
             div.calendar-item-banner-wrapper {
                 flex: none;
                 img.calendar-item-banner {
+                    display: block;
                     background-color: dimgray;
                     width: 5em; height: 5em;
                 }
