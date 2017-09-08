@@ -1,6 +1,7 @@
 // Calendar.js
 'use strict';
 import 'isomorphic-fetch';
+import { getUrlSearches } from './Utils.js';
 
 const today = new Date();
 const defaultState = {
@@ -35,18 +36,47 @@ const updateMonth = ({ year, month }) => {
     return {type: 'UPDATE_CALENDAR_MONTH', payload: { year, month }};
 };
 
-const MEMBER_CENTER_BASE_URL = 'http://dev-server-elb-1887534414.ap-northeast-1.elb.amazonaws.com:8083/member_center';
+const MEMBER_CENTER_BASE_URL = 'http://dev-server-elb-1887534414.ap-northeast-1.elb.amazonaws.com:8095/events';
 const fetchCommingEvents = () => { return (dispatch, getState) => {
+    let allEvents = [], allPromotions = [];
     fetch(`${MEMBER_CENTER_BASE_URL}/comming_events`, {method: 'get'})
     .then(response => {
-        if(response.status >= 400) { throw new Error("Bad response from server"); }
+        if(response.status >= 400) { throw new Error('Bad response from server'); }
         return response.json();
     })
     .then(response => {
-        const { events, promotions } = response.message;
+        const { events = [], promotions } = response.message;
+        allPromotions = promotions || [];
+        allEvents = events.map(event => Object.assign({}, event, {isParticipated: false}));
+    })
+    .then(() => {
+        return fetch(`${MEMBER_CENTER_BASE_URL}/participation`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({uuid: getUrlSearches().token_id})
+        })
+    })
+    .then(response => {
+        if(response.status >= 400) { throw new Error('Bad response from server'); }
+        return response.json();
+    })
+    .then(response => {
+        const participatedEvents = response.message.map(event => {
+            return Object.assign({}, event, {
+                banner: event.banner ? `https://event.pbplus.me/${event.banner}` : undefined,
+                link: `https://event.pbplus.me/event/${event.event_id}/info`,
+                isParticipated: true,
+            });
+        });
+        participatedEvents.forEach(participatedEvent => {
+            const eventsWithoutPromote = allEvents.filter(event => {
+                return event.isParticipated || event.id !== participatedEvent.event_id;
+            });
+            allEvents = [...eventsWithoutPromote, participatedEvent];
+        });
         dispatch({type: 'UPDATE_CALENDAR_ITEMS', payload: {
-            events: events || [],
-            promotions: promotions || [],
+            events: allEvents,
+            promotions: allPromotions,
         }});
     })
     .catch(error => { console.log(error); });

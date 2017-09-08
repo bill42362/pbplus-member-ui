@@ -86,11 +86,11 @@ class PbplusCalendar extends React.Component {
                 </div>
                 <div className='calendar-legend'>
                     <div className='calendar-legend-item'>
-                        <div className='calendar-day-notice has-promotion' />
+                        <div className='calendar-day-notice has-item' />
                         即將來臨的活動/優惠
                     </div>
                     <div className='calendar-legend-item'>
-                        <div className='calendar-day-notice has-event' />
+                        <div className='calendar-day-notice has-participated-event' />
                         已報名之活動
                     </div>
                 </div>
@@ -123,12 +123,15 @@ class PbplusCalendar extends React.Component {
                                     return calendarDateString === event.date.toDateString();
                                 });
                                 const hasEvent = !!todayEvents[0];
+                                const hasParticipatedEvents = !!todayEvents.filter(event => {
+                                    return event.isParticipated;
+                                })[0];
                                 const hasPromotion = !!promotions.filter(event => {
                                     return calendarDateString === event.date.toDateString();
                                 })[0];
                                 let noticeClassName = '';
-                                if(hasEvent) { noticeClassName = ' has-event'; }
-                                else if(hasPromotion) { noticeClassName = ' has-promotion'; }
+                                if(hasParticipatedEvents) { noticeClassName = ' has-participated-event'; }
+                                else if(hasEvent || hasPromotion) { noticeClassName = ' has-item'; }
                                 return <div
                                     className={`calendar-day${notThisMonthClassName}${selectedDayClassName}`} key={index}
                                     onClick={() => { selectDate({date: calendarDateObject}); }}
