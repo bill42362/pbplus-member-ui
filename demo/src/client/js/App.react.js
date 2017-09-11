@@ -5,6 +5,7 @@ import Calendar from './Calendar.js';
 import MemberCenter from './MemberCenter.js';
 import PersonalData from './PersonalData.js';
 import PictureEditor from './PictureEditor.js';
+import Points from './Points.js';
 // import { PbplusMemberCenter, PbplusCalendar, PbplusPersonalData } from 'pbplus-member-ui';
 import {
     PbplusMemberCenter, PbplusCalendar, PbplusPointCounter, PbplusPersonalData, PbplusImageInputBox
@@ -25,8 +26,11 @@ const ConnectedPbplusMemberCenter = connect(
 
 const ConnectedPbplusPointCounter = connect(
     (state, ownProps) => { return {
+        points: state.pbplusPoints.points,
+        rewards: state.pbplusPoints.rewards,
     }; },
     (dispatch, ownProps) => { return {
+        fetchRewardList: () => dispatch(Points.Actions.fetchRewardList()),
     }; }
 )(PbplusPointCounter);
 

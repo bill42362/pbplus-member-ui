@@ -1,5 +1,6 @@
 // PbplusPointCounter.react.js
 'use strict';
+import PropTypes from 'prop-types';
 import React from 'react';
 import '../css/pbplus-point-counter.less';
 
@@ -7,19 +8,52 @@ class PbplusPointCounter extends React.Component {
     constructor(props) {
         super(props);
     }
+    componentDidMount() { this.props.fetchRewardList(); }
     render() {
-        const { } = this.props;
+        const { points, rewards } = this.props;
+        console.log('PbplusPointCounter() rewards:', rewards);
         return <div className='pbplus-point-counter'>
             <div className='pbplus-point-counter-current-points'>
                 目前紅利點數
                 <span className='pbplus-point-counter-current-points-digit'>2,300</span>
                 點 (
-                <a className='pbplus-point-counter-current-points-info'>?</a>
+                <a
+                    className='pbplus-point-counter-current-points-info'
+                    href='#' target='_blank'
+                >?</a>
                 )
             </div>
             <div className='pbplus-point-counter-select-panel'>
-                <h4 className='pbplus-point-counter-select-panel-header'>選擇器</h4>
-                選擇器
+                {rewards.map((reward, index) => {
+                    return <div className='pbplus-point-counter-reward' key={index}>
+                        <div className='pbplus-point-counter-reward-display'>
+                            <div className='pbplus-point-counter-reward-name'>
+                                {reward.name}
+                                {reward.name}
+                                {reward.name}
+                                {reward.name}
+                                {reward.name}
+                                {reward.name}
+                            </div>
+                            <div className='pbplus-point-counter-reward-pricing'>
+                                <div className='pbplus-point-counter-reward-value'>NT$ {reward.rewardValue}</div>
+                                <div className='pbplus-point-counter-reward-points'>點數：{reward.pointCost}</div>
+                            </div>
+                        </div>
+                        <div className='pbplus-point-counter-reward-selector'>
+                            <div className='pbplus-point-counter-reward-selector-button' role='button'>
+                                <img title='add' src='https://tv.pbplus.me/img/facebook.svg' />
+                            </div>
+                            <input
+                                className='pbplus-point-counter-reward-selector-input'
+                                value={reward.selectedCount}
+                            />
+                            <div className='pbplus-point-counter-reward-selector-button' role='button'>
+                                <img title='add' src='https://tv.pbplus.me/img/youtube.svg' />
+                            </div>
+                        </div>
+                    </div>;
+                })}
             </div>
             <div className='pbplus-point-counter-notice'>
                 <h4 className='pbplus-point-counter-notice-title'>注意事項</h4>
@@ -58,5 +92,11 @@ class PbplusPointCounter extends React.Component {
         </div>;
     }
 }
+
+PbplusPointCounter.propTypes = {
+    points: PropTypes.number.isRequired,
+    rewards: PropTypes.array.isRequired,
+    fetchRewardList: PropTypes.func.isRequired,
+};
 
 export default PbplusPointCounter;

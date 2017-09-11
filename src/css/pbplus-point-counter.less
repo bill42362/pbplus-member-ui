@@ -24,6 +24,59 @@ div.pbplus-point-counter {
         flex: auto;
         border-top: 1px solid lightgray;
         padding: 2em 1em;
+        font-size: 14px;
+        div.pbplus-point-counter-reward {
+            display: flex;
+            margin-bottom: 1em;
+            div.pbplus-point-counter-reward-display {
+                flex: auto;
+                div.pbplus-point-counter-reward-name {
+                    border-left: 2px solid gray;
+                    padding-left: 10px;
+                    line-height: 1.2em;
+                    color: gray;
+                }
+                div.pbplus-point-counter-reward-pricing {
+                    display: flex;
+                    margin-top: 0.5em;
+                    padding-left: 12px;
+                    font-size: 13px;
+                    div.pbplus-point-counter-reward-value {
+                        flex: auto;
+                        font-weight: 500;
+                    }
+                    div.pbplus-point-counter-reward-points {
+                        flex: none;
+                    }
+                }
+            }
+            div.pbplus-point-counter-reward-selector {
+                flex: none;
+                display: flex;
+                margin-left: 1.5em;
+                align-items: center;
+                div.pbplus-point-counter-reward-selector-button {
+                    flex: none;
+                    border: 1px solid lightgray;
+                    width: 2em; height: 2em;
+                    cursor: pointer;
+                    transition: background-color .6s ease;
+                    &:hover { background-color: black; }
+                    img { width: 100%; height: 100%; }
+                }
+                input.pbplus-point-counter-reward-selector-input {
+                    flex: auto;
+                    border: 1px solid lightgray;
+                    border-left: none;
+                    border-right: none;
+                    background: transparent;
+                    width: 3em;
+                    font-size: 1.5em;
+                    font-weight: 600;
+                    text-align: center;
+                }
+            }
+        }
     }
     div.pbplus-point-counter-notice {
         flex: none;
@@ -33,6 +86,7 @@ div.pbplus-point-counter {
         h4.pbplus-point-counter-notice-title {
             font-size: 15px;
             text-align: center;
+            margin: 0.5em 0;
         }
         div.pbplus-point-counter-notice-body {
             font-size: 13px;
@@ -47,7 +101,7 @@ div.pbplus-point-counter {
                 -webkit-padding-start: 0px;
                 li {
                     padding-left: 0.7em;
-                    line-height: 1.8em;
+                    line-height: 1.5em;
                     ul {
                         -webkit-margin-start: 20px;
                         -webkit-padding-start: 0px;
