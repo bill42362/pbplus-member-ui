@@ -1,4 +1,88 @@
 // pbplus-point-counter.less
 
 div.pbplus-point-counter {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    letter-spacing: 1px;
+    div.pbplus-point-counter-current-points {
+        flex: none;
+        padding: 2em;
+        font-weight: 600;
+        text-align: center;
+        span.pbplus-point-counter-current-points-digit {
+            margin: 0px 0.3em;
+            font-size: 2.5em;
+            font-weight: 900;
+        }
+        a.pbplus-point-counter-current-points-info {
+            margin: 0px 0.3em;
+            color: rgb(0, 90, 232);
+        }
+    }
+    div.pbplus-point-counter-select-panel {
+        flex: auto;
+        border-top: 1px solid lightgray;
+        padding: 2em 1em;
+    }
+    div.pbplus-point-counter-notice {
+        flex: none;
+        border-top: 1px solid lightgray;
+        padding: 1em 25px;
+        font-size: 14px;
+        h4.pbplus-point-counter-notice-title {
+            font-size: 15px;
+            text-align: center;
+        }
+        div.pbplus-point-counter-notice-body {
+            font-size: 13px;
+            color: gray;
+            a {
+                color: black;
+                font-weight: 900;
+                text-decoration: underline;
+            }
+            ol {
+                -webkit-margin-start: 20px;
+                -webkit-padding-start: 0px;
+                li {
+                    padding-left: 0.7em;
+                    line-height: 1.8em;
+                    ul {
+                        -webkit-margin-start: 20px;
+                        -webkit-padding-start: 0px;
+                        li {
+                            padding-left: 0em;
+                            list-style-type: disc;
+                        }
+                    }
+                }
+            }
+        }
+        div.pbplus-point-counter-notice-checker {
+            margin-top: 2em;
+            label.pbplus-point-counter-notice-checker-label {
+                display: flex;
+                font-size: 13px;
+                font-weight: 600;
+                input.pbplus-point-counter-notice-checker-checkbox {
+                    margin-top: 0.8em;
+                    margin-right: 1.5em;
+                    padding: 10px;
+                    transform: scale(2);
+                }
+            }
+        }
+    }
+    div.pbplus-point-counter-submit-button-wrapper {
+        flex: none;
+        padding: 1em 25px 2em;
+        div.pbplus-point-counter-submit-button {
+            width: 100%;
+            padding: 1em 0;
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+    }
 }
