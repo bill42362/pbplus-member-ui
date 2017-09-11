@@ -25,12 +25,20 @@ const ConnectedPbplusMemberCenter = connect(
 )(PbplusMemberCenter);
 
 const ConnectedPbplusPointCounter = connect(
-    (state, ownProps) => { return {
-        points: state.pbplusPoints.points,
-        rewards: state.pbplusPoints.rewards,
-    }; },
+    (state, ownProps) => {
+        const { points, rewards } = state.pbplusPoints;
+        return {
+            points: points - rewards.reduce((current, reward) => {
+                return current + (reward.selectedCount*reward.pointCost);
+            }, 0),
+            rewards,
+        };
+    },
     (dispatch, ownProps) => { return {
         fetchRewardList: () => dispatch(Points.Actions.fetchRewardList()),
+        updateRewardSelectCount: ({ id, count }) => {
+            return dispatch(Points.Actions.updateRewardSelectCount({ id, count }));
+        },
     }; }
 )(PbplusPointCounter);
 

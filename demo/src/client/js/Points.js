@@ -3,7 +3,7 @@
 import 'isomorphic-fetch';
 
 const defaultState = {
-    points: 2300,
+    points: 20300,
     rewards: [],
 };
 const getRewardTemplate = () => ({
@@ -17,6 +17,17 @@ const Reducer = (state = defaultState, action) => {
     switch(action.type) {
         case 'UPDATE_PBPLUS_REWARD_LIST':
             return Object.assign({}, state, {rewards: action.payload.rewards});
+            break;
+        case 'UPDATE_PBPLUS_REWARD_SELECT_COUNT':
+            return Object.assign({}, state, {
+                rewards: state.rewards.map(reward => {
+                    if(action.payload.id === reward.id) {
+                        return Object.assign({}, reward, {selectedCount: action.payload.count});
+                    } else {
+                        return reward;
+                    }
+                })
+            });
             break;
         case 'UPDATE_PBPLUS_POINT_COUNT':
             return Object.assign({}, state, {points: action.payload.points});
@@ -34,6 +45,10 @@ const updateRewardList = ({ rewards }) => {
     return {type: 'UPDATE_PBPLUS_REWARD_LIST', payload: {
         rewards: rewards.map(reward => Object.assign({}, getRewardTemplate(), reward)),
     }};
+};
+
+const updateRewardSelectCount = ({ id, count }) => {
+    return {type: 'UPDATE_PBPLUS_REWARD_SELECT_COUNT', payload: { id, count }};
 };
 
 const POINTS_BASE_URL = 'http://dev-server-elb-1887534414.ap-northeast-1.elb.amazonaws.com:8095/points';
@@ -60,6 +75,6 @@ const fetchRewardList = () => { return (dispatch, getState) => {
     .catch(error => { console.log(error); });
 }; };
 
-const Actions = { updatePointCount, fetchRewardList };
+const Actions = { updatePointCount, fetchRewardList, updateRewardSelectCount };
 
 export default { Reducer, Actions };

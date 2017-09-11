@@ -7,15 +7,19 @@ import '../css/pbplus-point-counter.less';
 class PbplusPointCounter extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {isNoticeChecked: false};
+        this.onCheckerChange = this.onCheckerChange.bind(this);
     }
+    onCheckerChange(e) { this.setState({isNoticeChecked: e.target.checked}); }
     componentDidMount() { this.props.fetchRewardList(); }
     render() {
-        const { points, rewards } = this.props;
-        console.log('PbplusPointCounter() rewards:', rewards);
+        const { isNoticeChecked } = this.state;
+        const { points, rewards, updateRewardSelectCount } = this.props;
+        const submitClassName = isNoticeChecked ? '' : ' pbplus-disabled';
         return <div className='pbplus-point-counter'>
             <div className='pbplus-point-counter-current-points'>
                 目前紅利點數
-                <span className='pbplus-point-counter-current-points-digit'>2,300</span>
+                <span className='pbplus-point-counter-current-points-digit'>{points}</span>
                 點 (
                 <a
                     className='pbplus-point-counter-current-points-info'
@@ -25,30 +29,49 @@ class PbplusPointCounter extends React.Component {
             </div>
             <div className='pbplus-point-counter-select-panel'>
                 {rewards.map((reward, index) => {
+                    const canAddCount = points > reward.pointCost;
+                    const addCountClassName = canAddCount ? '' : ' pbplus-disabled';
+                    const canRemoveCount = 0 < reward.selectedCount;
+                    const removeCountClassName = canRemoveCount ? '' : ' pbplus-disabled';
                     return <div className='pbplus-point-counter-reward' key={index}>
                         <div className='pbplus-point-counter-reward-display'>
-                            <div className='pbplus-point-counter-reward-name'>
-                                {reward.name}
-                                {reward.name}
-                                {reward.name}
-                                {reward.name}
-                                {reward.name}
-                                {reward.name}
-                            </div>
+                            <div className='pbplus-point-counter-reward-name'>{reward.name}</div>
                             <div className='pbplus-point-counter-reward-pricing'>
                                 <div className='pbplus-point-counter-reward-value'>NT$ {reward.rewardValue}</div>
                                 <div className='pbplus-point-counter-reward-points'>點數：{reward.pointCost}</div>
                             </div>
                         </div>
                         <div className='pbplus-point-counter-reward-selector'>
-                            <div className='pbplus-point-counter-reward-selector-button' role='button'>
+                            <div
+                                className={`pbplus-point-counter-reward-selector-button${removeCountClassName}`}
+                                role='button'
+                                onClick={
+                                    canRemoveCount
+                                    ? () => { updateRewardSelectCount({
+                                        id: reward.id,
+                                        count: reward.selectedCount - 1,
+                                    }); }
+                                    : undefined
+                                }
+                            >
                                 <img title='add' src='https://tv.pbplus.me/img/facebook.svg' />
                             </div>
                             <input
                                 className='pbplus-point-counter-reward-selector-input'
                                 value={reward.selectedCount}
                             />
-                            <div className='pbplus-point-counter-reward-selector-button' role='button'>
+                            <div
+                                className={`pbplus-point-counter-reward-selector-button${addCountClassName}`}
+                                role='button'
+                                onClick={
+                                    canAddCount
+                                    ? () => { updateRewardSelectCount({
+                                        id: reward.id,
+                                        count: reward.selectedCount + 1,
+                                    }); }
+                                    : undefined
+                                }
+                            >
                                 <img title='add' src='https://tv.pbplus.me/img/youtube.svg' />
                             </div>
                         </div>
@@ -81,13 +104,18 @@ class PbplusPointCounter extends React.Component {
                 </div>
                 <div className='pbplus-point-counter-notice-checker'>
                     <label className='pbplus-point-counter-notice-checker-label'>
-                        <input type='checkbox' className='pbplus-point-counter-notice-checker-checkbox' />
+                        <input
+                            type='checkbox' className='pbplus-point-counter-notice-checker-checkbox'
+                            checked={isNoticeChecked} onChange={this.onCheckerChange}
+                        />
                         如果你已經仔細閱讀以賶注意事項並確認進行點數兌換現金折扣碼的話，請打勾。
                     </label>
                 </div>
             </div>
             <div className='pbplus-point-counter-submit-button-wrapper'>
-                <div className='pbplus-point-counter-submit-button' role='button'>送出</div>
+                <div
+                    className={`pbplus-point-counter-submit-button${submitClassName}`} role='button'
+                >送出</div>
             </div>
         </div>;
     }
@@ -96,6 +124,7 @@ class PbplusPointCounter extends React.Component {
 PbplusPointCounter.propTypes = {
     points: PropTypes.number.isRequired,
     rewards: PropTypes.array.isRequired,
+    updateRewardSelectCount: PropTypes.func.isRequired,
     fetchRewardList: PropTypes.func.isRequired,
 };
 
