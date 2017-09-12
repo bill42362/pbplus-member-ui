@@ -1,0 +1,148 @@
+// pbplus-point-counter.less
+
+div.pbplus-point-counter {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    letter-spacing: 1px;
+    div.pbplus-point-counter-current-points {
+        flex: none;
+        padding: 2em;
+        font-weight: 600;
+        text-align: center;
+        span.pbplus-point-counter-current-points-digit {
+            margin: 0px 0.3em;
+            font-size: 2.5em;
+            font-weight: 900;
+        }
+        a.pbplus-point-counter-current-points-info {
+            margin: 0px 0.3em;
+            color: rgb(0, 90, 232);
+        }
+    }
+    div.pbplus-point-counter-select-panel {
+        flex: auto;
+        border-top: 1px solid black;
+        padding: 0em 1em;
+        font-size: 14px;
+        div.pbplus-point-counter-reward {
+            padding: 2em 0;
+            border-bottom: 1px solid lightgray;
+            line-height: 1.7em;
+            div.pbplus-point-counter-reward-name { color: gray; }
+            div.pbplus-point-counter-reward-remain { font-size: 0.9em; }
+            div.pbplus-point-counter-reward-transaction {
+                display: flex;
+                div.pbplus-point-counter-reward-pricing {
+                    flex: auto;
+                    div.pbplus-point-counter-reward-value {
+                        display: inline-block;
+                        font-size: 1.2em;
+                        font-weight: 900;
+                    }
+                    div.pbplus-point-counter-reward-points {
+                        display: inline-block;
+                        font-size: 0.8em;
+                    }
+                }
+                div.pbplus-point-counter-reward-selector {
+                    flex: none;
+                    display: flex;
+                    margin-left: 1.5em;
+                    align-items: center;
+                    div.pbplus-point-counter-reward-selector-button {
+                        flex: none;
+                        border: 1px solid black;
+                        width: 2em; height: 2em;
+                        cursor: pointer;
+                        transition: background-color .6s ease;
+                        &:hover { background-color: black; }
+                        &.pbplus-disabled {
+                            cursor: not-allowed;
+                            &:hover { background-color: transparent; }
+                            img { opacity: 0.5; }
+                        }
+                        img { width: 100%; height: 100%; }
+                    }
+                    input.pbplus-point-counter-reward-selector-input {
+                        flex: auto;
+                        border: 1px solid black;
+                        border-left: none;
+                        border-right: none;
+                        background: transparent;
+                        width: 2.5em;
+                        font-size: 1.5em;
+                        font-weight: 300;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+    div.pbplus-point-counter-notice {
+        flex: none;
+        padding: 1em 25px;
+        font-size: 14px;
+        h4.pbplus-point-counter-notice-title {
+            font-size: 15px;
+            text-align: center;
+            margin: 0.5em 0;
+        }
+        div.pbplus-point-counter-notice-body {
+            font-size: 13px;
+            color: gray;
+            a {
+                color: black;
+                font-weight: 900;
+                text-decoration: underline;
+            }
+            ol {
+                -webkit-margin-start: 20px;
+                -webkit-padding-start: 0px;
+                li {
+                    padding-left: 0.7em;
+                    line-height: 1.5em;
+                    ul {
+                        -webkit-margin-start: 20px;
+                        -webkit-padding-start: 0px;
+                        li {
+                            padding-left: 0em;
+                            list-style-type: disc;
+                        }
+                    }
+                }
+            }
+        }
+        div.pbplus-point-counter-notice-checker {
+            margin-top: 2em;
+            label.pbplus-point-counter-notice-checker-label {
+                display: flex;
+                font-size: 13px;
+                font-weight: 600;
+                input.pbplus-point-counter-notice-checker-checkbox {
+                    margin-top: 0.8em;
+                    margin-right: 1.5em;
+                    padding: 10px;
+                    transform: scale(2);
+                }
+            }
+        }
+    }
+    div.pbplus-point-counter-submit-button-wrapper {
+        flex: none;
+        padding: 1em 25px 2em;
+        div.pbplus-point-counter-submit-button {
+            width: 100%;
+            padding: 1em 0;
+            background-color: black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            transition: opacity .6s ease;
+            &.pbplus-disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
