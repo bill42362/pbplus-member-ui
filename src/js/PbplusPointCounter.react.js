@@ -35,50 +35,51 @@ class PbplusPointCounter extends React.Component {
             </div>
             <div className='pbplus-point-counter-select-panel'>
                 {rewards.map((reward, index) => {
-                    const canAddCount = points > reward.pointCost;
+                    const canAddCount = points > reward.pointCost && reward.selectedCount < reward.total;
                     const addCountClassName = canAddCount ? '' : ' pbplus-disabled';
                     const canRemoveCount = 0 < reward.selectedCount;
                     const removeCountClassName = canRemoveCount ? '' : ' pbplus-disabled';
                     return <div className='pbplus-point-counter-reward' key={index}>
-                        <div className='pbplus-point-counter-reward-display'>
-                            <div className='pbplus-point-counter-reward-name'>{reward.name}</div>
+                        <div className='pbplus-point-counter-reward-name'>{reward.name}</div>
+                        <div className='pbplus-point-counter-reward-remain'>尚餘數量：{reward.total}</div>
+                        <div className='pbplus-point-counter-reward-transaction'>
                             <div className='pbplus-point-counter-reward-pricing'>
                                 <div className='pbplus-point-counter-reward-value'>NT$ {reward.rewardValue}</div>
-                                <div className='pbplus-point-counter-reward-points'>點數：{reward.pointCost}</div>
+                                <div className='pbplus-point-counter-reward-points'>（{reward.pointCost}點）</div>
                             </div>
-                        </div>
-                        <div className='pbplus-point-counter-reward-selector'>
-                            <div
-                                className={`pbplus-point-counter-reward-selector-button${removeCountClassName}`}
-                                role='button'
-                                onClick={
-                                    canRemoveCount
-                                    ? () => { updateRewardSelectCount({
-                                        id: reward.id,
-                                        count: reward.selectedCount - 1,
-                                    }); }
-                                    : undefined
-                                }
-                            >
-                                <img title='add' src='https://tv.pbplus.me/img/facebook.svg' />
-                            </div>
-                            <input
-                                className='pbplus-point-counter-reward-selector-input'
-                                value={reward.selectedCount}
-                            />
-                            <div
-                                className={`pbplus-point-counter-reward-selector-button${addCountClassName}`}
-                                role='button'
-                                onClick={
-                                    canAddCount
-                                    ? () => { updateRewardSelectCount({
-                                        id: reward.id,
-                                        count: reward.selectedCount + 1,
-                                    }); }
-                                    : undefined
-                                }
-                            >
-                                <img title='add' src='https://tv.pbplus.me/img/youtube.svg' />
+                            <div className='pbplus-point-counter-reward-selector'>
+                                <div
+                                    className={`pbplus-point-counter-reward-selector-button${removeCountClassName}`}
+                                    role='button'
+                                    onClick={
+                                        canRemoveCount
+                                        ? () => { updateRewardSelectCount({
+                                            id: reward.id,
+                                            count: reward.selectedCount - 1,
+                                        }); }
+                                        : undefined
+                                    }
+                                >
+                                    <img title='add' src='https://tv.pbplus.me/img/facebook.svg' />
+                                </div>
+                                <input
+                                    className='pbplus-point-counter-reward-selector-input'
+                                    value={reward.selectedCount}
+                                />
+                                <div
+                                    className={`pbplus-point-counter-reward-selector-button${addCountClassName}`}
+                                    role='button'
+                                    onClick={
+                                        canAddCount
+                                        ? () => { updateRewardSelectCount({
+                                            id: reward.id,
+                                            count: reward.selectedCount + 1,
+                                        }); }
+                                        : undefined
+                                    }
+                                >
+                                    <img title='add' src='https://tv.pbplus.me/img/youtube.svg' />
+                                </div>
                             </div>
                         </div>
                     </div>;

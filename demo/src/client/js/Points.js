@@ -84,7 +84,7 @@ const fetchRewardList = () => { return (dispatch, getState) => {
                 name: reward.name,
                 rewardValue: reward.reward_value,
                 pointCost: reward.points,
-                total: reward.total,
+                total: reward.total || 0,
                 type: reward.type,
                 link: reward.link,
             };

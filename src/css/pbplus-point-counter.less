@@ -22,70 +22,65 @@ div.pbplus-point-counter {
     }
     div.pbplus-point-counter-select-panel {
         flex: auto;
-        border-top: 1px solid lightgray;
-        padding: 2em 1em;
+        border-top: 1px solid black;
+        padding: 0em 1em;
         font-size: 14px;
         div.pbplus-point-counter-reward {
-            display: flex;
-            margin-bottom: 1em;
-            div.pbplus-point-counter-reward-display {
-                flex: auto;
-                div.pbplus-point-counter-reward-name {
-                    border-left: 2px solid gray;
-                    padding-left: 10px;
-                    line-height: 1.2em;
-                    color: gray;
-                }
+            padding: 2em 0;
+            border-bottom: 1px solid lightgray;
+            line-height: 1.7em;
+            div.pbplus-point-counter-reward-name { color: gray; }
+            div.pbplus-point-counter-reward-remain { font-size: 0.9em; }
+            div.pbplus-point-counter-reward-transaction {
+                display: flex;
                 div.pbplus-point-counter-reward-pricing {
-                    display: flex;
-                    margin-top: 0.5em;
-                    padding-left: 12px;
-                    font-size: 13px;
+                    flex: auto;
                     div.pbplus-point-counter-reward-value {
-                        flex: auto;
-                        font-weight: 500;
+                        display: inline-block;
+                        font-size: 1.2em;
+                        font-weight: 900;
                     }
                     div.pbplus-point-counter-reward-points {
-                        flex: none;
+                        display: inline-block;
+                        font-size: 0.8em;
                     }
                 }
-            }
-            div.pbplus-point-counter-reward-selector {
-                flex: none;
-                display: flex;
-                margin-left: 1.5em;
-                align-items: center;
-                div.pbplus-point-counter-reward-selector-button {
+                div.pbplus-point-counter-reward-selector {
                     flex: none;
-                    border: 1px solid black;
-                    width: 2em; height: 2em;
-                    cursor: pointer;
-                    transition: background-color .6s ease;
-                    &:hover { background-color: black; }
-                    &.pbplus-disabled {
-                        cursor: not-allowed;
-                        &:hover { background-color: transparent; }
-                        img { opacity: 0.5; }
+                    display: flex;
+                    margin-left: 1.5em;
+                    align-items: center;
+                    div.pbplus-point-counter-reward-selector-button {
+                        flex: none;
+                        border: 1px solid black;
+                        width: 2em; height: 2em;
+                        cursor: pointer;
+                        transition: background-color .6s ease;
+                        &:hover { background-color: black; }
+                        &.pbplus-disabled {
+                            cursor: not-allowed;
+                            &:hover { background-color: transparent; }
+                            img { opacity: 0.5; }
+                        }
+                        img { width: 100%; height: 100%; }
                     }
-                    img { width: 100%; height: 100%; }
-                }
-                input.pbplus-point-counter-reward-selector-input {
-                    flex: auto;
-                    border: 1px solid black;
-                    border-left: none;
-                    border-right: none;
-                    background: transparent;
-                    width: 3em;
-                    font-size: 1.5em;
-                    font-weight: 600;
-                    text-align: center;
+                    input.pbplus-point-counter-reward-selector-input {
+                        flex: auto;
+                        border: 1px solid black;
+                        border-left: none;
+                        border-right: none;
+                        background: transparent;
+                        width: 2.5em;
+                        font-size: 1.5em;
+                        font-weight: 300;
+                        text-align: center;
+                    }
                 }
             }
         }
     }
     div.pbplus-point-counter-notice {
         flex: none;
-        border-top: 1px solid lightgray;
         padding: 1em 25px;
         font-size: 14px;
         h4.pbplus-point-counter-notice-title {
