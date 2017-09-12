@@ -9,9 +9,15 @@ class PbplusPointCounter extends React.Component {
         super(props);
         this.state = {isNoticeChecked: false};
         this.onCheckerChange = this.onCheckerChange.bind(this);
+        this.submit = this.submit.bind(this);
+    }
+    submit() {
+        const { rewards } = this.props;
+        const orders = rewards.filter(reward => 0 < reward.selectedCount);
+        this.props.submit({ orders });
     }
     onCheckerChange(e) { this.setState({isNoticeChecked: e.target.checked}); }
-    componentDidMount() { this.props.fetchRewardList(); }
+    componentDidMount() { this.props.fetchRewardList(); this.props.fetchPoints(); }
     render() {
         const { isNoticeChecked } = this.state;
         const { points, rewards, updateRewardSelectCount } = this.props;
@@ -114,7 +120,8 @@ class PbplusPointCounter extends React.Component {
             </div>
             <div className='pbplus-point-counter-submit-button-wrapper'>
                 <div
-                    className={`pbplus-point-counter-submit-button${submitClassName}`} role='button'
+                    className={`pbplus-point-counter-submit-button${submitClassName}`}
+                    role='button' onClick={this.submit}
                 >送出</div>
             </div>
         </div>;
@@ -126,6 +133,8 @@ PbplusPointCounter.propTypes = {
     rewards: PropTypes.array.isRequired,
     updateRewardSelectCount: PropTypes.func.isRequired,
     fetchRewardList: PropTypes.func.isRequired,
+    fetchPoints: PropTypes.func.isRequired,
+    submit: PropTypes.func.isRequired,
 };
 
 export default PbplusPointCounter;

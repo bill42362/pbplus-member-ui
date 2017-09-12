@@ -39,6 +39,8 @@ const ConnectedPbplusPointCounter = connect(
         updateRewardSelectCount: ({ id, count }) => {
             return dispatch(Points.Actions.updateRewardSelectCount({ id, count }));
         },
+        fetchPoints: () => dispatch(Points.Actions.fetchPoints()),
+        submit: ({ orders }) => dispatch(Points.Actions.submit({ orders })),
     }; }
 )(PbplusPointCounter);
 
