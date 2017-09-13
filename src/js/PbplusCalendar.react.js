@@ -5,6 +5,9 @@ import React from 'react';
 import { getDateStringWithFormat } from './utils.js';
 import '../css/pbplus-calendar.less';
 
+import DefaultEventBanner from '../img/event.jpg';
+import DefaultPromotionBanner from '../img/promotion.jpg';
+
 const monthStringMap = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十' , '十一', '十二'];
 
 class PbplusCalendar extends React.Component {
@@ -147,9 +150,7 @@ class PbplusCalendar extends React.Component {
                 </div>
                 <div className='calendar-items'>
                     {selectedDateItems.map((item, index) => {
-                        const defaultBanner = 'event' === item.type
-                            ? 'https://tv.pbplus.me/img/facebook.svg'
-                            : 'https://tv.pbplus.me/img/youtube.svg';
+                        const defaultBanner = 'event' === item.type ? DefaultEventBanner : DefaultPromotionBanner;
                         return <a className='calendar-item' href={item.link} key={index}>
                             <div className='calendar-item-banner-wrapper'>
                                 <img

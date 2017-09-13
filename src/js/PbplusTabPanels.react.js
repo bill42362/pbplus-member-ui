@@ -28,12 +28,14 @@ class PbplusTabPanels extends React.Component {
         return <div className={`pbplus-tab-panels ${className || ''}`}>
             <div className='tab-panels-tabs'>
                 {children.map((child, index) => {
-                    const isActivedTabClassName = activeKey === child.props['data-key'] ? ' active' : '';
+                    const isActivedTab = activeKey === child.props['data-key'];
+                    const isActivedTabClassName = isActivedTab ? ' active' : '';
+                    const iconSrc = isActivedTab ? child.props['data-icon_active'] : child.props['data-icon'];
                     return <span
                         className={`tab-panels-tab${isActivedTabClassName}`} key={index}
                         data-key={child.props['data-key']} onClick={this.onClick}
                     >
-                        <img className='tab-panels-tab-icon' src={child.props['data-icon']} />
+                        <img className='tab-panels-tab-icon' src={iconSrc} />
                         <span className='tab-panels-tab-display' >{child.props['data-display']}</span>
                     </span>;
                 })}
