@@ -5,6 +5,15 @@ import React from 'react';
 import PbplusTabPanels from './PbplusTabPanels.react.js';
 import '../css/pbplus-member-center.less';
 
+import CloseImage from '../img/close.png';
+import LogoImage from '../img/logo.svg';
+import CalendarIcon from '../img/calendar.png';
+import CalendarHoverIcon from '../img/calendar_hover.png';
+import PointsIcon from '../img/points.png';
+import PointsHoverIcon from '../img/points_hover.png';
+import PersonalIcon from '../img/personal.png';
+import PersonalHoverIcon from '../img/personal_hover.png';
+
 class PbplusMemberCenter extends React.Component {
     constructor(props) {
         super(props);
@@ -22,11 +31,11 @@ class PbplusMemberCenter extends React.Component {
             <div className='pbplus-member-center-fullscreen-background' role='button' onClick={hide}></div>
             <div className='pbplus-member-center-content'>
                 <div className='pbplus-member-center-header'>
-                    <div
-                        className='pbplus-member-center-close-button' role='button' onClick={hide}
-                    >X</div>
+                    <div className='pbplus-member-center-close-button' role='button' onClick={hide} >
+                        <img className='pbplus-member-center-close' title='close' src={CloseImage}/>
+                    </div>
                     <div className='pbplus-member-center-branding'>
-                        <img className='pbplus-member-center-logo' title='PBPlus'/>
+                        <img className='pbplus-member-center-logo' title='PBPlus' src={LogoImage}/>
                         <div className='pbplus-member-center-brand-display'>會員中心</div>
                     </div>
                 </div>
@@ -36,19 +45,25 @@ class PbplusMemberCenter extends React.Component {
                         <PbplusTabPanels activeKey={activeKey} setActiveKey={this.setActiveKey}>
                             <div
                                 className='interaction'
-                                data-key='calendar' data-display='日曆中心' data-icon='https://tv.pbplus.me/img/facebook.svg'
+                                data-key='calendar' data-display='日曆中心'
+                                data-icon={CalendarIcon}
+                                data-icon_active={CalendarHoverIcon}
                             >
                                 {calendar}
                             </div>
                             <div
                                 className='interaction'
-                                data-key='point-counter' data-display='兌換點數' data-icon='https://tv.pbplus.me/img/facebook.svg'
+                                data-key='point-counter' data-display='兌換點數'
+                                data-icon={PointsIcon}
+                                data-icon_active={PointsHoverIcon}
                             >
                                 {pointCounter}
                             </div>
                             <div
                                 className='interaction'
-                                data-key='personal-data' data-display='個人資料' data-icon='https://tv.pbplus.me/img/facebook.svg'
+                                data-key='personal-data' data-display='個人資料'
+                                data-icon={PersonalIcon}
+                                data-icon_active={PersonalHoverIcon}
                             >
                                 {personalData}
                             </div>

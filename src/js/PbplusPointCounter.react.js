@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import '../css/pbplus-point-counter.less';
 
+import PlusImage from '../img/plus.png';
+import PlusHoverImage from '../img/plus_hover.png';
+import MinusImage from '../img/minus.png';
+import MinusHoverImage from '../img/minus_hover.png';
+
 class PbplusPointCounter extends React.Component {
     constructor(props) {
         super(props);
@@ -60,7 +65,8 @@ class PbplusPointCounter extends React.Component {
                                         : undefined
                                     }
                                 >
-                                    <img title='add' src='https://tv.pbplus.me/img/facebook.svg' />
+                                    <img className='selector-button' title='remove' src={MinusImage} />
+                                    <img className='selector-button-hover' title='remove' src={MinusHoverImage} />
                                 </div>
                                 <input
                                     className='pbplus-point-counter-reward-selector-input'
@@ -78,7 +84,8 @@ class PbplusPointCounter extends React.Component {
                                         : undefined
                                     }
                                 >
-                                    <img title='add' src='https://tv.pbplus.me/img/youtube.svg' />
+                                    <img className='selector-button' title='add' src={PlusImage} />
+                                    <img className='selector-button-hover' title='add' src={PlusHoverImage} />
                                 </div>
                             </div>
                         </div>
