@@ -11,19 +11,21 @@ import CalendarIcon from '../img/calendar.png';
 import CalendarHoverIcon from '../img/calendar_hover.png';
 import PointsIcon from '../img/points.png';
 import PointsHoverIcon from '../img/points_hover.png';
+import CartIcon from '../img/record.png';
+import CartHoverIcon from '../img/record_hover.png';
 import PersonalIcon from '../img/personal.png';
 import PersonalHoverIcon from '../img/personal_hover.png';
 
 class PbplusMemberCenter extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {activeKey: 'point-counter'};
+        this.state = {activeKey: 'buying-logs'};
         this.setActiveKey = this.setActiveKey.bind(this);
     }
     setActiveKey({ key }) { this.setState({activeKey: key}); }
     render() {
         const { activeKey } = this.state;
-        const { displayState, hide, calendar, pointCounter, personalData } = this.props;
+        const { displayState, hide, calendar, pointCounter, buyingLogs, personalData } = this.props;
         let displayClassName = '';
         if('hiding' === displayState) { displayClassName = ' pbplus-hiding'; }
         else if('hidden' == displayState) { displayClassName = ' pbplus-hidden'; }
@@ -61,6 +63,14 @@ class PbplusMemberCenter extends React.Component {
                             </div>
                             <div
                                 className='interaction'
+                                data-key='buying-logs' data-display='消費記錄'
+                                data-icon={CartIcon}
+                                data-icon_active={CartHoverIcon}
+                            >
+                                {buyingLogs}
+                            </div>
+                            <div
+                                className='interaction'
                                 data-key='personal-data' data-display='個人資料'
                                 data-icon={PersonalIcon}
                                 data-icon_active={PersonalHoverIcon}
@@ -80,6 +90,7 @@ PbplusMemberCenter.propTypes = {
     hide: PropTypes.func.isRequired,
     calendar: PropTypes.element.isRequired,
     pointCounter: PropTypes.element.isRequired,
+    buyingLogs: PropTypes.element.isRequired,
     personalData: PropTypes.element.isRequired,
 };
 

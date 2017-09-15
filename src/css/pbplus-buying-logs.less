@@ -1,0 +1,88 @@
+// pbplus-buying-logs.less
+
+div.pbplus-buying-logs {
+    padding: 2em 3em 2em;
+    font-size: 14px;
+    color: gray;
+    letter-spacing: 1px;
+    div.pbplus-buying-logs-date-group {
+        margin-top: 2em;
+        div.pbplus-buying-logs-date-group-title {
+            border-bottom: 2px solid gray;
+            padding: 0.5em 0px;
+            text-align: center;
+            div.pbplus-buying-logs-date-group-title-date {
+                span.pbplus-buying-logs-date-group-title-date-display {
+                    margin-left: 2em;
+                }
+            }
+        }
+        div.pbplus-buying-logs-date-group-logs {
+            div.pbplus-buying-logs-date-group-log {
+                margin-top: 2em;
+                div.pbplus-buying-logs-date-group-log-display {
+                    display: flex;
+                    div.pbplus-buying-logs-date-group-log-banner {
+                        flex: none;
+                        img.pbplus-buying-logs-date-group-log-banner {
+                            border: 1px solid #cdcdcd;
+                            height: 5em; width: auto;
+                        }
+                    }
+                    div.pbplus-buying-logs-date-group-log-title {
+                        flex: auto;
+                        display: flex;
+                        align-items: center;
+                        margin-left: 2em;
+                        letter-spacing: 0;
+                    }
+                }
+                div.pbplus-buying-logs-date-group-log-pricing {
+                    margin-top: 1.5em;
+                    div.pbplus-buying-logs-date-group-log-subtotal {
+                        display: flex;
+                        div.pbplus-buying-logs-date-group-log-subtotal-title { flex: auto; }
+                        div.pbplus-buying-logs-date-group-log-subtotal-digit { flex: none; }
+                    }
+                    div.pbplus-buying-logs-date-group-log-payment {
+                        display: flex;
+                        div.pbplus-buying-logs-date-group-log-payment-fee-title { flex: auto; }
+                        div.pbplus-buying-logs-date-group-log-payment-method {
+                            flex: none;
+                            margin-left: 1em;
+                        }
+                        div.pbplus-buying-logs-date-group-log-payment-fee-digit {
+                            flex: none;
+                            margin-left: 1em;
+                        }
+                    }
+                    div.pbplus-buying-logs-date-group-log-shipping {
+                        display: flex;
+                        div.pbplus-buying-logs-date-group-log-shipping-fee-title { flex: auto; }
+                        div.pbplus-buying-logs-date-group-log-shipping-method {
+                            flex: none;
+                            margin-left: 1em;
+                        }
+                        div.pbplus-buying-logs-date-group-log-shipping-fee-digit {
+                            flex: none;
+                            margin-left: 1em;
+                        }
+                    }
+                }
+                div.pbplus-buying-logs-date-group-log-total-price {
+                    display: flex;
+                    margin-top: 0.5em;
+                    div.pbplus-buying-logs-date-group-log-total-price-title {
+                        flex: auto;
+                        display: flex;
+                        align-items: flex-end;
+                    }
+                    div.pbplus-buying-logs-date-group-log-total-price-digit {
+                        flex: none;
+                        font-size: 1.5em;
+                    }
+                }
+            }
+        }
+    }
+}
