@@ -7,6 +7,8 @@ import '../css/pbplus-member-center.less';
 
 import CloseImage from '../img/close.png';
 import LogoImage from '../img/logo.svg';
+import MessageIcon from '../img/message.png';
+import MessageHoverIcon from '../img/message_hover.png';
 import CalendarIcon from '../img/calendar.png';
 import CalendarHoverIcon from '../img/calendar_hover.png';
 import PointsIcon from '../img/points.png';
@@ -19,7 +21,7 @@ import PersonalHoverIcon from '../img/personal_hover.png';
 class PbplusMemberCenter extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {activeKey: 'buying-logs'};
+        this.state = {activeKey: 'notice-center'};
         this.setActiveKey = this.setActiveKey.bind(this);
     }
     setActiveKey({ key }) { this.setState({activeKey: key}); }
@@ -48,8 +50,8 @@ class PbplusMemberCenter extends React.Component {
                             <div
                                 className='interaction'
                                 data-key='notice-center' data-display='通知中心'
-                                data-icon={CalendarIcon}
-                                data-icon_active={CalendarHoverIcon}
+                                data-icon={MessageIcon}
+                                data-icon_active={MessageHoverIcon}
                             >
                                 {noticeCenter}
                             </div>
