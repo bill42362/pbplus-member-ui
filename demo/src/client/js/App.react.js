@@ -8,7 +8,7 @@ import PictureEditor from './PictureEditor.js';
 import Points from './Points.js';
 // import { PbplusMemberCenter, PbplusCalendar, PbplusPersonalData } from 'pbplus-member-ui';
 import {
-    PbplusMemberCenter,
+    PbplusMemberCenter,PbplusNoticeCenter,
     PbplusCalendar, PbplusPointCounter, PbplusBuyingLogs,
     PbplusPersonalData, PbplusImageInputBox
 } from '../../../../src/js/index.js';
@@ -25,6 +25,17 @@ const ConnectedPbplusMemberCenter = connect(
         },
     }; }
 )(PbplusMemberCenter);
+
+const ConnectedPbplusNoticeCenter = connect(
+    (state, ownProps) => {
+        return {
+            notices: [],
+        };
+    },
+    (dispatch, ownProps) => { return {
+        fetchNotices: () => { console.log('fetchNotices()'); },
+    }; }
+)(PbplusNoticeCenter);
 
 const ConnectedPbplusPointCounter = connect(
     (state, ownProps) => {
@@ -169,6 +180,7 @@ class App extends React.Component {
                 使用者中心
             </div>
             <ConnectedPbplusMemberCenter
+                noticeCenter={<ConnectedPbplusNoticeCenter />}
                 calendar={<ConnectedPbplusCalendar />}
                 pointCounter={<ConnectedPbplusPointCounter />}
                 buyingLogs={<ConnectedPbplusBuyingLogs />}

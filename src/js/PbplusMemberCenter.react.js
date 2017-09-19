@@ -25,7 +25,7 @@ class PbplusMemberCenter extends React.Component {
     setActiveKey({ key }) { this.setState({activeKey: key}); }
     render() {
         const { activeKey } = this.state;
-        const { displayState, hide, calendar, pointCounter, buyingLogs, personalData } = this.props;
+        const { displayState, hide, noticeCenter, calendar, pointCounter, buyingLogs, personalData } = this.props;
         let displayClassName = '';
         if('hiding' === displayState) { displayClassName = ' pbplus-hiding'; }
         else if('hidden' == displayState) { displayClassName = ' pbplus-hidden'; }
@@ -45,6 +45,14 @@ class PbplusMemberCenter extends React.Component {
                     <div className='pbplus-member-center-summary'></div>
                     <div className='pbplus-member-center-interactions'>
                         <PbplusTabPanels activeKey={activeKey} setActiveKey={this.setActiveKey}>
+                            <div
+                                className='interaction'
+                                data-key='notice-center' data-display='通知中心'
+                                data-icon={CalendarIcon}
+                                data-icon_active={CalendarHoverIcon}
+                            >
+                                {noticeCenter}
+                            </div>
                             <div
                                 className='interaction'
                                 data-key='calendar' data-display='日曆中心'
@@ -88,6 +96,7 @@ class PbplusMemberCenter extends React.Component {
 PbplusMemberCenter.propTypes = {
     displayState: PropTypes.oneOf(['display', 'hiding', 'hidden']).isRequired,
     hide: PropTypes.func.isRequired,
+    noticeCenter: PropTypes.element.isRequired,
     calendar: PropTypes.element.isRequired,
     pointCounter: PropTypes.element.isRequired,
     buyingLogs: PropTypes.element.isRequired,
