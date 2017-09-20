@@ -1,6 +1,7 @@
 // App.react.js
 import { connect } from 'react-redux';
 import React from 'react';
+import NoticeCenter from './NoticeCenter.js';
 import Calendar from './Calendar.js';
 import MemberCenter from './MemberCenter.js';
 import PersonalData from './PersonalData.js';
@@ -8,7 +9,7 @@ import PictureEditor from './PictureEditor.js';
 import Points from './Points.js';
 // import { PbplusMemberCenter, PbplusCalendar, PbplusPersonalData } from 'pbplus-member-ui';
 import {
-    PbplusMemberCenter,PbplusNoticeCenter,
+    PbplusMemberCenter, PbplusNoticeCenter,
     PbplusCalendar, PbplusPointCounter, PbplusBuyingLogs,
     PbplusPersonalData, PbplusImageInputBox
 } from '../../../../src/js/index.js';
@@ -29,27 +30,13 @@ const ConnectedPbplusMemberCenter = connect(
 const ConnectedPbplusNoticeCenter = connect(
     (state, ownProps) => {
         return {
-            notices: [
-                {
-                    date: new Date(), isNew: true, isImportant: false,
-                    title: '新通知', content: 'notice_content',
-                },
-                {
-                    date: new Date(), isNew: true, isImportant: true,
-                    title: '新通知+重要通知', content: 'notice_content',
-                },
-                {
-                    date: new Date(), isNew: false, isImportant: true,
-                    title: '已讀重要通知', content: 'notice_content',
-                },
-                {
-                    date: new Date(), isNew: false, isImportant: false,
-                    title: '一般通知', content: 'notice_content',
-                },
-            ],
+            notices: state.pbplusNoticeCenter.notices,
+            expendedNoticeId: state.pbplusNoticeCenter.expendedNoticeId,
         };
     },
     (dispatch, ownProps) => { return {
+        expendNotice: ({ noticeId }) => { dispatch(NoticeCenter.Actions.updateExpendedNotice({id: noticeId})); },
+        clearExpendNotice: () => { dispatch(NoticeCenter.Actions.updateExpendedNotice({id: '-1'})); },
         fetchNotices: () => { console.log('fetchNotices()'); },
     }; }
 )(PbplusNoticeCenter);
