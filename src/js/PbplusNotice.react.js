@@ -5,9 +5,9 @@ import React from 'react';
 import { getDateStringWithFormat } from './utils.js';
 import '../css/pbplus-notice.less';
 
-import MessageIcon from '../img/message.png';
-import CalendarIcon from '../img/calendar.png';
-import PersonalIcon from '../img/personal.png';
+import ImportantIcon from '../img/important.png';
+import ImportantReadIcon from '../img/important_read.png';
+import NewIcon from '../img/new.png';
 
 class PbplusNotice extends React.Component {
     constructor(props) {
@@ -53,13 +53,13 @@ class PbplusNotice extends React.Component {
         >
             <div className='pbplus-notice-icon'>
                 {notice.isNew && !notice.isImportant && <img
-                    className='pbplus-notice-icon' src={MessageIcon}
+                    className='pbplus-notice-icon' src={NewIcon}
                 />}
                 {notice.isNew && notice.isImportant && <img
-                    className='pbplus-notice-icon' src={CalendarIcon}
+                    className='pbplus-notice-icon' src={ImportantIcon}
                 />}
                 {!notice.isNew && notice.isImportant && <img
-                    className='pbplus-notice-icon' src={PersonalIcon}
+                    className='pbplus-notice-icon' src={ImportantReadIcon}
                 />}
                 {!notice.isNew && !notice.isImportant && <div
                     className='pbplus-notice-icon-placeholder'
