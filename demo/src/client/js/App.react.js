@@ -1,6 +1,7 @@
 // App.react.js
 import { connect } from 'react-redux';
 import React from 'react';
+import NoticeCenter from './NoticeCenter.js';
 import Calendar from './Calendar.js';
 import MemberCenter from './MemberCenter.js';
 import PersonalData from './PersonalData.js';
@@ -8,7 +9,9 @@ import PictureEditor from './PictureEditor.js';
 import Points from './Points.js';
 // import { PbplusMemberCenter, PbplusCalendar, PbplusPersonalData } from 'pbplus-member-ui';
 import {
-    PbplusMemberCenter, PbplusCalendar, PbplusPointCounter, PbplusPersonalData, PbplusImageInputBox
+    PbplusMemberCenter, PbplusNoticeCenter,
+    PbplusCalendar, PbplusPointCounter, PbplusBuyingLogs,
+    PbplusPersonalData, PbplusImageInputBox
 } from '../../../../src/js/index.js';
 import '../css/app.less';
 
@@ -23,6 +26,20 @@ const ConnectedPbplusMemberCenter = connect(
         },
     }; }
 )(PbplusMemberCenter);
+
+const ConnectedPbplusNoticeCenter = connect(
+    (state, ownProps) => {
+        return {
+            notices: state.pbplusNoticeCenter.notices,
+            expendedNoticeId: state.pbplusNoticeCenter.expendedNoticeId,
+        };
+    },
+    (dispatch, ownProps) => { return {
+        expendNotice: ({ noticeId }) => { dispatch(NoticeCenter.Actions.updateExpendedNotice({id: noticeId})); },
+        clearExpendNotice: () => { dispatch(NoticeCenter.Actions.updateExpendedNotice({id: '-1'})); },
+        fetchNotices: () => { console.log('fetchNotices()'); },
+    }; }
+)(PbplusNoticeCenter);
 
 const ConnectedPbplusPointCounter = connect(
     (state, ownProps) => {
@@ -43,6 +60,39 @@ const ConnectedPbplusPointCounter = connect(
         submit: ({ orders }) => dispatch(Points.Actions.submit({ orders })),
     }; }
 )(PbplusPointCounter);
+
+const ConnectedPbplusBuyingLogs = connect(
+    (state, ownProps) => {
+        return {
+            logs: [
+                {
+                    date: new Date(2017, 4, 23, 12), type: 'event',
+                    title: '2017 HOOD TO COAST 台灣賽 中午場', bannerSrc: '',
+                    paymentMethod: '信用卡', paymentFee: 30,
+                    shippingFee: 40, shippingMethod: '宅配',
+                    price: 20000, total: 20070,
+                },
+                {
+                    date: new Date(2017, 4, 23, 16), type: 'promotion',
+                    title: '2017 HOOD TO COAST 台灣賽 下午場', bannerSrc: '',
+                    paymentMethod: '信用卡', paymentFee: 20,
+                    shippingFee: 0, shippingMethod: '現場取件',
+                    price: 20500, total: 20570,
+                },
+                {
+                    date: new Date(2017, 6, 23, 16), type: 'event',
+                    title: '2017 HOOD TO COAST 台灣賽 六月場', bannerSrc: '',
+                    paymentMethod: 'ATM', paymentFee: 20,
+                    shippingFee: 20, shippingMethod: '宅配',
+                    price: 30500, total: 30590,
+                },
+            ],
+        };
+    },
+    (dispatch, ownProps) => { return {
+        fetchBuyingLogs: () => { console.log('fetchBuyingLogs()'); },
+    }; }
+)(PbplusBuyingLogs);
 
 const ConnectedPbplusImageInputBox = connect(
     (state, ownProps) => { return {
@@ -134,8 +184,10 @@ class App extends React.Component {
                 使用者中心
             </div>
             <ConnectedPbplusMemberCenter
+                noticeCenter={<ConnectedPbplusNoticeCenter />}
                 calendar={<ConnectedPbplusCalendar />}
                 pointCounter={<ConnectedPbplusPointCounter />}
+                buyingLogs={<ConnectedPbplusBuyingLogs />}
                 personalData={<ConnectedPbplusPersonalData />}
             />
         </div>;
