@@ -18,12 +18,14 @@ import '../css/app.less';
 const ConnectedPbplusMemberCenter = connect(
     (state, ownProps) => { return {
         displayState: state.pbplusMemberCenter.displayState,
+        activeTab: state.pbplusMemberCenter.activeTab,
     }; },
     (dispatch, ownProps) => { return {
         hide: () => {
             dispatch(MemberCenter.Actions.updateDisplayState({displayState: 'hiding'}));
             setTimeout(() => { dispatch(MemberCenter.Actions.updateDisplayState({displayState: 'hidden'})); }, 600);
         },
+        setActiveTab: ({ key }) => { dispatch(MemberCenter.Actions.updateActiveTab({activeTab: key})); },
     }; }
 )(PbplusMemberCenter);
 
