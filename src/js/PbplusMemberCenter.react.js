@@ -19,15 +19,12 @@ import PersonalIcon from '../img/personal.png';
 import PersonalHoverIcon from '../img/personal_hover.png';
 
 class PbplusMemberCenter extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {activeKey: 'notice-center'};
-        this.setActiveKey = this.setActiveKey.bind(this);
-    }
-    setActiveKey({ key }) { this.setState({activeKey: key}); }
+    constructor(props) { super(props); }
     render() {
-        const { activeKey } = this.state;
-        const { displayState, hide, noticeCenter, calendar, pointCounter, buyingLogs, personalData } = this.props;
+        const {
+            displayState, hide, activeTab, setActiveTab,
+            noticeCenter, calendar, pointCounter, buyingLogs, personalData
+        } = this.props;
         let displayClassName = '';
         if('hiding' === displayState) { displayClassName = ' pbplus-hiding'; }
         else if('hidden' == displayState) { displayClassName = ' pbplus-hidden'; }
@@ -46,7 +43,7 @@ class PbplusMemberCenter extends React.Component {
                 <div className='pbplus-member-center-body'>
                     <div className='pbplus-member-center-summary'></div>
                     <div className='pbplus-member-center-interactions'>
-                        <PbplusTabPanels activeKey={activeKey} setActiveKey={this.setActiveKey}>
+                        <PbplusTabPanels activeKey={activeTab} setActiveKey={setActiveTab}>
                             <div
                                 className='interaction'
                                 data-key='notice-center' data-display='通知中心'
@@ -71,14 +68,14 @@ class PbplusMemberCenter extends React.Component {
                             >
                                 {pointCounter}
                             </div>
-                            <div
+                            {/*<div
                                 className='interaction'
                                 data-key='buying-logs' data-display='消費記錄'
                                 data-icon={CartIcon}
                                 data-icon_active={CartHoverIcon}
                             >
                                 {buyingLogs}
-                            </div>
+                            </div>*/}
                             <div
                                 className='interaction'
                                 data-key='personal-data' data-display='個人資料'
@@ -98,6 +95,8 @@ class PbplusMemberCenter extends React.Component {
 PbplusMemberCenter.propTypes = {
     displayState: PropTypes.oneOf(['display', 'hiding', 'hidden']).isRequired,
     hide: PropTypes.func.isRequired,
+    activeTab: PropTypes.string.isRequired,
+    setActiveTab: PropTypes.func.isRequired,
     noticeCenter: PropTypes.element.isRequired,
     calendar: PropTypes.element.isRequired,
     pointCounter: PropTypes.element.isRequired,
