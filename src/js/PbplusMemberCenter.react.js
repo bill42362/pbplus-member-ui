@@ -23,7 +23,7 @@ class PbplusMemberCenter extends React.Component {
     render() {
         const {
             displayState, hide, activeTab, setActiveTab,
-            noticeCenter, calendar, pointCounter, buyingLogs, personalData
+            memberSummary, noticeCenter, calendar, pointCounter, buyingLogs, personalData
         } = this.props;
         let displayClassName = '';
         if('hiding' === displayState) { displayClassName = ' pbplus-hiding'; }
@@ -41,7 +41,7 @@ class PbplusMemberCenter extends React.Component {
                     </div>
                 </div>
                 <div className='pbplus-member-center-body'>
-                    <div className='pbplus-member-center-summary'></div>
+                    {'notice-center' === activeTab && memberSummary}
                     <div className='pbplus-member-center-interactions'>
                         <PbplusTabPanels activeKey={activeTab} setActiveKey={setActiveTab}>
                             <div
@@ -97,6 +97,7 @@ PbplusMemberCenter.propTypes = {
     hide: PropTypes.func.isRequired,
     activeTab: PropTypes.string.isRequired,
     setActiveTab: PropTypes.func.isRequired,
+    memberSummary: PropTypes.element.isRequired,
     noticeCenter: PropTypes.element.isRequired,
     calendar: PropTypes.element.isRequired,
     pointCounter: PropTypes.element.isRequired,
