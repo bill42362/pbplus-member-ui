@@ -36,7 +36,7 @@ class PbplusNotice extends React.Component {
         if(shouldExpend) {
             newHeight = titleHeight + contentHeight + bodyPadding;
         } else {
-            newHeight = titleHeight + bodyPadding;
+            newHeight = Math.max(titleHeight, 25) + bodyPadding;
         }
         if(currentHeight !== newHeight) { this.setState({height: newHeight}); }
     }
