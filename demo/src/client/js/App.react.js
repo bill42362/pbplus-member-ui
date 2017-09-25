@@ -9,8 +9,8 @@ import PictureEditor from './PictureEditor.js';
 import Points from './Points.js';
 // import { PbplusMemberCenter, PbplusCalendar, PbplusPersonalData } from 'pbplus-member-ui';
 import {
-    PbplusMemberCenter, PbplusNoticeCenter,
-    PbplusCalendar, PbplusPointCounter, PbplusBuyingLogs,
+    PbplusMemberCenter, PbplusMemberSummary,
+    PbplusNoticeCenter, PbplusCalendar, PbplusPointCounter, PbplusBuyingLogs,
     PbplusPersonalData, PbplusImageInputBox
 } from '../../../../src/js/index.js';
 import '../css/app.less';
@@ -28,6 +28,33 @@ const ConnectedPbplusMemberCenter = connect(
         setActiveTab: ({ key }) => { dispatch(MemberCenter.Actions.updateActiveTab({activeTab: key})); },
     }; }
 )(PbplusMemberCenter);
+
+const ConnectedPbplusMemberSummary = connect(
+    (state, ownProps) => {
+        return {
+            userPhoto: 'https://p2.bahamut.com.tw/HOME/creationCover/40/0003703340.JPG',
+            nickname: 'Steve 李韶午',
+            registeredDate: new Date(),
+            coins: 50,
+            eventCounts: [
+                {key: 'baseball', count: 15, display: '棒球 %f 場'},
+                {key: 'baseketball', count: 8, display: '籃球 %f 場'},
+                {key: 'jogging', count: 5, display: '路跑 %f KM'},
+                {key: 'gym', count: 22, display: '健身 %f 堂'},
+            ],
+            achievements: [
+                {key: 'achievement-1', display: 'achi-1', imageSrc: 'https://p2.bahamut.com.tw/HOME/creationCover/40/0003703340.JPG'},
+                {key: 'achievement-2', display: 'achi-2', imageSrc: 'https://p2.bahamut.com.tw/HOME/creationCover/40/0003703340.JPG'},
+                {key: 'achievement-3', display: 'achi-3', imageSrc: 'https://p2.bahamut.com.tw/HOME/creationCover/40/0003703340.JPG'},
+            ],
+            points: state.pbplusPoints.points,
+            pointsLastRenewDate: new Date(),
+        };
+    },
+    (dispatch, ownProps) => { return {
+        fetchMemberSummary: () => { console.log('fetchMemberSummary()'); },
+    }; }
+)(PbplusMemberSummary);
 
 const ConnectedPbplusNoticeCenter = connect(
     (state, ownProps) => {
@@ -186,6 +213,7 @@ class App extends React.Component {
                 使用者中心
             </div>
             <ConnectedPbplusMemberCenter
+                memberSummary={<ConnectedPbplusMemberSummary />}
                 noticeCenter={<ConnectedPbplusNoticeCenter />}
                 calendar={<ConnectedPbplusCalendar />}
                 pointCounter={<ConnectedPbplusPointCounter />}
