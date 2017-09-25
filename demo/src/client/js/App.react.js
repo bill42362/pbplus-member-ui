@@ -37,10 +37,10 @@ const ConnectedPbplusMemberSummary = connect(
             registeredDate: new Date(),
             coins: 50,
             eventCounts: [
-                {key: 'baseball', count: 15, display: '棒球 %f 場'},
-                {key: 'baseketball', count: 8, display: '籃球 %f 場'},
-                {key: 'jogging', count: 5, display: '路跑 %f KM'},
-                {key: 'gym', count: 22, display: '健身 %f 堂'},
+                {key: 'baseball', count: 100*Math.random(), display: '棒球 %f 場', color: 'rgb(246, 185, 80)'},
+                {key: 'baseketball', count: 100*Math.random(), display: '籃球 %f 場', color: 'rgb(128, 159, 232)'},
+                {key: 'jogging', count: 100*Math.random(), display: '路跑 %f KM', color: 'rgb(144, 252, 128)'},
+                {key: 'gym', count: 100*Math.random(), display: '健身 %f 堂', color: 'rgb(50, 200, 235)'},
             ],
             achievements: [
                 {key: 'achievement-1', display: 'achi-1', imageSrc: 'https://p2.bahamut.com.tw/HOME/creationCover/40/0003703340.JPG'},

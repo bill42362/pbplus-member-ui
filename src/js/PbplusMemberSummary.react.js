@@ -3,6 +3,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { getDateStringWithFormat } from './utils.js';
+import PbplusMeterRing from './PbplusMeterRing.react.js';
 import '../css/pbplus-member-summary.less';
 
 class PbplusMemberSummary extends React.Component {
@@ -13,6 +14,7 @@ class PbplusMemberSummary extends React.Component {
             userPhoto, nickname, registeredDate, coins, eventCounts,
             achievements, points, pointsLastRenewDate, fetchMemberSummary
         } = this.props;
+        const eventCountsSum = eventCounts.reduce((current, eventCount) => current + eventCount.count, 0);
         return <div className='pbplus-member-summary'>
             <div className='pbplus-member-summary-header'>
                 <div className='pbplus-member-summary-photo'>
@@ -27,8 +29,33 @@ class PbplusMemberSummary extends React.Component {
                 </div>
             </div>
             <div className='pbplus-member-summary-meter'>
-                <div className='pbplus-member-summary-meter-body'></div>
-                <div className='pbplus-member-summary-meter-legend'></div>
+                <div className='pbplus-member-summary-meter-body'>
+                    <div className='pbplus-member-summary-meter-body-background'></div>
+                    <div className='pbplus-member-summary-meter-body-ring-wrapper'>
+                        <PbplusMeterRing arcs={eventCounts.map(eventCount => {
+                            return {
+                                ratio: eventCount.count/eventCountsSum,
+                                color: eventCount.color,
+                            };
+                        })} />
+                    </div>
+                    <div className='pbplus-member-summary-meter-body-digit'>{coins}</div>
+                    <div className='pbplus-member-summary-meter-body-description'>BMI</div>
+                </div>
+                <div className='pbplus-member-summary-meter-legends'>
+                    {eventCounts.map((eventCount, index) => {
+                        return <div
+                            className='pbplus-member-summary-meter-legend' key={index}
+                            style={{borderLeftColor: eventCount.color}}
+                        >
+                            {eventCount.display.replace(/%f.*$/, '')}
+                            <span className='pbplus-member-summary-meter-legend-digit'>
+                                {Math.floor(eventCount.count)}
+                            </span>
+                            {eventCount.display.replace(/^.*%f/, '')}
+                        </div>;
+                    })}
+                </div>
             </div>
             <div className='pbplus-member-summary-achievements'>
                 <div className='pbplus-member-summary-achievements-label'>成就</div>
