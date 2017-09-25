@@ -61,7 +61,7 @@ class PbplusMemberSummary extends React.Component {
 }
 
 PbplusMemberSummary.propTypes = {
-    userPhoto: PropTypes.object.isRequired,
+    userPhoto: PropTypes.string.isRequired,
     nickname: PropTypes.string.isRequired,
     registeredDate: PropTypes.object.isRequired,
     coins: PropTypes.number.isRequired,
