@@ -22,6 +22,7 @@ class PbplusTabPanels extends React.Component {
         const { className, activeKey } = this.props;
         let { children } = this.props;
         if(children && !children.length) { children = [ children ]; }
+        children = children.filter(children => children);
         const activeChild = children.filter(child => {
             return activeKey === child.props['data-key'];
         })[0] || children[0];

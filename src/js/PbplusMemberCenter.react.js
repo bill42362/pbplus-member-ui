@@ -44,46 +44,36 @@ class PbplusMemberCenter extends React.Component {
                     {'notice-center' === activeTab && memberSummary}
                     <div className='pbplus-member-center-interactions'>
                         <PbplusTabPanels activeKey={activeTab} setActiveKey={setActiveTab}>
-                            <div
+                            {!!noticeCenter && <div
                                 className='interaction'
                                 data-key='notice-center' data-display='通知中心'
                                 data-icon={MessageIcon}
                                 data-icon_active={MessageHoverIcon}
-                            >
-                                {noticeCenter}
-                            </div>
-                            <div
+                            >{noticeCenter}</div>}
+                            {!!calendar && <div
                                 className='interaction'
                                 data-key='calendar' data-display='日曆中心'
                                 data-icon={CalendarIcon}
                                 data-icon_active={CalendarHoverIcon}
-                            >
-                                {calendar}
-                            </div>
-                            <div
+                            >{calendar}</div>}
+                            {!!pointCounter && <div
                                 className='interaction'
                                 data-key='point-counter' data-display='兌換點數'
                                 data-icon={PointsIcon}
                                 data-icon_active={PointsHoverIcon}
-                            >
-                                {pointCounter}
-                            </div>
-                            {/*<div
+                            >{pointCounter}</div>}
+                            {!!buyingLogs && <div
                                 className='interaction'
                                 data-key='buying-logs' data-display='消費記錄'
                                 data-icon={CartIcon}
                                 data-icon_active={CartHoverIcon}
-                            >
-                                {buyingLogs}
-                            </div>*/}
-                            <div
+                            >{buyingLogs}</div>}
+                            {!!personalData && <div
                                 className='interaction'
                                 data-key='personal-data' data-display='個人資料'
                                 data-icon={PersonalIcon}
                                 data-icon_active={PersonalHoverIcon}
-                            >
-                                {personalData}
-                            </div>
+                            >{personalData}</div>}
                         </PbplusTabPanels>
                     </div>
                 </div>
@@ -97,12 +87,12 @@ PbplusMemberCenter.propTypes = {
     hide: PropTypes.func.isRequired,
     activeTab: PropTypes.string.isRequired,
     setActiveTab: PropTypes.func.isRequired,
-    memberSummary: PropTypes.element.isRequired,
-    noticeCenter: PropTypes.element.isRequired,
-    calendar: PropTypes.element.isRequired,
-    pointCounter: PropTypes.element.isRequired,
-    buyingLogs: PropTypes.element.isRequired,
-    personalData: PropTypes.element.isRequired,
+    memberSummary: PropTypes.element,
+    noticeCenter: PropTypes.element,
+    calendar: PropTypes.element,
+    pointCounter: PropTypes.element,
+    buyingLogs: PropTypes.element,
+    personalData: PropTypes.element,
 };
 
 export default PbplusMemberCenter;
