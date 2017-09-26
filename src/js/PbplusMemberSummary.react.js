@@ -29,18 +29,22 @@ class PbplusMemberSummary extends React.Component {
                 </div>
             </div>
             <div className='pbplus-member-summary-meter'>
-                <div className='pbplus-member-summary-meter-body'>
-                    <div className='pbplus-member-summary-meter-body-background'></div>
-                    <div className='pbplus-member-summary-meter-body-ring-wrapper'>
-                        <PbplusMeterRing arcs={eventCounts.map(eventCount => {
-                            return {
-                                ratio: eventCount.count/eventCountsSum,
-                                color: eventCount.color,
-                            };
-                        })} />
+                <div className='pbplus-member-summary-meter-body-wrapper'>
+                    <div className='pbplus-member-summary-meter-body'>
+                        <div className='pbplus-member-summary-meter-body-background'></div>
+                        <div className='pbplus-member-summary-meter-body-ring-wrapper'>
+                            <PbplusMeterRing arcs={eventCounts.map(eventCount => {
+                                return {
+                                    ratio: eventCount.count/eventCountsSum,
+                                    color: eventCount.color,
+                                };
+                            })} />
+                        </div>
+                        <div className='pbplus-member-summary-meter-body-texts'>
+                            <div className='pbplus-member-summary-meter-body-digit'>{coins}</div>
+                            <div className='pbplus-member-summary-meter-body-description'>BMI</div>
+                        </div>
                     </div>
-                    <div className='pbplus-member-summary-meter-body-digit'>{coins}</div>
-                    <div className='pbplus-member-summary-meter-body-description'>BMI</div>
                 </div>
                 <div className='pbplus-member-summary-meter-legends'>
                     {eventCounts.map((eventCount, index) => {
