@@ -2,7 +2,7 @@
 'use strict';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { getDateStringWithFormat } from './utils.js';
+import { getDateStringWithFormat, addCommaToDigit } from './utils.js';
 import PbplusMeterRing from './PbplusMeterRing.react.js';
 import '../css/pbplus-member-summary.less';
 
@@ -29,18 +29,22 @@ class PbplusMemberSummary extends React.Component {
                 </div>
             </div>
             <div className='pbplus-member-summary-meter'>
-                <div className='pbplus-member-summary-meter-body'>
-                    <div className='pbplus-member-summary-meter-body-background'></div>
-                    <div className='pbplus-member-summary-meter-body-ring-wrapper'>
-                        <PbplusMeterRing arcs={eventCounts.map(eventCount => {
-                            return {
-                                ratio: eventCount.count/eventCountsSum,
-                                color: eventCount.color,
-                            };
-                        })} />
+                <div className='pbplus-member-summary-meter-body-wrapper'>
+                    <div className='pbplus-member-summary-meter-body'>
+                        <div className='pbplus-member-summary-meter-body-background'></div>
+                        <div className='pbplus-member-summary-meter-body-ring-wrapper'>
+                            <PbplusMeterRing arcs={eventCounts.map(eventCount => {
+                                return {
+                                    ratio: eventCount.count/eventCountsSum,
+                                    color: eventCount.color,
+                                };
+                            })} />
+                        </div>
+                        <div className='pbplus-member-summary-meter-body-texts'>
+                            <div className='pbplus-member-summary-meter-body-digit'>{coins}</div>
+                            <div className='pbplus-member-summary-meter-body-description'>BMI</div>
+                        </div>
                     </div>
-                    <div className='pbplus-member-summary-meter-body-digit'>{coins}</div>
-                    <div className='pbplus-member-summary-meter-body-description'>BMI</div>
                 </div>
                 <div className='pbplus-member-summary-meter-legends'>
                     {eventCounts.map((eventCount, index) => {
@@ -73,7 +77,9 @@ class PbplusMemberSummary extends React.Component {
             <div className='pbplus-member-summary-points'>
                 <div className='pbplus-member-summary-points-display'>
                     目前累積
-                    <span className='pbplus-member-summary-points-display-digit'>{points}</span>
+                    <span className='pbplus-member-summary-points-display-digit'>
+                        {addCommaToDigit({number: points})}
+                    </span>
                     點紅利
                 </div>
                 <div className='pbplus-member-summary-points-last-update-date'>
