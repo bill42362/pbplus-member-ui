@@ -1,6 +1,7 @@
 // index.js
 'use strict';
 import PbplusNoticeCenterComponent from './PbplusNoticeCenter.react.js';
+import PbplusMemberSummaryComponent from './PbplusMemberSummary.react.js';
 import PbplusCalendarComponent from './PbplusCalendar.react.js';
 import PbplusTabPanelsComponent from './PbplusTabPanels.react.js';
 import PbplusMemberCenterComponent from './PbplusMemberCenter.react.js';
@@ -10,6 +11,7 @@ import PbplusPersonalDataComponent from './PbplusPersonalData.react.js';
 import PbplusImageInputBoxComponent from './ImageInputBox.react.js';
 
 export const PbplusNoticeCenter = PbplusNoticeCenterComponent;
+export const PbplusMemberSummary = PbplusMemberSummaryComponent;
 export const PbplusCalendar = PbplusCalendarComponent;
 export const PbplusTabPanels = PbplusTabPanelsComponent;
 export const PbplusMemberCenter = PbplusMemberCenterComponent;
@@ -19,6 +21,7 @@ export const PbplusPersonalData = PbplusPersonalDataComponent;
 export const PbplusImageInputBox = PbplusImageInputBoxComponent;
 export default {
     PbplusNoticeCenter: PbplusNoticeCenterComponent,
+    PbplusMemberSummary: PbplusMemberSummaryComponent,
     PbplusCalendar: PbplusCalendarComponent,
     PbplusTabPanels: PbplusTabPanelsComponent,
     PbplusMemberCenter: PbplusMemberCenterComponent,
