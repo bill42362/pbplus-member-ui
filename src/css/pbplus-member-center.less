@@ -82,6 +82,12 @@ div.pbplus-member-center {
             flex: auto;
             display: flex;
             flex-direction: column;
+            &.full-scroll {
+                overflow-y: scroll;
+                div.pbplus-member-center-interactions {
+                    div.interaction { position: relative; }
+                }
+            }
             div.pbplus-member-center-summary { flex: none; }
             div.pbplus-member-center-interactions {
                 flex: auto;
