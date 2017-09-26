@@ -1,10 +1,11 @@
 // pbplus-member-summary.less
 @import './base.less';
 @photoSize: 80px;
+@meterSize: 70%;
 
 div.pbplus-member-summary {
     border-radius: 8px;
-    margin-top: (0.3*@photoSize);
+    margin-top: (0.5*@photoSize);
     padding: (0.5*@photoSize) 20px 30px;
     background-color: @pbplusBackgroundColor;
     color: black;
@@ -32,11 +33,65 @@ div.pbplus-member-summary {
             font-size: 12px;
         }
     }
+    div.pbplus-member-summary-meter {
+        display: flex;
+        position: relative;
+        margin-top: 30px;
+        div.pbplus-member-summary-meter-body {
+            flex: auto;
+            flex-direction: column;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            div.pbplus-member-summary-meter-body-background {
+                position: absolute;
+                border-radius: 50%;
+                width: @meterSize; height: @meterSize;
+                padding-top: @meterSize;
+                background-color: rgb(48, 67, 94);
+                z-index: 1;
+            }
+            div.pbplus-member-summary-meter-body-ring-wrapper {
+                position: absolute;
+                width: @meterSize; height: @meterSize;
+                padding-top: @meterSize;
+                z-index: 2;
+            }
+            div.pbplus-member-summary-meter-body-digit {
+                z-index: 3;
+                font-size: 2em;
+            }
+            div.pbplus-member-summary-meter-body-description {
+                z-index: 3;
+                font-size: 0.8em;
+            }
+        }
+        div.pbplus-member-summary-meter-legends {
+            flex: none;
+            min-width: 40%;
+            text-align: left;
+            div.pbplus-member-summary-meter-legend {
+                display: flex;
+                align-items: center;
+                border-left: 5px solid gray;
+                margin-bottom: 0.5em;
+                padding-left: 1em;
+                font-size: 14px;
+                &:last-of-type { margin-bottom: 0px; }
+                span.pbplus-member-summary-meter-legend-digit {
+                    margin: 0px 0.5em;
+                    font-size: 1.5em;
+                }
+            }
+        }
+    }
     div.pbplus-member-summary-achievements {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-top: 20px;
+        margin-top: 30px;
         div.pbplus-member-summary-achievements-label {
             flex: none;
             font-size: 14px;
