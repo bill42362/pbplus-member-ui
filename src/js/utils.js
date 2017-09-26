@@ -27,3 +27,10 @@ export const getDateStringWithFormat = ({ timestamp, format }) => {
     if(matchSeconds) { format = format.replace(/[s]+/, pad(dateObject.getSeconds(), matchSeconds.length)); }
     return format;
 }
+
+export const addCommaToDigit = ({ number, bit = 3 }) => {
+    const regExp = new RegExp(`\\B(?=(\\d{${bit}})+(?!\\d))`, 'g');
+    const parts = number.toString().split('.');
+    parts[0] = parts[0].replace(regExp, ',');
+    return parts.join('.');
+};

@@ -2,6 +2,7 @@
 'use strict';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { addCommaToDigit } from './utils.js';
 import '../css/pbplus-point-counter.less';
 
 import PlusImage from '../img/plus.png';
@@ -30,7 +31,9 @@ class PbplusPointCounter extends React.Component {
         return <div className='pbplus-point-counter'>
             <div className='pbplus-point-counter-current-points'>
                 目前紅利點數
-                <span className='pbplus-point-counter-current-points-digit'>{points}</span>
+                <span className='pbplus-point-counter-current-points-digit'>
+                    {addCommaToDigit({number: points})}
+                </span>
                 點 (
                 <a
                     className='pbplus-point-counter-current-points-info'

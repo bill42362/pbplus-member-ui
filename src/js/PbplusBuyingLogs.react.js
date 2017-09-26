@@ -2,6 +2,7 @@
 'use strict';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { addCommaToDigit } from './utils.js';
 import '../css/pbplus-buying-logs.less';
 
 import DefaultEventBanner from '../img/event.jpg';
@@ -56,22 +57,30 @@ class PbplusBuyingLogs extends React.Component {
                                 <div className='pbplus-buying-logs-date-group-log-pricing'>
                                     <div className='pbplus-buying-logs-date-group-log-subtotal'>
                                         <div className='pbplus-buying-logs-date-group-log-subtotal-title'>小計</div>
-                                        <div className='pbplus-buying-logs-date-group-log-subtotal-digit'>{log.price}</div>
+                                        <div className='pbplus-buying-logs-date-group-log-subtotal-digit'>
+                                            {addCommaToDigit({number: log.price})}
+                                        </div>
                                     </div>
                                     <div className='pbplus-buying-logs-date-group-log-payment'>
                                         <div className='pbplus-buying-logs-date-group-log-payment-fee-title'>金流手續費</div>
                                         <div className='pbplus-buying-logs-date-group-log-payment-method'>{log.paymentMethod}</div>
-                                        <div className='pbplus-buying-logs-date-group-log-payment-fee-digit'>{log.paymentFee}</div>
+                                        <div className='pbplus-buying-logs-date-group-log-payment-fee-digit'>
+                                            {addCommaToDigit({number: log.paymentFee})}
+                                        </div>
                                     </div>
                                     <div className='pbplus-buying-logs-date-group-log-shipping'>
                                         <div className='pbplus-buying-logs-date-group-log-shipping-fee-title'>運費</div>
                                         <div className='pbplus-buying-logs-date-group-log-shipping-method'>{log.shippingMethod}</div>
-                                        <div className='pbplus-buying-logs-date-group-log-shipping-fee-digit'>{log.shippingFee}</div>
+                                        <div className='pbplus-buying-logs-date-group-log-shipping-fee-digit'>
+                                            {addCommaToDigit({number: log.shippingFee})}
+                                        </div>
                                     </div>
                                 </div>
                                 <div className='pbplus-buying-logs-date-group-log-total-price'>
                                     <div className='pbplus-buying-logs-date-group-log-total-price-title'>總計</div>
-                                    <div className='pbplus-buying-logs-date-group-log-total-price-digit'>{log.total}</div>
+                                    <div className='pbplus-buying-logs-date-group-log-total-price-digit'>
+                                        {addCommaToDigit({number: log.total})}
+                                    </div>
                                 </div>
                             </div>;
                         })}

@@ -2,7 +2,7 @@
 'use strict';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { getDateStringWithFormat } from './utils.js';
+import { getDateStringWithFormat, addCommaToDigit } from './utils.js';
 import PbplusMeterRing from './PbplusMeterRing.react.js';
 import '../css/pbplus-member-summary.less';
 
@@ -77,7 +77,9 @@ class PbplusMemberSummary extends React.Component {
             <div className='pbplus-member-summary-points'>
                 <div className='pbplus-member-summary-points-display'>
                     目前累積
-                    <span className='pbplus-member-summary-points-display-digit'>{points}</span>
+                    <span className='pbplus-member-summary-points-display-digit'>
+                        {addCommaToDigit({number: points})}
+                    </span>
                     點紅利
                 </div>
                 <div className='pbplus-member-summary-points-last-update-date'>
