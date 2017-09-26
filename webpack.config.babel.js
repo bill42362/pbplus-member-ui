@@ -4,6 +4,7 @@ const isProd = process.env.NODE_ENV === 'production';
 
 export default {
     entry: [
+        'babel-polyfill',
         './src/js/index.js',
     ],
     output: {

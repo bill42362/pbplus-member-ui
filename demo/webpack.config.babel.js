@@ -5,6 +5,7 @@ const WDS_PORT = 7000;
 
 export default {
     entry: [
+        'babel-polyfill',
         './src/client/js',
     ],
     output: {
