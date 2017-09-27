@@ -21,7 +21,7 @@ class PbplusMeterRing extends React.Component {
         const canvas = context.canvas;
         context.clearRect(0, 0, 0.5*canvas.width, 0.5*canvas.height);
     }
-    componentDidUpdate() {
+    drawMeter() {
         const { context, center, radius } = this.state;
         const { arcs = [] } = this.props;
         let drawnAngle = -0.5*Math.PI;
@@ -54,19 +54,27 @@ class PbplusMeterRing extends React.Component {
             drawnAngle = endAngle;
         });
     }
-    componentDidMount() {
+    setupCanvas() {
+        const { center: currentCenter, radius: currentRadius } = this.state;
         const canvas = this.refs.canvas;
         const context = canvas.getContext('2d');
         const width = ANTIALIAS_FACTOR*canvas.clientWidth;
         const height = ANTIALIAS_FACTOR*canvas.clientHeight;
         const center = {x: 0.25*width, y: 0.25*height};
-        const radius = 0.25*Math.min(width, height) - RING_PADDING;
+        const radius = Math.max(0, 0.25*Math.min(width, height) - RING_PADDING);
         context.canvas.width = width;
         context.canvas.height = height;
         context.transform(ANTIALIAS_FACTOR, 0, 0, ANTIALIAS_FACTOR, 0, 0);
         context.lineWidth = 4;
-        this.setState({ context, center, radius });
+        if(currentRadius !== radius || currentCenter.x !== center.x || currentCenter.y !== center.y) {
+            this.setState({ context, center, radius });
+        }
     }
+    componentDidUpdate() {
+        this.setupCanvas();
+        this.drawMeter();
+    }
+    componentDidMount() { this.setupCanvas(); }
     render() { return <canvas className='pbplus-meter-ring' ref='canvas' />; }
 }
 
