@@ -18,11 +18,12 @@ div.pbplus-member-summary {
             position: absolute;
             top: -@photoSize; left: 50%;
             img.pbplus-member-summary-photo {
+                display: block;
                 border: 2px solid gray;
                 border-radius: (0.5*@photoSize);
                 margin-left: (-0.5*@photoSize);
                 width: @photoSize; height: @photoSize;
-                background-color: cyan;
+                background-color: @pbplusBackgroundColor;
             }
         }
         div.pbplus-member-summary-nickname {
