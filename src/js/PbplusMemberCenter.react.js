@@ -25,8 +25,9 @@ class PbplusMemberCenter extends React.Component {
             displayState, hide, activeTab, setActiveTab,
             memberSummary, noticeCenter, calendar, pointCounter, buyingLogs, personalData
         } = this.props;
+        const shouldShowMemberSummary = !!memberSummary && 'notice-center' === activeTab;
+        const fullScrollClassName = shouldShowMemberSummary ? ' full-scroll' : '';
         let displayClassName = '';
-        let fullScrollClassName = 'notice-center' === activeTab ? ' full-scroll' : '';
         if('hiding' === displayState) { displayClassName = ' pbplus-hiding'; }
         else if('hidden' == displayState) { displayClassName = ' pbplus-hidden'; }
         return <div className={`pbplus-member-center${displayClassName}`}>
@@ -42,7 +43,7 @@ class PbplusMemberCenter extends React.Component {
                     </div>
                 </div>
                 <div className={`pbplus-member-center-body${fullScrollClassName}`}>
-                    {'notice-center' === activeTab && memberSummary}
+                    {shouldShowMemberSummary && memberSummary}
                     <div className='pbplus-member-center-interactions'>
                         <PbplusTabPanels activeKey={activeTab} setActiveKey={setActiveTab}>
                             {!!noticeCenter && <div
