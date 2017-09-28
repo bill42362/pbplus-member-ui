@@ -137,7 +137,7 @@ class PbplusPersonalData extends React.Component {
                     </div>
                 </div>
             </div>
-            <div className='pbplus-personal-data-row'>
+            {/*<div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-country-wrapper'>
                     <InputUnit title='國家' value={country} />
                 </div>
@@ -147,8 +147,8 @@ class PbplusPersonalData extends React.Component {
                         inputProps={{placeholder: '0912345678', type: 'number'}}
                     />
                 </div>
-            </div>
-            <div className='pbplus-personal-data-row'>
+            </div>*/}
+            {/*<div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-mobile-verify-code-wrapper'>
                     <InputUnit
                         title='手機驗證碼' value={mobileVerifyCode}
@@ -160,7 +160,7 @@ class PbplusPersonalData extends React.Component {
                         發送驗證碼
                     </div>
                 </div>
-            </div>
+            </div>*/}
             <div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-email-wrapper'>
                     <InputUnit
