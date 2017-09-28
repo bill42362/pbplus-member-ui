@@ -37,7 +37,7 @@ class PbplusPointCounter extends React.Component {
                 點 (
                 <a
                     className='pbplus-point-counter-current-points-info'
-                    href='#' target='_blank'
+                    href='http://x.pbplus.me/point' target='_blank'
                 >?</a>
                 )
             </div>
@@ -106,7 +106,7 @@ class PbplusPointCounter extends React.Component {
                                 <li>報名揪in活動結束後五個工作天，確定您無退費後轉入。</li>
                             </ul>
                         </li>
-                        <li>每次從點數兌換現金的作業，請給 pb+ 小編五個工作天。</li>
+                        <li>每次從點數兌換現金的作業，請給 pb+ 小編 5 個工作天。</li>
                         <li>使用紅利點數折抵之消費，若退貨點數不予退回喔!</li>
                         <li>可折抵之金額依照商品及活動類型有不同上限。</li>
                         <li>
