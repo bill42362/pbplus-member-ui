@@ -68,8 +68,10 @@ class PbplusPersonalData extends React.Component {
             birthYear, birthMonth, birthDay,
             country, mobile, mobileVerifyCode,
             email, zipcode, address,
-            imageInputBox, submit
+            imageInputBox, submit,
+            submitResult
         } = this.props;
+        const submitResultClassName = submitResult.isSuccess ? ' pbplus-success' : ' pbplus-error';
         return <div className='pbplus-personal-data'>
             <div className='pbplus-personal-data-photo'>
                 <div className='pbplus-personal-data-photo-image-input-box-wrapper'>
@@ -181,6 +183,11 @@ class PbplusPersonalData extends React.Component {
                 </div>
             </div>
             <div className='pbplus-personal-data-submit-button-wrapper'>
+                <div className='pbplus-personal-data-submit-result-wrapper' >
+                    {undefined !== submitResult.isSuccess && <div
+                        className={`pbplus-personal-data-submit-result${submitResultClassName}`}
+                    >{submitResult.message}</div>}
+                </div>
                 <div
                     className='pbplus-personal-data-submit-button' role='button'
                     onClick={() => { submit({
@@ -196,6 +203,7 @@ class PbplusPersonalData extends React.Component {
 }
 
 PbplusPersonalData.propTypes = {
+    submitResult: PropTypes.object,
     updateValue: PropTypes.func.isRequired,
     imageInputBox: PropTypes.element.isRequired,
     updateImageSource: PropTypes.func.isRequired,
