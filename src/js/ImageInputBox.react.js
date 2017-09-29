@@ -5,6 +5,8 @@ import React from 'react';
 import MouseTracker from './MouseTracker.react.js';
 import '../css/image-input-box.less';
 
+import MockUserPhoto from '../img/mock_user_photo.jpg';
+
 const moverSize = {width: 1280, height: 720};
 const defaultAction = {
     type: '',
@@ -159,7 +161,7 @@ class ImageInputBox extends React.Component {
             />}
             <img
                 className='preview'
-                src={editorState.resultSource}
+                src={editorState.resultSource || MockUserPhoto}
                 data-enable_select_file={true}
             />
             {isEditing && <div

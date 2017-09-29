@@ -65,7 +65,7 @@ const fetchPoints = () => { return (dispatch, getState) => {
         return response.json();
     })
     .then(response => {
-        if(200 === response.status) { dispatch(updatePointCount({points: response.message})); }
+        if(200 === response.status) { dispatch(updatePointCount({points: response.message.points})); }
         else { throw new Error('Bad response from server'); }
     })
     .catch(error => { console.log(error); });

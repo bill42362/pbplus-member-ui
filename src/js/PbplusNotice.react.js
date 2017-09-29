@@ -71,7 +71,14 @@ class PbplusNotice extends React.Component {
                 >{notice.title}</div>
                 <div className='pbplus-notice-content' ref='content'>
                     {notice.content}
-                    {!!notice.link && <a className='pbplus-notice-link' href={notice.link} target='_blank'>前往</a>}
+                    <span className='pbplus-notice-content-links'>
+                        {notice.links.map((link, index) => {
+                            return <a
+                                className='pbplus-notice-link' key={index}
+                                href={link.href} target='_blank'
+                            >{link.text}</a>;
+                        })}
+                    </span>
                 </div>
             </div>
             <div className='pbplus-notice-date'>

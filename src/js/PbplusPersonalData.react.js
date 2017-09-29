@@ -5,6 +5,8 @@ import React from 'react';
 import InputUnit from './InputUnit.react.js';
 import '../css/pbplus-personal-data.less';
 
+import MockUserPhoto from '../img/mock_user_photo.jpg';
+
 const DEFAULT_SIZE = 120;
 const initedImage = new Image();
 initedImage.crossOrigin = 'anonymous';
@@ -68,8 +70,10 @@ class PbplusPersonalData extends React.Component {
             birthYear, birthMonth, birthDay,
             country, mobile, mobileVerifyCode,
             email, zipcode, address,
-            imageInputBox, submit
+            imageInputBox, submit,
+            submitResult
         } = this.props;
+        const submitResultClassName = submitResult.isSuccess ? ' pbplus-success' : ' pbplus-error';
         return <div className='pbplus-personal-data'>
             <div className='pbplus-personal-data-photo'>
                 <div className='pbplus-personal-data-photo-image-input-box-wrapper'>
@@ -137,7 +141,7 @@ class PbplusPersonalData extends React.Component {
                     </div>
                 </div>
             </div>
-            <div className='pbplus-personal-data-row'>
+            {/*<div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-country-wrapper'>
                     <InputUnit title='國家' value={country} />
                 </div>
@@ -147,8 +151,8 @@ class PbplusPersonalData extends React.Component {
                         inputProps={{placeholder: '0912345678', type: 'number'}}
                     />
                 </div>
-            </div>
-            <div className='pbplus-personal-data-row'>
+            </div>*/}
+            {/*<div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-mobile-verify-code-wrapper'>
                     <InputUnit
                         title='手機驗證碼' value={mobileVerifyCode}
@@ -160,7 +164,7 @@ class PbplusPersonalData extends React.Component {
                         發送驗證碼
                     </div>
                 </div>
-            </div>
+            </div>*/}
             <div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-email-wrapper'>
                     <InputUnit
@@ -181,10 +185,16 @@ class PbplusPersonalData extends React.Component {
                 </div>
             </div>
             <div className='pbplus-personal-data-submit-button-wrapper'>
+                <div className='pbplus-personal-data-submit-result-wrapper' >
+                    {undefined !== submitResult.isSuccess && <div
+                        className={`pbplus-personal-data-submit-result${submitResultClassName}`}
+                    >{submitResult.message}</div>}
+                </div>
                 <div
                     className='pbplus-personal-data-submit-button' role='button'
                     onClick={() => { submit({
-                        photo, name, gender,
+                        photo: photo || MockUserPhoto,
+                        name, gender,
                         birthYear, birthMonth, birthDay,
                         country, mobile, mobileVerifyCode,
                         email, zipcode, address
@@ -196,6 +206,7 @@ class PbplusPersonalData extends React.Component {
 }
 
 PbplusPersonalData.propTypes = {
+    submitResult: PropTypes.object,
     updateValue: PropTypes.func.isRequired,
     imageInputBox: PropTypes.element.isRequired,
     updateImageSource: PropTypes.func.isRequired,

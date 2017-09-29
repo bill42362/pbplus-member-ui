@@ -1,4 +1,10 @@
 // pbplus-personal-data.less
+@import './utils.less';
+
+.keyframes(personalDataSubmitResultFadout, {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+});
 
 div.pbplus-personal-data {
     padding: 20px;
@@ -119,10 +125,29 @@ div.pbplus-personal-data {
         margin-left: 0.5em;
     }
     div.pbplus-personal-data-submit-button-wrapper {
+        display: flex;
         margin-top: 1.5em;
-        text-align: right;
+        div.pbplus-personal-data-submit-result-wrapper {
+            flex: auto;
+            div.pbplus-personal-data-submit-result {
+                border-radius: 0.4em;
+                padding: 0.3em 0.5em;
+                background-color: rgb(231, 232, 234);
+                color: rgb(71, 74, 78);
+                .animation(personalDataSubmitResultFadout, .6s, 5s, 1, forwards);
+                &.pbplus-success {
+                    background-color: rgb(213, 237, 218);
+                    color: rgb(25, 87, 39);
+                }
+                &.pbplus-error {
+                    background-color: rgb(247, 215, 218);
+                    color: rgb(113, 29, 38);
+                }
+            }
+        }
         div.pbplus-personal-data-submit-button {
-            display: inline-block;
+            flex: none;
+            margin-left: 1em;
         }
     }
 }

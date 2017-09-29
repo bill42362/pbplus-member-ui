@@ -32,7 +32,7 @@ const ConnectedPbplusMemberCenter = connect(
 const ConnectedPbplusMemberSummary = connect(
     (state, ownProps) => {
         return {
-            userPhoto: 'https://p2.bahamut.com.tw/HOME/creationCover/40/0003703340.JPG',
+            userPhoto: '',
             nickname: 'Steve 李韶午',
             registeredDate: new Date(),
             coins: 50,
