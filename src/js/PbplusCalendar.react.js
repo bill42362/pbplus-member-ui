@@ -151,7 +151,7 @@ class PbplusCalendar extends React.Component {
                 <div className='calendar-items'>
                     {selectedDateItems.map((item, index) => {
                         const defaultBanner = 'event' === item.type ? DefaultEventBanner : DefaultPromotionBanner;
-                        return <a className='calendar-item' href={item.link} key={index}>
+                        return <a className='calendar-item' href={item.link} key={index} target='_blank'>
                             <div className='calendar-item-banner-wrapper'>
                                 <img
                                     className='calendar-item-banner'
