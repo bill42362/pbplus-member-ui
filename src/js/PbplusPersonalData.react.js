@@ -5,6 +5,8 @@ import React from 'react';
 import InputUnit from './InputUnit.react.js';
 import '../css/pbplus-personal-data.less';
 
+import MockUserPhoto from '../img/mock_user_photo.jpg';
+
 const DEFAULT_SIZE = 120;
 const initedImage = new Image();
 initedImage.crossOrigin = 'anonymous';
@@ -191,7 +193,8 @@ class PbplusPersonalData extends React.Component {
                 <div
                     className='pbplus-personal-data-submit-button' role='button'
                     onClick={() => { submit({
-                        photo, name, gender,
+                        photo: photo || MockUserPhoto,
+                        name, gender,
                         birthYear, birthMonth, birthDay,
                         country, mobile, mobileVerifyCode,
                         email, zipcode, address

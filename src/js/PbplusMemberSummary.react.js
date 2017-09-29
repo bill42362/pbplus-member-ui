@@ -6,6 +6,8 @@ import { getDateStringWithFormat, addCommaToDigit } from './utils.js';
 import PbplusMeterRing from './PbplusMeterRing.react.js';
 import '../css/pbplus-member-summary.less';
 
+import MockUserPhoto from '../img/mock_user_photo.jpg';
+
 class PbplusMemberSummary extends React.Component {
     constructor(props) { super(props); }
     componentDidMount() { this.props.fetchMemberSummary(); }
@@ -18,7 +20,11 @@ class PbplusMemberSummary extends React.Component {
         return <div className='pbplus-member-summary'>
             <div className='pbplus-member-summary-header'>
                 <div className='pbplus-member-summary-photo'>
-                    <img className='pbplus-member-summary-photo' src={userPhoto} title='顯示圖片' />
+                    <img
+                        className='pbplus-member-summary-photo'
+                        src={userPhoto || MockUserPhoto}
+                        title='顯示圖片'
+                    />
                 </div>
                 <div className='pbplus-member-summary-nickname'>{nickname}</div>
                 <div className='pbplus-member-summary-registered-date'>
