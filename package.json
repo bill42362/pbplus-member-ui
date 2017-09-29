@@ -1,6 +1,6 @@
 {
   "name": "pbplus-member-ui",
-  "version": "2.9.2",
+  "version": "2.10.0",
   "description": "User interface of PBPlus member plugin.",
   "main": "dist/js/index.js",
   "scripts": {
