@@ -137,7 +137,7 @@ class PbplusPointCounter extends React.Component {
             <div className='pbplus-point-counter-submit-button-wrapper'>
                 <div
                     className={`pbplus-point-counter-submit-button${submitClassName}`}
-                    role='button' onClick={this.submit}
+                    role='button' onClick={isNoticeChecked ? this.submit : undefined}
                 >送出</div>
             </div>
         </div>;
