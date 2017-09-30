@@ -44,8 +44,8 @@ class PbplusPointCounter extends React.Component {
             <div className='pbplus-point-counter-select-panel'>
                 {rewards.map((reward, index) => {
                     // Stop considering reward amount because of system limit on 91APP.
-                    //const canAddCount = points > reward.pointCost && reward.selectedCount < reward.total;
-                    const canAddCount = points > reward.pointCost;
+                    //const canAddCount = points >= reward.pointCost && reward.selectedCount < reward.total;
+                    const canAddCount = points >= reward.pointCost;
                     const addCountClassName = canAddCount ? '' : ' pbplus-disabled';
                     const canRemoveCount = 0 < reward.selectedCount;
                     const removeCountClassName = canRemoveCount ? '' : ' pbplus-disabled';
