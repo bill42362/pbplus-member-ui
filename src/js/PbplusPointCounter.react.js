@@ -130,7 +130,7 @@ class PbplusPointCounter extends React.Component {
                             type='checkbox' className='pbplus-point-counter-notice-checker-checkbox'
                             checked={isNoticeChecked} onChange={this.onCheckerChange}
                         />
-                        如果你已經仔細閱讀以賶注意事項並確認進行點數兌換現金折扣碼的話，請打勾。
+                        如果你已經仔細閱讀以上注意事項並確認進行點數兌換現金折扣碼的話，請打勾。
                     </label>
                 </div>
             </div>
