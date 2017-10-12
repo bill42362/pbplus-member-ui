@@ -35,7 +35,7 @@ class PbplusPersonalData extends React.Component {
     selectFile(e) {
         const enableSelectFile = e.target.getAttribute('data-enable_select_file');
         if(!enableSelectFile) { return ;}
-        const input = this.refs.fileSelector;
+        const input = this.fileSelector;
         if(input) {
             const event = new MouseEvent('click', {
                 'view': window, 'bubbles': false, 'cancelable': true
@@ -81,7 +81,8 @@ class PbplusPersonalData extends React.Component {
                 </div>
                 <div className='pbplus-personal-data-photo-functions'>
                     <input
-                        type='file' ref='fileSelector' className='file-input'
+                        type='file' className='file-input'
+                        ref={fileSelector => this.fileSelector = fileSelector}
                         accept='image/*' multiple={false}
                         onChange={this.onFileChange} aria-label='file-selector'
                     />

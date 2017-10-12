@@ -79,7 +79,7 @@ class MouseTracker extends React.Component {
     render() {
         const { style } = this.props;
         return <div
-            ref='div' className='mouse-tracker'
+            className='mouse-tracker'
             style={Object.assign({
                 position: 'absolute',
                 width: '100%', height: '100%',
