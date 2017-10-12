@@ -28,10 +28,10 @@ class PbplusNotice extends React.Component {
     updateNoticeHeight() {
         const { height: currentHeight } = this.state;
         const { shouldExpend } = this.props;
-        const baseHeight = this.refs.base.getBoundingClientRect().height;
+        const baseHeight = this.base.getBoundingClientRect().height;
         const bodyPadding = 16;
-        const titleHeight = this.refs.title.getBoundingClientRect().height;
-        const contentHeight = this.refs.content.getBoundingClientRect().height;
+        const titleHeight = this.title.getBoundingClientRect().height;
+        const contentHeight = this.content.getBoundingClientRect().height;
         let newHeight = currentHeight;
         if(shouldExpend) {
             newHeight = titleHeight + contentHeight + bodyPadding;
@@ -48,7 +48,7 @@ class PbplusNotice extends React.Component {
         const expendClassName = shouldExpend ? ' pbplus-expend' : '';
         return <div
             className={`pbplus-notice${expendClassName}`}
-            style={{ height }} ref='base'
+            style={{ height }} ref={base => this.base = base}
             data-notice_id={notice.id} onClick={this.expendNotice}
         >
             <div className='pbplus-notice-icon'>
@@ -66,10 +66,10 @@ class PbplusNotice extends React.Component {
                 />}
             </div>
             <div className='pbplus-notice-body'>
-                <div className='pbplus-notice-title' ref='title'
+                <div className='pbplus-notice-title' ref={title => this.title = title}
                     onClick={shouldExpend ? this.clearExpendNotice : undefined}
                 >{notice.title}</div>
-                <div className='pbplus-notice-content' ref='content'>
+                <div className='pbplus-notice-content' ref={content => this.content = content}>
                     {notice.content}
                     <span className='pbplus-notice-content-links'>
                         {notice.links.map((link, index) => {

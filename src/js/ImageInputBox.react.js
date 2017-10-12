@@ -58,7 +58,7 @@ class ImageInputBox extends React.Component {
         const { top, left } = this.props.editorState;
         const { isOnLeft, isOnRight, isOnTop, isOnBottom } = this.checkMouseOnEdge(
             {x: x - left - moverSize.width + 60, y: y - top - moverSize.height + 60},
-            this.refs.fullImageView
+            this.fullImageView
         );
         // Change mouse cursor while not actioning.
         let mouseCursor = 'move';
@@ -73,7 +73,7 @@ class ImageInputBox extends React.Component {
         const { top, left } = this.props.editorState;
         const { isOnLeft, isOnRight, isOnTop, isOnBottom } = this.checkMouseOnEdge(
             {x: x - left - moverSize.width + 60, y: y - top - moverSize.height + 60},
-            this.refs.fullImageView
+            this.fullImageView
         );
         // Setup action properties.
         if(!isOnLeft && !isOnRight && !isOnTop && !isOnBottom) {
@@ -156,7 +156,7 @@ class ImageInputBox extends React.Component {
             onDrop={this.onDrop}
         >
             {isEditing && <img
-                className='full-image-view' ref='fullImageView'
+                className='full-image-view' ref={fullImageView => this.fullImageView = fullImageView}
                 src={image.src} style={{ top, left, width, height }}
             />}
             <img

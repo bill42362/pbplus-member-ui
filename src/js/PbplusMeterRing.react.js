@@ -56,7 +56,7 @@ class PbplusMeterRing extends React.Component {
     }
     setupCanvas() {
         const { center: currentCenter, radius: currentRadius } = this.state;
-        const canvas = this.refs.canvas;
+        const canvas = this.canvas;
         const context = canvas.getContext('2d');
         const width = ANTIALIAS_FACTOR*canvas.clientWidth;
         const height = ANTIALIAS_FACTOR*canvas.clientHeight;
@@ -75,7 +75,7 @@ class PbplusMeterRing extends React.Component {
         this.drawMeter();
     }
     componentDidMount() { this.setupCanvas(); }
-    render() { return <canvas className='pbplus-meter-ring' ref='canvas' />; }
+    render() { return <canvas className='pbplus-meter-ring' ref={canvas => this.canvas = canvas} />; }
 }
 
 PbplusMeterRing.propTypes = {
