@@ -5,7 +5,7 @@ import PictureEditor from './PictureEditor.js';
 import { getUrlSearches, trimObject } from './Utils.js';
 
 const defaultState = {
-    name: '', gender: '',
+    nickname: '', name: '', gender: '',
     birthYear: '', birthMonth: '', birthDay: '',
     country: '', mobile: '',
     mobileVerifyCode: '',
@@ -42,13 +42,13 @@ const fetchPersonalData = () => { return (dispatch, getState) => {
     .then(response => {
         const {
             src,
-            name, gender,
+            nickname, name, gender,
             birth_year: birthYear, birth_month: birthMonth, birth_day: birthDay,
             country, mobile, email,
             zipcode, address
         } = response.message;
         const newValueMap = trimObject({
-            name, gender,
+            nickname, name, gender,
             birthYear, birthMonth, birthDay,
             country, mobile, email,
             zipcode, address
@@ -60,7 +60,7 @@ const fetchPersonalData = () => { return (dispatch, getState) => {
 }; };
 
 const submit = ({
-    photo, name, gender,
+    photo, nickname, name, gender,
     birthYear, birthMonth, birthDay,
     country, mobile, mobileVerifyCode,
     email, zipcode, address
@@ -68,7 +68,7 @@ const submit = ({
     const putData = Object.assign({uuid: getUrlSearches().token_id}, {
         birthday: `${birthYear}-${birthMonth}-${birthDay}`,
         picture: photo,
-        name, gender,
+        nickname, name, gender,
         country, mobile, mobileVerifyCode,
         email, zipcode, address
     });

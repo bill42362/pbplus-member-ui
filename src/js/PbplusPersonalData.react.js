@@ -21,6 +21,7 @@ class PbplusPersonalData extends React.Component {
         this.imageType = /^image\//;
         this.selectFile = this.selectFile.bind(this);
         this.onFileChange = this.onFileChange.bind(this);
+        this.onChangeNickname = this.onChangeNickname.bind(this);
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeGender = this.onChangeGender.bind(this);
         this.onChangeBirthYear = this.onChangeBirthYear.bind(this);
@@ -50,6 +51,7 @@ class PbplusPersonalData extends React.Component {
             this.props.updateImageSource(url);
         }
     }
+    onChangeNickname({ value }) { this.props.updateValue({newValueMap: {nickname: value}}); }
     onChangeName({ value }) { this.props.updateValue({newValueMap: {name: value}}); }
     onChangeGender(e) {
         const gender = e.target.getAttribute('data-gender');
@@ -66,7 +68,8 @@ class PbplusPersonalData extends React.Component {
     componentDidMount() { this.props.fetchPersonalData(); }
     render() {
         const {
-            photo, name, gender,
+            photo,
+            nickname, name, gender,
             birthYear, birthMonth, birthDay,
             country, mobile, mobileVerifyCode,
             email, zipcode, address,
@@ -95,6 +98,11 @@ class PbplusPersonalData extends React.Component {
                             點一下圖片進行編輯
                         </div>
                     </div>
+                </div>
+            </div>
+            <div className='pbplus-personal-data-row'>
+                <div className='pbplus-personal-data-nickname-wrapper'>
+                    <InputUnit title='暱稱' value={nickname} onChange={this.onChangeNickname} />
                 </div>
             </div>
             <div className='pbplus-personal-data-row'>
@@ -195,7 +203,7 @@ class PbplusPersonalData extends React.Component {
                     className='pbplus-personal-data-submit-button' role='button'
                     onClick={() => { submit({
                         photo: photo || MockUserPhoto,
-                        name, gender,
+                        nickname, name, gender,
                         birthYear, birthMonth, birthDay,
                         country, mobile, mobileVerifyCode,
                         email, zipcode, address
