@@ -2,7 +2,7 @@
 'use strict';
 import PropTypes from 'prop-types';
 import React from 'react';
-import InputUnit from './InputUnit.react.js';
+import MemberInputUnit from './MemberInputUnit.react.js';
 import '../css/pbplus-personal-data.less';
 
 import MockUserPhoto from '../img/mock_user_photo.jpg';
@@ -72,9 +72,10 @@ class PbplusPersonalData extends React.Component {
             nickname, name, gender,
             birthYear, birthMonth, birthDay,
             country, mobile, mobileVerifyCode,
-            email, zipcode, address,
+            email, isEmailValidated,
+            zipcode, address,
             imageInputBox, submit,
-            submitResult
+            validateEmail, submitResult
         } = this.props;
         const submitResultClassName = submitResult.isSuccess ? ' pbplus-success' : ' pbplus-error';
         return <div className='pbplus-personal-data'>
@@ -102,12 +103,12 @@ class PbplusPersonalData extends React.Component {
             </div>
             <div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-nickname-wrapper'>
-                    <InputUnit title='暱稱' value={nickname} onChange={this.onChangeNickname} />
+                    <MemberInputUnit title='暱稱' value={nickname} onChange={this.onChangeNickname} />
                 </div>
             </div>
             <div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-name-wrapper'>
-                    <InputUnit title='姓名' value={name} onChange={this.onChangeName} />
+                    <MemberInputUnit title='姓名' value={name} onChange={this.onChangeName} />
                 </div>
                 <div className='pbplus-personal-data-gender-wrapper'>
                     <div className='pbplus-personal-data-gender'>
@@ -152,10 +153,10 @@ class PbplusPersonalData extends React.Component {
             </div>
             {/*<div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-country-wrapper'>
-                    <InputUnit title='國家' value={country} />
+                    <MemberInputUnit title='國家' value={country} />
                 </div>
                 <div className='pbplus-personal-data-mobile-wrapper'>
-                    <InputUnit
+                    <MemberInputUnit
                         title='手機號碼' value={mobile} onChange={this.onChangeMobile}
                         inputProps={{placeholder: '0912345678', type: 'number'}}
                     />
@@ -163,7 +164,7 @@ class PbplusPersonalData extends React.Component {
             </div>*/}
             {/*<div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-mobile-verify-code-wrapper'>
-                    <InputUnit
+                    <MemberInputUnit
                         title='手機驗證碼' value={mobileVerifyCode}
                         onChange={this.onChangeMobileVarifyCode}
                     />
@@ -176,21 +177,28 @@ class PbplusPersonalData extends React.Component {
             </div>*/}
             <div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-email-wrapper'>
-                    <InputUnit
+                    <MemberInputUnit
                         title='Email' value={email} onChange={this.onChangeEmail}
                         inputProps={{type: 'email'}}
+                        isLocked={isEmailValidated} lockedInfo='Email 已驗證，請洽服務人員進行修改'
                     />
                 </div>
+                {!isEmailValidated && <div className='pbplus-personal-data-email-validation-button-wrapper'>
+                    <div
+                        className='pbplus-personal-data-email-validation-button' role='button'
+                        onClick={() => { validateEmail({ email }); }}
+                    >驗證 Email</div>
+                </div>}
             </div>
             <div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-zipcode-wrapper'>
-                    <InputUnit
+                    <MemberInputUnit
                         title='郵遞區號' value={zipcode} onChange={this.onChangeZipcode}
                         inputProps={{type: 'number'}}
                     />
                 </div>
                 <div className='pbplus-personal-data-address-wrapper'>
-                    <InputUnit title='地址' value={address} onChange={this.onChangeAddress} />
+                    <MemberInputUnit title='地址' value={address} onChange={this.onChangeAddress} />
                 </div>
             </div>
             <div className='pbplus-personal-data-submit-button-wrapper'>
@@ -219,6 +227,7 @@ PbplusPersonalData.propTypes = {
     updateValue: PropTypes.func.isRequired,
     imageInputBox: PropTypes.element.isRequired,
     updateImageSource: PropTypes.func.isRequired,
+    validateEmail: PropTypes.func.isRequired,
     submit: PropTypes.func.isRequired,
     fetchPersonalData: PropTypes.func.isRequired,
 };

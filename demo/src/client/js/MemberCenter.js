@@ -1,7 +1,7 @@
 // MemberCenter.js
 'use strict';
 
-const defaultState = {displayState: 'display', activeTab: 'notice-center'};
+const defaultState = {displayState: 'display', activeTab: 'personal-data'};
 
 const Reducer = (state = defaultState, action) => {
     switch(action.type) {
