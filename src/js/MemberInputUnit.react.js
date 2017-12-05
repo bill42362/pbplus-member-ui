@@ -1,9 +1,9 @@
-// Input.react.js
+// MemberInputUnit.react.js
 'use strict';
 import React from 'react';
-import '../css/input-unit.less';
+import '../css/member-input-unit.less';
 
-class InputUnit extends React.Component {
+class MemberInputUnit extends React.Component {
     constructor(props) {
         super(props);
         this.state = {id: `${Math.random()}${Math.random()}${Math.random()}`};
@@ -13,7 +13,7 @@ class InputUnit extends React.Component {
     render() {
         const { id } = this.state;
         const { title, value, isPassed, status = 'default', info, inputProps = {}, onChange } = this.props;
-        return <div className={`input-unit input-unit-${status}`}>
+        return <div className={`member-input-unit member-input-unit-${status}`}>
             <label htmlFor={id}>{title}</label>
             <input id={id} title={title} value={value} onChange={this.onChange} {...inputProps} />
             <div className='info'>{info}</div>
@@ -21,4 +21,4 @@ class InputUnit extends React.Component {
     }
 }
 
-export default InputUnit;
+export default MemberInputUnit;
