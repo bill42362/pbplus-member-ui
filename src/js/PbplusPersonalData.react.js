@@ -179,6 +179,7 @@ class PbplusPersonalData extends React.Component {
                     <MemberInputUnit
                         title='Email' value={email} onChange={this.onChangeEmail}
                         inputProps={{type: 'email'}}
+                        isLocked={true} lockedInfo='已驗證過的 Email 不得更改'
                     />
                 </div>
             </div>
