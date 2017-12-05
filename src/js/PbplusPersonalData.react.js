@@ -72,9 +72,10 @@ class PbplusPersonalData extends React.Component {
             nickname, name, gender,
             birthYear, birthMonth, birthDay,
             country, mobile, mobileVerifyCode,
-            email, zipcode, address,
+            email, isEmailValidated,
+            zipcode, address,
             imageInputBox, submit,
-            submitResult
+            validateEmail, submitResult
         } = this.props;
         const submitResultClassName = submitResult.isSuccess ? ' pbplus-success' : ' pbplus-error';
         return <div className='pbplus-personal-data'>
@@ -179,9 +180,15 @@ class PbplusPersonalData extends React.Component {
                     <MemberInputUnit
                         title='Email' value={email} onChange={this.onChangeEmail}
                         inputProps={{type: 'email'}}
-                        isLocked={true} lockedInfo='已驗證過的 Email 不得更改'
+                        isLocked={isEmailValidated} lockedInfo='Email 已驗證，請洽服務人員進行修改'
                     />
                 </div>
+                {!isEmailValidated && <div className='pbplus-personal-data-email-validation-button-wrapper'>
+                    <div
+                        className='pbplus-personal-data-email-validation-button' role='button'
+                        onClick={() => { validateEmail({ email }); }}
+                    >驗證 Email</div>
+                </div>}
             </div>
             <div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-zipcode-wrapper'>
@@ -220,6 +227,7 @@ PbplusPersonalData.propTypes = {
     updateValue: PropTypes.func.isRequired,
     imageInputBox: PropTypes.element.isRequired,
     updateImageSource: PropTypes.func.isRequired,
+    validateEmail: PropTypes.func.isRequired,
     submit: PropTypes.func.isRequired,
     fetchPersonalData: PropTypes.func.isRequired,
 };

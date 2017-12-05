@@ -9,7 +9,7 @@ const defaultState = {
     birthYear: '', birthMonth: '', birthDay: '',
     country: '', mobile: '',
     mobileVerifyCode: '',
-    email: '',
+    email: '', isEmailValidated: false,
     zipcode: '', address: '',
     submitResult: {isSuccess: undefined, message: ''},
 };
