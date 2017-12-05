@@ -147,6 +147,7 @@ const ConnectedPbplusPersonalData = connect(
         },
         updateImageSource: (url) => { dispatch(PictureEditor.Actions.updateImageSource(url)); },
         fetchPersonalData: () => { dispatch(PersonalData.Actions.fetchPersonalData()); },
+        validateEmail: ({ email }) => { console.log('validateEmail() email:', email); },
         submit: ({
             photo, name, gender,
             birthYear, birthMonth, birthDay,

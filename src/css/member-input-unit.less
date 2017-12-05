@@ -1,0 +1,60 @@
+// member-input-unit.less
+
+div.member-input-unit {
+    transition: color .6s ease;
+    &.member-input-unit-primary { color: rgb(0, 123, 255); }
+    &.member-input-unit-success { color: rgb(40, 167, 69); }
+    &.member-input-unit-info { color: rgb(23, 162, 184); }
+    &.member-input-unit-danger { color: rgb(220, 53, 69); }
+    &.member-input-unit-locked {
+        input {
+            background-color: #ededed;
+            cursor: not-allowed;
+        }
+        div.locked-icon {
+            display: block;
+            position: relative;
+            img {
+                position: absolute;
+                right: 0.5em; bottom: 0.4em;
+                height: 20px;
+            }
+        }
+        div.locked-info {
+            position: relative;
+            display: block;
+            opacity: 0;
+            transition: opacity .6s ease;
+            div.locked-info-text {
+                position: absolute;
+                right: 0; top: 4px;
+                font-size: 0.6em;
+                font-weight: 600;
+                color: gray;
+            }
+        }
+    }
+    &.member-input-unit-locked:hover {
+        div.locked-info {
+            opacity: 1;
+        }
+    }
+    label {
+        display: block;
+        margin-left: 3px;
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 1px;
+    }
+    input {
+        width: 100%;
+        border: 1px solid lightgray;
+        margin-top: 0.4em;
+        padding: 0.5em 1.2em;
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+    div.locked-icon { display: none; }
+    div.info { }
+    div.locked-info { display: none; }
+}
