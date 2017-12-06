@@ -136,16 +136,22 @@ class PbplusPersonalData extends React.Component {
                         <div className='pbplus-personal-data-birthday-title'>出生日期</div>
                         <div className='pbplus-personal-data-birthday-row'>
                             <label className='birthday-year'>
-                                <input value={birthYear} title='年' type='number' onChange={this.onChangeBirthYear}/>
-                                年
+                                <span className='input'>
+                                    <input value={birthYear} title='年' type='number' onChange={this.onChangeBirthYear}/>
+                                </span>
+                                <span className='label'>年</span>
                             </label>
                             <label>
-                                <input value={birthMonth} title='月' type='number' onChange={this.onChangeBirthMonth}/>
-                                月
+                                <span className='input'>
+                                    <input value={birthMonth} title='月' type='number' onChange={this.onChangeBirthMonth}/>
+                                </span>
+                                <span className='label'>月</span>
                             </label>
                             <label>
-                                <input value={birthDay} title='日' type='number' onChange={this.onChangeBirthDay}/>
-                                日
+                                <span className='input'>
+                                    <input value={birthDay} title='日' type='number' onChange={this.onChangeBirthDay}/>
+                                </span>
+                                <span className='label'>日</span>
                             </label>
                         </div>
                     </div>

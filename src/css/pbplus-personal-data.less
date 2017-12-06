@@ -97,11 +97,15 @@ div.pbplus-personal-data {
                     font-size: 14px;
                     line-height: 2.5em;
                     &.birthday-year { flex: 3; }
-                    input {
-                        width: 100%;
+                    span.input {
+                        flex: auto;
                         margin-right: 0.8em;
-                        text-align: center;
+                        input {
+                            width: 100%;
+                            text-align: center;
+                        }
                     }
+                    span.label { flex: none; }
                 }
             }
         }
