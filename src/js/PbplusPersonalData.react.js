@@ -27,6 +27,7 @@ class PbplusPersonalData extends React.Component {
         this.onChangeBirthYear = this.onChangeBirthYear.bind(this);
         this.onChangeBirthMonth = this.onChangeBirthMonth.bind(this);
         this.onChangeBirthDay = this.onChangeBirthDay.bind(this);
+        this.onChangeCountry = this.onChangeCountry.bind(this);
         this.onChangeMobile = this.onChangeMobile.bind(this);
         this.onChangeMobileVarifyCode = this.onChangeMobileVarifyCode.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -60,6 +61,7 @@ class PbplusPersonalData extends React.Component {
     onChangeBirthYear(e) { this.props.updateValue({newValueMap: {birthYear: e.target.value}}); }
     onChangeBirthMonth(e) { this.props.updateValue({newValueMap: {birthMonth: e.target.value}}); }
     onChangeBirthDay(e) { this.props.updateValue({newValueMap: {birthDay: e.target.value}}); }
+    onChangeCountry({ value }) { this.props.updateValue({newValueMap: {country: value}}); }
     onChangeMobile({ value }) { this.props.updateValue({newValueMap: {mobile: value}}); }
     onChangeMobileVarifyCode({ value }) { this.props.updateValue({newValueMap: {mobileVerifyCode: value}}); }
     onChangeEmail({ value }) { this.props.updateValue({newValueMap: {email: value}}); }
@@ -72,11 +74,14 @@ class PbplusPersonalData extends React.Component {
             nickname, name, gender,
             birthYear, birthMonth, birthDay,
             country, mobile, mobileVerifyCode,
+            isMobileValidated, isMobileVerifyCodeSent,
             email, isEmailValidated,
             zipcode, address,
             imageInputBox, submit,
-            validateEmail, submitResult
+            validateEmail, sendValidateMobileMessage, submitMobileVerifyCode,
+            submitResult
         } = this.props;
+        const shouldDisplayMobileVerifyingUI = (country || mobile) && !isMobileValidated;
         const submitResultClassName = submitResult.isSuccess ? ' pbplus-success' : ' pbplus-error';
         return <div className='pbplus-personal-data'>
             <div className='pbplus-personal-data-photo'>
@@ -157,9 +162,9 @@ class PbplusPersonalData extends React.Component {
                     </div>
                 </div>
             </div>
-            {/*<div className='pbplus-personal-data-row'>
+            <div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-country-wrapper'>
-                    <MemberInputUnit title='國家' value={country} />
+                    <MemberInputUnit title='國家' value={country} onChange={this.onChangeCountry}/>
                 </div>
                 <div className='pbplus-personal-data-mobile-wrapper'>
                     <MemberInputUnit
@@ -167,20 +172,31 @@ class PbplusPersonalData extends React.Component {
                         inputProps={{placeholder: '0912345678', type: 'number'}}
                     />
                 </div>
-            </div>*/}
-            {/*<div className='pbplus-personal-data-row'>
+            </div>
+            {shouldDisplayMobileVerifyingUI && <div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-mobile-verify-code-wrapper'>
                     <MemberInputUnit
                         title='手機驗證碼' value={mobileVerifyCode}
                         onChange={this.onChangeMobileVarifyCode}
                     />
                 </div>
-                <div className='pbplus-personal-data-mobile-verify-code-button-wrapper'>
-                    <div className='pbplus-personal-data-mobile-verify-code-button' role='button'>
+                {!isMobileVerifyCodeSent && <div className='pbplus-personal-data-mobile-verify-code-button-wrapper'>
+                    <div
+                        className='pbplus-personal-data-mobile-verify-code-button' role='button'
+                        onClick={() => { sendValidateMobileMessage({ country, mobile }); }}
+                    >
                         發送驗證碼
                     </div>
-                </div>
-            </div>*/}
+                </div>}
+                {isMobileVerifyCodeSent && <div className='pbplus-personal-data-mobile-verify-code-button-wrapper'>
+                    <div
+                        className='pbplus-personal-data-mobile-verify-code-button' role='button'
+                        onClick={() => { submitMobileVerifyCode({ mobileVerifyCode }); }}
+                    >
+                        驗證手機
+                    </div>
+                </div>}
+            </div>}
             <div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-email-wrapper'>
                     <MemberInputUnit
@@ -233,6 +249,8 @@ PbplusPersonalData.propTypes = {
     updateValue: PropTypes.func.isRequired,
     imageInputBox: PropTypes.element.isRequired,
     updateImageSource: PropTypes.func.isRequired,
+    sendValidateMobileMessage: PropTypes.func.isRequired,
+    submitMobileVerifyCode: PropTypes.func.isRequired,
     validateEmail: PropTypes.func.isRequired,
     submit: PropTypes.func.isRequired,
     fetchPersonalData: PropTypes.func.isRequired,
