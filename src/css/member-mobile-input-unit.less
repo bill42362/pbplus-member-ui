@@ -1,0 +1,73 @@
+// member-mobile-input-unit.less
+
+div.member-mobile-input-unit {
+    transition: color .6s ease;
+    &.member-mobile-input-unit-locked {
+        div.react-tel-input {
+            input {
+                background-color: #ededed;
+                cursor: not-allowed;
+            }
+            div.flag-dropdown {
+                cursor: not-allowed;
+            }
+        }
+        div.locked-icon {
+            display: block;
+            position: relative;
+            img {
+                position: absolute;
+                right: 0.5em; bottom: 0.4em;
+                height: 20px;
+            }
+        }
+        div.locked-info {
+            position: relative;
+            display: block;
+            opacity: 0;
+            transition: opacity .6s ease;
+            div.locked-info-text {
+                position: absolute;
+                right: 0; top: 4px;
+                font-size: 0.6em;
+                font-weight: 600;
+                color: gray;
+            }
+        }
+    }
+    &.member-mobile-input-unit-locked:hover {
+        div.locked-info {
+            opacity: 1;
+        }
+    }
+    label {
+        display: block;
+        margin-left: 3px;
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 1px;
+    }
+    div.react-tel-input {
+        width: unset;
+        margin-top: 0.4em;
+        input {
+            width: 100%; height: 2.4em;
+            background-color: transparent;
+            border: 1px solid lightgray;
+            border-radius: 0px;
+            padding: 0.5em 1.2em 0.5em 44px;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+        input:focus { border: 1px solid lightgray; }
+        div.flag-dropdown {
+            background-color: transparent;
+            div.selected-flag {
+                height: 2em;
+            }
+        }
+    }
+    div.locked-icon { display: none; }
+    div.info { }
+    div.locked-info { display: none; }
+}

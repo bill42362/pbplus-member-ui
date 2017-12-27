@@ -110,9 +110,21 @@ div.pbplus-personal-data {
             }
         }
     }
-    div.pbplus-personal-data-country-wrapper { flex: 1; }
-    div.pbplus-personal-data-mobile-wrapper { flex: 3; margin-left: 0.5em; }
-    div.pbplus-personal-data-mobile-verify-code-wrapper { flex: auto; }
+    div.pbplus-personal-data-mobile-wrapper { flex: auto; }
+    div.pbplus-personal-data-mobile-verify-message-button-wrapper {
+        display: flex;
+        flex: none;
+        margin-left: 0.5em;
+        div.pbplus-personal-data-mobile-verify-message-button {
+            align-self: flex-end;
+        }
+    }
+    div.pbplus-personal-data-mobile-verify-code-wrapper {
+        flex: auto;
+        div.member-input-unit {
+            label { font-size: 10px; }
+        }
+    }
     div.pbplus-personal-data-mobile-verify-code-button-wrapper {
         display: flex;
         flex: none;

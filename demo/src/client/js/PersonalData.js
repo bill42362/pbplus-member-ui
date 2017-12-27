@@ -7,8 +7,8 @@ import { getUrlSearches, trimObject } from './Utils.js';
 const defaultState = {
     nickname: '', name: '', gender: '',
     birthYear: '', birthMonth: '', birthDay: '',
-    country: '', mobile: '',
-    mobileVerifyCode: '',
+    country: '', mobile: '', isMobileValidated: false,
+    mobileVerifyCode: '', isMobileVerifyCodeSent: false,
     email: '', isEmailValidated: false,
     zipcode: '', address: '',
     submitResult: {isSuccess: undefined, message: ''},

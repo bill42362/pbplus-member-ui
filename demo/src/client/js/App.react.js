@@ -147,6 +147,12 @@ const ConnectedPbplusPersonalData = connect(
         },
         updateImageSource: (url) => { dispatch(PictureEditor.Actions.updateImageSource(url)); },
         fetchPersonalData: () => { dispatch(PersonalData.Actions.fetchPersonalData()); },
+        sendValidateMobileMessage: ({ country, mobile }) => {
+            console.log('sendValidateMobileMessage() country:', country, ', mobile:', mobile);
+        },
+        submitMobileVerifyCode: ({ mobileVerifyCode }) => {
+            console.log('submitMobileVerifyCode() mobileVerifyCode:', mobileVerifyCode);
+        },
         validateEmail: ({ email }) => { console.log('validateEmail() email:', email); },
         submit: ({
             photo, name, gender,
