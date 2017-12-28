@@ -34,7 +34,7 @@ export default {
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 use: [
-                    { loader: 'url-loader', options: {limit: 10000}, },
+                    { loader: 'url-loader', options: {limit: 100000}, },
                     { loader: 'img-loader', options: {
                         enabled: process.env.NODE_ENV === 'production',
                         gifsicle: { interlaced: false },
