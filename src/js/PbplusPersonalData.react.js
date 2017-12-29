@@ -179,7 +179,7 @@ class PbplusPersonalData extends React.Component {
                     </div>
                 </div>}
             </div>
-            {isMobileVerifyCodeSent && <div className='pbplus-personal-data-row'>
+            {(isMobileVerifyCodeSent && !isMobileValidated) && <div className='pbplus-personal-data-row'>
                 <div className='pbplus-personal-data-mobile-verify-code-wrapper'>
                     <MemberInputUnit
                         title='已傳送驗證碼至您的手機，十分鐘後才能再次傳送'
