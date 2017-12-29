@@ -28,7 +28,7 @@ const updateValue = ({ newValueMap }) => {
     return {type: 'UPDATE_PERSONAL_DATA_VALUE', payload: newValueMap};
 };
 
-const MEMBER_CENTER_BASE_URL = 'http://dev-server-elb-1887534414.ap-northeast-1.elb.amazonaws.com:8095';
+const MEMBER_CENTER_BASE_URL = 'http://dev-server-elb-1887534414.ap-northeast-1.elb.amazonaws.com:8098';
 const fetchPersonalData = () => { return (dispatch, getState) => {
     fetch(`${MEMBER_CENTER_BASE_URL}/member_data`, {
         method: 'post',

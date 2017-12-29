@@ -52,7 +52,7 @@ const updateRewardSelectCount = ({ id, count }) => {
     return {type: 'UPDATE_PBPLUS_REWARD_SELECT_COUNT', payload: { id, count }};
 };
 
-const POINTS_BASE_URL = 'http://dev-server-elb-1887534414.ap-northeast-1.elb.amazonaws.com:8095/points';
+const POINTS_BASE_URL = 'http://dev-server-elb-1887534414.ap-northeast-1.elb.amazonaws.com:8098/points';
 
 const fetchPoints = () => { return (dispatch, getState) => {
     fetch(`${POINTS_BASE_URL}`, {

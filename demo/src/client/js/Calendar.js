@@ -36,7 +36,7 @@ const updateMonth = ({ year, month }) => {
     return {type: 'UPDATE_CALENDAR_MONTH', payload: { year, month }};
 };
 
-const MEMBER_CENTER_BASE_URL = 'http://dev-server-elb-1887534414.ap-northeast-1.elb.amazonaws.com:8095/events';
+const MEMBER_CENTER_BASE_URL = 'http://dev-server-elb-1887534414.ap-northeast-1.elb.amazonaws.com:8098/events';
 const fetchCommingEvents = () => { return (dispatch, getState) => {
     let allEvents = [], allPromotions = [];
     fetch(`${MEMBER_CENTER_BASE_URL}/comming_events`, {method: 'get'})
