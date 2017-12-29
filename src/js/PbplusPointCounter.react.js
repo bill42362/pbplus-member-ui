@@ -3,12 +3,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { addCommaToDigit } from './utils.js';
+import PbplusPointCounterVirtualReward from './PbplusPointCounterVirtualReward.react.js';
 import '../css/pbplus-point-counter.less';
-
-import PlusImage from '../img/plus.png';
-import PlusHoverImage from '../img/plus_hover.png';
-import MinusImage from '../img/minus.png';
-import MinusHoverImage from '../img/minus_hover.png';
 
 class PbplusPointCounter extends React.Component {
     constructor(props) {
@@ -44,60 +40,13 @@ class PbplusPointCounter extends React.Component {
             <div className='pbplus-point-counter-select-panel'>
                 {rewards.map((reward, index) => {
                     // Stop considering reward amount because of system limit on 91APP.
-                    //const canAddCount = points >= reward.pointCost && reward.selectedCount < reward.total;
+                    // const canAddCount = points >= reward.pointCost && reward.selectedCount < reward.total;
                     const canAddCount = points >= reward.pointCost;
-                    const addCountClassName = canAddCount ? '' : ' pbplus-disabled';
-                    const canRemoveCount = 0 < reward.selectedCount;
-                    const removeCountClassName = canRemoveCount ? '' : ' pbplus-disabled';
-                    return <div className='pbplus-point-counter-reward' key={index}>
-                        <div className='pbplus-point-counter-reward-name'>{reward.name}</div>
-                        {/*
-                            // Stop considering reward amount because of system limit on 91APP.
-                            <div className='pbplus-point-counter-reward-remain'>尚餘數量：{reward.total}</div>
-                          */}
-                        <div className='pbplus-point-counter-reward-transaction'>
-                            <div className='pbplus-point-counter-reward-pricing'>
-                                <div className='pbplus-point-counter-reward-value'>NT$ {reward.rewardValue}</div>
-                                <div className='pbplus-point-counter-reward-points'>（{reward.pointCost}點）</div>
-                            </div>
-                            <div className='pbplus-point-counter-reward-selector'>
-                                <div
-                                    className={`pbplus-point-counter-reward-selector-button${removeCountClassName}`}
-                                    role='button'
-                                    onClick={
-                                        canRemoveCount
-                                        ? () => { updateRewardSelectCount({
-                                            id: reward.id,
-                                            count: reward.selectedCount - 1,
-                                        }); }
-                                        : undefined
-                                    }
-                                >
-                                    <img className='selector-button' title='remove' src={MinusImage} />
-                                    <img className='selector-button-hover' title='remove' src={MinusHoverImage} />
-                                </div>
-                                <input
-                                    className='pbplus-point-counter-reward-selector-input'
-                                    value={reward.selectedCount}
-                                />
-                                <div
-                                    className={`pbplus-point-counter-reward-selector-button${addCountClassName}`}
-                                    role='button'
-                                    onClick={
-                                        canAddCount
-                                        ? () => { updateRewardSelectCount({
-                                            id: reward.id,
-                                            count: reward.selectedCount + 1,
-                                        }); }
-                                        : undefined
-                                    }
-                                >
-                                    <img className='selector-button' title='add' src={PlusImage} />
-                                    <img className='selector-button-hover' title='add' src={PlusHoverImage} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>;
+                    return <PbplusPointCounterVirtualReward
+                        key={index}
+                        canAddCount={canAddCount} reward={reward}
+                        updateRewardSelectCount={updateRewardSelectCount}
+                    />;
                 })}
             </div>
             <div className='pbplus-point-counter-notice'>
