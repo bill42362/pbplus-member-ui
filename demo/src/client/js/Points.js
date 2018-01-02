@@ -5,6 +5,7 @@ import { getUrlSearches } from './Utils.js';
 
 const defaultState = {
     points: 0,
+    usingRewardType: 'real',
     rewards: [],
 };
 const getRewardTemplate = () => ({
@@ -78,14 +79,15 @@ const fetchRewardList = () => { return (dispatch, getState) => {
         return response.json();
     })
     .then(response => {
-        const rewards = response.message.virtual.map(reward => {
+        const { virtual, entity } = response.message;
+        const rewards = [ ...virtual, ...entity ].map(reward => {
             return {
                 id: reward.id,
                 name: reward.name,
                 rewardValue: reward.reward_value,
                 pointCost: reward.points,
                 total: reward.total || 0,
-                type: reward.type,
+                type: 'virtual' === reward.type ? 'virtual' : 'real',
                 link: reward.link,
             };
         });

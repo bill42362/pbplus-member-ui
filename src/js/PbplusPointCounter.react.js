@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { addCommaToDigit } from './utils.js';
 import PbplusPointCounterVirtualReward from './PbplusPointCounterVirtualReward.react.js';
+import PbplusPointCounterRealReward from './PbplusPointCounterRealReward.react.js';
 import '../css/pbplus-point-counter.less';
 
 class PbplusPointCounter extends React.Component {
@@ -22,7 +23,7 @@ class PbplusPointCounter extends React.Component {
     componentDidMount() { this.props.fetchRewardList(); this.props.fetchPoints(); }
     render() {
         const { isNoticeChecked } = this.state;
-        const { points, rewards, updateRewardSelectCount } = this.props;
+        const { points, rewards, usingRewardType, updateRewardSelectCount } = this.props;
         const submitClassName = isNoticeChecked ? '' : ' pbplus-disabled';
         return <div className='pbplus-point-counter'>
             <div className='pbplus-point-counter-current-points'>
@@ -42,11 +43,19 @@ class PbplusPointCounter extends React.Component {
                     // Stop considering reward amount because of system limit on 91APP.
                     // const canAddCount = points >= reward.pointCost && reward.selectedCount < reward.total;
                     const canAddCount = points >= reward.pointCost;
-                    return <PbplusPointCounterVirtualReward
-                        key={index}
-                        canAddCount={canAddCount} reward={reward}
-                        updateRewardSelectCount={updateRewardSelectCount}
-                    />;
+                    if('virtual' === usingRewardType) {
+                        return <PbplusPointCounterVirtualReward
+                            key={index}
+                            canAddCount={canAddCount} reward={reward}
+                            updateRewardSelectCount={updateRewardSelectCount}
+                        />;
+                    } else {
+                        return <PbplusPointCounterRealReward
+                            key={index}
+                            canAddCount={canAddCount} reward={reward}
+                            updateRewardSelectCount={updateRewardSelectCount}
+                        />;
+                    }
                 })}
             </div>
             <div className='pbplus-point-counter-notice'>
@@ -95,6 +104,7 @@ class PbplusPointCounter extends React.Component {
 
 PbplusPointCounter.propTypes = {
     points: PropTypes.number.isRequired,
+    usingRewardType: PropTypes.string.isRequired,
     rewards: PropTypes.array.isRequired,
     updateRewardSelectCount: PropTypes.func.isRequired,
     fetchRewardList: PropTypes.func.isRequired,

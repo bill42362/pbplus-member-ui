@@ -72,12 +72,14 @@ const ConnectedPbplusNoticeCenter = connect(
 
 const ConnectedPbplusPointCounter = connect(
     (state, ownProps) => {
-        const { points, rewards } = state.pbplusPoints;
+        const { points, rewards, usingRewardType } = state.pbplusPoints;
+        const usingRewards = rewards.filter(reward => usingRewardType === reward.type);
         return {
-            points: points - rewards.reduce((current, reward) => {
+            points: points - usingRewards.reduce((current, reward) => {
                 return current + (reward.selectedCount*reward.pointCost);
             }, 0),
-            rewards,
+            rewards: usingRewards,
+            usingRewardType,
         };
     },
     (dispatch, ownProps) => { return {
