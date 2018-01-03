@@ -6,6 +6,7 @@ import PbplusCalendarComponent from './PbplusCalendar.react.js';
 import PbplusTabPanelsComponent from './PbplusTabPanels.react.js';
 import PbplusMemberCenterComponent from './PbplusMemberCenter.react.js';
 import PbplusPointCounterComponent from './PbplusPointCounter.react.js';
+import PbplusPointCounterRewardTypeTabComponent from './PbplusPointCounterRewardTypeTab.react.js';
 import PbplusBuyingLogsComponent from './PbplusBuyingLogs.react.js';
 import PbplusPersonalDataComponent from './PbplusPersonalData.react.js';
 import PbplusImageInputBoxComponent from './ImageInputBox.react.js';
@@ -16,6 +17,7 @@ export const PbplusCalendar = PbplusCalendarComponent;
 export const PbplusTabPanels = PbplusTabPanelsComponent;
 export const PbplusMemberCenter = PbplusMemberCenterComponent;
 export const PbplusPointCounter = PbplusPointCounterComponent;
+export const PbplusPointCounterRewardTypeTab = PbplusPointCounterRewardTypeTabComponent;
 export const PbplusBuyingLogs = PbplusBuyingLogsComponent;
 export const PbplusPersonalData = PbplusPersonalDataComponent;
 export const PbplusImageInputBox = PbplusImageInputBoxComponent;
@@ -26,6 +28,7 @@ export default {
     PbplusTabPanels: PbplusTabPanelsComponent,
     PbplusMemberCenter: PbplusMemberCenterComponent,
     PbplusPointCounter: PbplusPointCounterComponent,
+    PbplusPointCounterRewardTypeTab: PbplusPointCounterRewardTypeTabComponent,
     PbplusBuyingLogs: PbplusBuyingLogsComponent,
     PbplusPersonalData: PbplusPersonalDataComponent,
     PbplusImageInputBox: PbplusImageInputBoxComponent

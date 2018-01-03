@@ -3,6 +3,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { addCommaToDigit } from './utils.js';
+import PbplusPointCounterRewardTypeTab from './PbplusPointCounterRewardTypeTab.react.js';
 import PbplusPointCounterVirtualReward from './PbplusPointCounterVirtualReward.react.js';
 import PbplusPointCounterRealReward from './PbplusPointCounterRealReward.react.js';
 import '../css/pbplus-point-counter.less';
@@ -23,6 +24,7 @@ class PbplusPointCounter extends React.Component {
     componentDidMount() { this.props.fetchRewardList(); this.props.fetchPoints(); }
     render() {
         const { isNoticeChecked } = this.state;
+        const { rewardTypeTab } = this.props;
         const { points, rewards, usingRewardType, updateRewardSelectCount } = this.props;
         const submitClassName = isNoticeChecked ? '' : ' pbplus-disabled';
         return <div className='pbplus-point-counter'>
@@ -38,6 +40,9 @@ class PbplusPointCounter extends React.Component {
                 >?</a>
                 )
             </div>
+            {!!rewardTypeTab && <div className='pbplus-point-counter-reward-type-tab-wrapper'>
+                {rewardTypeTab}
+            </div>}
             <div className='pbplus-point-counter-select-panel'>
                 {rewards.map((reward, index) => {
                     // Stop considering reward amount because of system limit on 91APP.
@@ -105,6 +110,7 @@ class PbplusPointCounter extends React.Component {
 PbplusPointCounter.propTypes = {
     points: PropTypes.number.isRequired,
     usingRewardType: PropTypes.string.isRequired,
+    rewardTypeTab: PropTypes.element,
     rewards: PropTypes.array.isRequired,
     updateRewardSelectCount: PropTypes.func.isRequired,
     fetchRewardList: PropTypes.func.isRequired,

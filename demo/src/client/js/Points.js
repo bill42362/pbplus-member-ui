@@ -17,6 +17,9 @@ const getRewardTemplate = () => ({
 
 const Reducer = (state = defaultState, action) => {
     switch(action.type) {
+        case 'UPDATE_PBPLUS_USING_REWARD_TYPE':
+            return Object.assign({}, state, {usingRewardType: action.payload.usingRewardType});
+            break;
         case 'UPDATE_PBPLUS_REWARD_LIST':
             return Object.assign({}, state, {rewards: action.payload.rewards});
             break;
@@ -96,6 +99,10 @@ const fetchRewardList = () => { return (dispatch, getState) => {
     .catch(error => { console.log(error); });
 }; };
 
+const updateUsingRewardType = ({ usingRewardType }) => { return (dispatch, getState) => {
+    return dispatch({type: 'UPDATE_PBPLUS_USING_REWARD_TYPE', payload: { usingRewardType }});
+}; };
+
 const submit = ({ orders }) => { return (dispatch, getState) => {
     const putDataTemplate = {uuid: getUrlSearches().token_id};
     orders.forEach(order => dispatch(updateRewardSelectCount({id: order.id, count: 0})));
@@ -121,6 +128,6 @@ const submit = ({ orders }) => { return (dispatch, getState) => {
     .catch(error => { console.log(error); });
 }; };
 
-const Actions = { updatePointCount, fetchRewardList, updateRewardSelectCount, submit, fetchPoints };
+const Actions = { updatePointCount, fetchRewardList, updateRewardSelectCount, updateUsingRewardType, submit, fetchPoints };
 
 export default { Reducer, Actions };

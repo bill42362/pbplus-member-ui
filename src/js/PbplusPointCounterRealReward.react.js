@@ -17,7 +17,6 @@ class PbplusPointCounterRealReward extends React.Component {
         const addCountClassName = canAddCount ? '' : ' pbplus-disabled';
         const canRemoveCount = 0 < reward.selectedCount;
         const removeCountClassName = canRemoveCount ? '' : ' pbplus-disabled';
-        const aVeryLineRewardName = '很很長很長很長很長很長很長很長很長很長很長很長很長很長很長很長很長很長很長很長很長很長很長很長很長長';
         return <div className='pbplus-point-counter-real-reward'>
             <div className='pbplus-point-counter-real-reward-thumb-wrapper'>
                 <img

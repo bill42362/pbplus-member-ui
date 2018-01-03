@@ -10,7 +10,8 @@ import Points from './Points.js';
 // import { PbplusMemberCenter, PbplusCalendar, PbplusPersonalData } from 'pbplus-member-ui';
 import {
     PbplusMemberCenter, PbplusMemberSummary,
-    PbplusNoticeCenter, PbplusCalendar, PbplusPointCounter, PbplusBuyingLogs,
+    PbplusNoticeCenter, PbplusCalendar, PbplusBuyingLogs,
+    PbplusPointCounter, PbplusPointCounterRewardTypeTab,
     PbplusPersonalData, PbplusImageInputBox
 } from '../../../../src/js/index.js';
 import '../css/app.less';
@@ -70,6 +71,23 @@ const ConnectedPbplusNoticeCenter = connect(
     }; }
 )(PbplusNoticeCenter);
 
+const rewardTypes = [
+    {key: 'virtual', display: '折扣兌換'},
+    {key: 'real', display: '超值兌物'},
+];
+const ConnectedPbplusPointCounterRewardTypeTab = connect(
+    (state, ownProps) => {
+        const { usingRewardType } = state.pbplusPoints;
+        return { usingRewardType, rewardTypes };
+    },
+    (dispatch, ownProps) => { return {
+        updateUsingRewardType: ({ rewardType: rewardTypeKey }) => {
+            const rewardType = rewardTypes.filter(rewardType => rewardTypeKey === rewardType.key)[0] || rewardTypes[0];
+            return dispatch(Points.Actions.updateUsingRewardType({usingRewardType: rewardType.key}));
+        },
+    }; }
+)(PbplusPointCounterRewardTypeTab);
+
 const ConnectedPbplusPointCounter = connect(
     (state, ownProps) => {
         const { points, rewards, usingRewardType } = state.pbplusPoints;
@@ -79,6 +97,7 @@ const ConnectedPbplusPointCounter = connect(
                 return current + (reward.selectedCount*reward.pointCost);
             }, 0),
             rewards: usingRewards,
+            rewardTypeTab: <ConnectedPbplusPointCounterRewardTypeTab />,
             usingRewardType,
         };
     },
