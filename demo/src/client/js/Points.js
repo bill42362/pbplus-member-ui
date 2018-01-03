@@ -7,6 +7,7 @@ const defaultState = {
     points: 0,
     usingRewardType: 'real',
     rewards: [],
+    isNoticeChecked: false,
 };
 const getRewardTemplate = () => ({
     id: 0, name: 'reward_template', link: '#',
@@ -37,6 +38,9 @@ const Reducer = (state = defaultState, action) => {
         case 'UPDATE_PBPLUS_POINT_COUNT':
             return Object.assign({}, state, {points: action.payload.points});
             break;
+        case 'UPDATE_PBPLUS_IS_NOTICE_CHECKED':
+            return Object.assign({}, state, {isNoticeChecked: action.payload.isNoticeChecked});
+            break;
         default:
             return state;
     }
@@ -54,6 +58,10 @@ const updateRewardList = ({ rewards }) => {
 
 const updateRewardSelectCount = ({ id, count }) => {
     return {type: 'UPDATE_PBPLUS_REWARD_SELECT_COUNT', payload: { id, count }};
+};
+
+const updateIsNoticeChecked = ({ isNoticeChecked }) => {
+    return {type: 'UPDATE_PBPLUS_IS_NOTICE_CHECKED', payload: { isNoticeChecked }};
 };
 
 const POINTS_BASE_URL = 'http://dev-server-elb-1887534414.ap-northeast-1.elb.amazonaws.com:8098/points';
@@ -100,6 +108,7 @@ const fetchRewardList = () => { return (dispatch, getState) => {
 }; };
 
 const updateUsingRewardType = ({ usingRewardType }) => { return (dispatch, getState) => {
+    dispatch(updateIsNoticeChecked({isNoticeChecked: false}));
     return dispatch({type: 'UPDATE_PBPLUS_USING_REWARD_TYPE', payload: { usingRewardType }});
 }; };
 
@@ -128,6 +137,10 @@ const submit = ({ orders }) => { return (dispatch, getState) => {
     .catch(error => { console.log(error); });
 }; };
 
-const Actions = { updatePointCount, fetchRewardList, updateRewardSelectCount, updateUsingRewardType, submit, fetchPoints };
+const Actions = {
+    updatePointCount, updateUsingRewardType, updateIsNoticeChecked,
+    fetchRewardList, updateRewardSelectCount,
+    submit, fetchPoints
+};
 
 export default { Reducer, Actions };

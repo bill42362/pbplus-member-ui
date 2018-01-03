@@ -11,8 +11,6 @@ import '../css/pbplus-point-counter.less';
 class PbplusPointCounter extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {isNoticeChecked: false};
-        this.onCheckerChange = this.onCheckerChange.bind(this);
         this.submit = this.submit.bind(this);
     }
     submit() {
@@ -20,11 +18,9 @@ class PbplusPointCounter extends React.Component {
         const orders = rewards.filter(reward => 0 < reward.selectedCount);
         this.props.submit({ orders });
     }
-    onCheckerChange(e) { this.setState({isNoticeChecked: e.target.checked}); }
     componentDidMount() { this.props.fetchRewardList(); this.props.fetchPoints(); }
     render() {
-        const { isNoticeChecked } = this.state;
-        const { rewardTypeTab } = this.props;
+        const { rewardTypeTab, isNoticeChecked, updateIsNoticeChecked } = this.props;
         const { points, rewards, usingRewardType, updateRewardSelectCount } = this.props;
         const submitClassName = isNoticeChecked ? '' : ' pbplus-disabled';
         return <div className='pbplus-point-counter'>
@@ -91,7 +87,8 @@ class PbplusPointCounter extends React.Component {
                     <label className='pbplus-point-counter-notice-checker-label'>
                         <input
                             type='checkbox' className='pbplus-point-counter-notice-checker-checkbox'
-                            checked={isNoticeChecked} onChange={this.onCheckerChange}
+                            checked={isNoticeChecked}
+                            onChange={() => updateIsNoticeChecked({isNoticeChecked: !isNoticeChecked})}
                         />
                         如果你已經仔細閱讀以上注意事項並確認進行點數兌換現金折扣碼的話，請打勾。
                     </label>
@@ -115,6 +112,7 @@ PbplusPointCounter.propTypes = {
     updateRewardSelectCount: PropTypes.func.isRequired,
     fetchRewardList: PropTypes.func.isRequired,
     fetchPoints: PropTypes.func.isRequired,
+    updateIsNoticeChecked: PropTypes.func.isRequired,
     submit: PropTypes.func.isRequired,
 };
 

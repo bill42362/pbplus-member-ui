@@ -1,4 +1,19 @@
 // pbplus-point-counter-reward-type-tab.less
 
 div.pbplus-point-counter-reward-type-tab {
+    display: flex;
+    div.pbplus-point-counter-reward-type-item {
+        flex: auto;
+        border-top: 1px solid black;
+        padding: 1em;
+        font-weight: 700;
+        text-align: center;
+        color: lightgray;
+        cursor: pointer;
+        transition: color .6s ease, background-color .6s ease;
+        &.pbplus-active {
+            background-color: lightgray;
+            color: black;
+        }
+    }
 }
