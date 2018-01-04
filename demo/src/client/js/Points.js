@@ -8,6 +8,9 @@ const defaultState = {
     usingRewardType: 'real',
     rewards: [],
     isNoticeChecked: false,
+    receiverInfo: {
+        name: '', country: '', mobile: '', zipcode: '', address: '',
+    },
 };
 const getRewardTemplate = () => ({
     id: 0, name: 'reward_template', link: '#',
@@ -40,6 +43,13 @@ const Reducer = (state = defaultState, action) => {
             break;
         case 'UPDATE_PBPLUS_IS_NOTICE_CHECKED':
             return Object.assign({}, state, {isNoticeChecked: action.payload.isNoticeChecked});
+            break;
+        case 'UPDATE_PBPLUS_RECEIVER_INFO':
+            return Object.assign(
+                {},
+                state,
+                {receiverInfo: Object.assign({}, state.receiverInfo, action.payload.newValueMap)}
+            );
             break;
         default:
             return state;
@@ -107,6 +117,10 @@ const fetchRewardList = () => { return (dispatch, getState) => {
     .catch(error => { console.log(error); });
 }; };
 
+const updateReceiverInfo = ({ newValueMap }) => { return (dispatch, getState) => {
+    return dispatch({type: 'UPDATE_PBPLUS_RECEIVER_INFO', payload: { newValueMap }});
+}; };
+
 const updateUsingRewardType = ({ usingRewardType }) => { return (dispatch, getState) => {
     dispatch(updateIsNoticeChecked({isNoticeChecked: false}));
     return dispatch({type: 'UPDATE_PBPLUS_USING_REWARD_TYPE', payload: { usingRewardType }});
@@ -139,7 +153,7 @@ const submit = ({ orders }) => { return (dispatch, getState) => {
 
 const Actions = {
     updatePointCount, updateUsingRewardType, updateIsNoticeChecked,
-    fetchRewardList, updateRewardSelectCount,
+    fetchRewardList, updateRewardSelectCount, updateReceiverInfo,
     submit, fetchPoints
 };
 

@@ -6,6 +6,7 @@ import { addCommaToDigit } from './utils.js';
 import PbplusPointCounterRewardTypeTab from './PbplusPointCounterRewardTypeTab.react.js';
 import PbplusPointCounterVirtualReward from './PbplusPointCounterVirtualReward.react.js';
 import PbplusPointCounterRealReward from './PbplusPointCounterRealReward.react.js';
+import PbplusPointCounterReceiverInfo from './PbplusPointCounterReceiverInfo.react.js';
 import '../css/pbplus-point-counter.less';
 
 class PbplusPointCounter extends React.Component {
@@ -20,7 +21,7 @@ class PbplusPointCounter extends React.Component {
     }
     componentDidMount() { this.props.fetchRewardList(); this.props.fetchPoints(); }
     render() {
-        const { rewardTypeTab, isNoticeChecked, updateIsNoticeChecked } = this.props;
+        const { rewardTypeTab, isNoticeChecked, updateIsNoticeChecked, receiverInfo } = this.props;
         const { points, rewards, usingRewardType, updateRewardSelectCount } = this.props;
         const submitClassName = isNoticeChecked ? '' : ' pbplus-disabled';
         return <div className='pbplus-point-counter'>
@@ -94,6 +95,9 @@ class PbplusPointCounter extends React.Component {
                     </label>
                 </div>
             </div>
+            {('real' === usingRewardType && receiverInfo) && <div className='pbplus-point-counter-receiver-info-wrapper'>
+                {receiverInfo}
+            </div>}
             <div className='pbplus-point-counter-submit-button-wrapper'>
                 <div
                     className={`pbplus-point-counter-submit-button${submitClassName}`}
@@ -113,6 +117,7 @@ PbplusPointCounter.propTypes = {
     fetchRewardList: PropTypes.func.isRequired,
     fetchPoints: PropTypes.func.isRequired,
     updateIsNoticeChecked: PropTypes.func.isRequired,
+    receiverInfo: PropTypes.element,
     submit: PropTypes.func.isRequired,
 };
 

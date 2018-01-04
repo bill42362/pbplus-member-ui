@@ -11,7 +11,7 @@ import Points from './Points.js';
 import {
     PbplusMemberCenter, PbplusMemberSummary,
     PbplusNoticeCenter, PbplusCalendar, PbplusBuyingLogs,
-    PbplusPointCounter, PbplusPointCounterRewardTypeTab,
+    PbplusPointCounter, PbplusPointCounterRewardTypeTab, PbplusPointCounterReceiverInfo,
     PbplusPersonalData, PbplusImageInputBox
 } from '../../../../src/js/index.js';
 import '../css/app.less';
@@ -88,6 +88,18 @@ const ConnectedPbplusPointCounterRewardTypeTab = connect(
     }; }
 )(PbplusPointCounterRewardTypeTab);
 
+const ConnectedPbplusPointCounterReceiverInfo = connect(
+    (state, ownProps) => {
+        const { name, country, mobile, zipcode, address } = state.pbplusPoints.receiverInfo;
+        return { name, country, mobile, zipcode, address };
+    },
+    (dispatch, ownProps) => { return {
+        updateReceiverInfo: ({ newValueMap }) => {
+            return dispatch(Points.Actions.updateReceiverInfo({ newValueMap }));
+        },
+    }; }
+)(PbplusPointCounterReceiverInfo);
+
 const ConnectedPbplusPointCounter = connect(
     (state, ownProps) => {
         const { points, rewards, usingRewardType, isNoticeChecked } = state.pbplusPoints;
@@ -98,6 +110,7 @@ const ConnectedPbplusPointCounter = connect(
             }, 0),
             rewards: usingRewards,
             rewardTypeTab: <ConnectedPbplusPointCounterRewardTypeTab />,
+            receiverInfo: <ConnectedPbplusPointCounterReceiverInfo />,
             usingRewardType, isNoticeChecked,
         };
     },
