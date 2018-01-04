@@ -1,7 +1,7 @@
 // MemberCenter.js
 'use strict';
 
-const defaultState = {displayState: 'display', activeTab: 'personal-data'};
+const defaultState = {displayState: 'display', activeTab: 'point-counter'};
 
 const Reducer = (state = defaultState, action) => {
     switch(action.type) {
