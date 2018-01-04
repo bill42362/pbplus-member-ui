@@ -10,7 +10,8 @@ import Points from './Points.js';
 // import { PbplusMemberCenter, PbplusCalendar, PbplusPersonalData } from 'pbplus-member-ui';
 import {
     PbplusMemberCenter, PbplusMemberSummary,
-    PbplusNoticeCenter, PbplusCalendar, PbplusPointCounter, PbplusBuyingLogs,
+    PbplusNoticeCenter, PbplusCalendar, PbplusBuyingLogs,
+    PbplusPointCounter, PbplusPointCounterRewardTypeTab, PbplusPointCounterReceiverInfo,
     PbplusPersonalData, PbplusImageInputBox
 } from '../../../../src/js/index.js';
 import '../css/app.less';
@@ -70,14 +71,47 @@ const ConnectedPbplusNoticeCenter = connect(
     }; }
 )(PbplusNoticeCenter);
 
+const rewardTypes = [
+    {key: 'virtual', display: '折扣兌換'},
+    {key: 'real', display: '超值兌物'},
+];
+const ConnectedPbplusPointCounterRewardTypeTab = connect(
+    (state, ownProps) => {
+        const { usingRewardType } = state.pbplusPoints;
+        return { usingRewardType, rewardTypes };
+    },
+    (dispatch, ownProps) => { return {
+        updateUsingRewardType: ({ rewardType: rewardTypeKey }) => {
+            const rewardType = rewardTypes.filter(rewardType => rewardTypeKey === rewardType.key)[0] || rewardTypes[0];
+            return dispatch(Points.Actions.updateUsingRewardType({usingRewardType: rewardType.key}));
+        },
+    }; }
+)(PbplusPointCounterRewardTypeTab);
+
+const ConnectedPbplusPointCounterReceiverInfo = connect(
+    (state, ownProps) => {
+        const { name, country, mobile, zipcode, address } = state.pbplusPoints.receiverInfo;
+        return { name, country, mobile, zipcode, address };
+    },
+    (dispatch, ownProps) => { return {
+        updateReceiverInfo: ({ newValueMap }) => {
+            return dispatch(Points.Actions.updateReceiverInfo({ newValueMap }));
+        },
+    }; }
+)(PbplusPointCounterReceiverInfo);
+
 const ConnectedPbplusPointCounter = connect(
     (state, ownProps) => {
-        const { points, rewards } = state.pbplusPoints;
+        const { points, rewards, usingRewardType, usingNotice, isNoticeChecked } = state.pbplusPoints;
+        const usingRewards = rewards.filter(reward => usingRewardType === reward.type);
         return {
-            points: points - rewards.reduce((current, reward) => {
+            points: points - usingRewards.reduce((current, reward) => {
                 return current + (reward.selectedCount*reward.pointCost);
             }, 0),
-            rewards,
+            rewards: usingRewards,
+            rewardTypeTab: <ConnectedPbplusPointCounterRewardTypeTab />,
+            receiverInfo: <ConnectedPbplusPointCounterReceiverInfo />,
+            usingRewardType, usingNotice, isNoticeChecked,
         };
     },
     (dispatch, ownProps) => { return {
@@ -86,6 +120,9 @@ const ConnectedPbplusPointCounter = connect(
             return dispatch(Points.Actions.updateRewardSelectCount({ id, count }));
         },
         fetchPoints: () => dispatch(Points.Actions.fetchPoints()),
+        updateIsNoticeChecked: ({ isNoticeChecked }) => {
+            return dispatch(Points.Actions.updateIsNoticeChecked({ isNoticeChecked }));
+        },
         submit: ({ orders }) => dispatch(Points.Actions.submit({ orders })),
     }; }
 )(PbplusPointCounter);

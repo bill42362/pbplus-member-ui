@@ -1,0 +1,66 @@
+// pbplus-point-counter-virtual-reward.less
+
+div.pbplus-point-counter-virtual-reward {
+    padding: 2em 0;
+    border-bottom: 1px solid lightgray;
+    line-height: 1.7em;
+    div.pbplus-point-counter-virtual-reward-name { color: gray; }
+    div.pbplus-point-counter-virtual-reward-remain { font-size: 0.9em; }
+    div.pbplus-point-counter-virtual-reward-transaction {
+        display: flex;
+        div.pbplus-point-counter-virtual-reward-pricing {
+            flex: auto;
+            div.pbplus-point-counter-virtual-reward-value {
+                display: inline-block;
+                font-size: 1.2em;
+                font-weight: 900;
+            }
+            div.pbplus-point-counter-virtual-reward-points {
+                display: inline-block;
+                font-size: 0.8em;
+            }
+        }
+        div.pbplus-point-counter-virtual-reward-selector {
+            flex: none;
+            display: flex;
+            margin-left: 1.5em;
+            align-items: center;
+            div.pbplus-point-counter-virtual-reward-selector-button {
+                position: relative;
+                flex: none;
+                border: 1px solid black;
+                width: 2em; height: 2em;
+                cursor: pointer;
+                transition: background-color .6s ease;
+                &:hover {
+                    background-color: black;
+                    img.selector-button { opacity: 0; }
+                }
+                &.pbplus-disabled {
+                    cursor: not-allowed;
+                    opacity: 0.5;
+                }
+                img {
+                    margin: 10%;
+                    width: 80%; height: 80%;
+                }
+                img.selector-button {
+                    position: absolute;
+                    top: 0px; left: 0px;
+                    transition: opacity .6s ease;
+                }
+            }
+            input.pbplus-point-counter-virtual-reward-selector-input {
+                flex: auto;
+                border: 1px solid black;
+                border-left: none;
+                border-right: none;
+                background: transparent;
+                width: 2.5em;
+                font-size: 1.5em;
+                font-weight: 300;
+                text-align: center;
+            }
+        }
+    }
+}
