@@ -102,7 +102,7 @@ const ConnectedPbplusPointCounterReceiverInfo = connect(
 
 const ConnectedPbplusPointCounter = connect(
     (state, ownProps) => {
-        const { points, rewards, usingRewardType, isNoticeChecked } = state.pbplusPoints;
+        const { points, rewards, usingRewardType, usingNotice, isNoticeChecked } = state.pbplusPoints;
         const usingRewards = rewards.filter(reward => usingRewardType === reward.type);
         return {
             points: points - usingRewards.reduce((current, reward) => {
@@ -111,7 +111,7 @@ const ConnectedPbplusPointCounter = connect(
             rewards: usingRewards,
             rewardTypeTab: <ConnectedPbplusPointCounterRewardTypeTab />,
             receiverInfo: <ConnectedPbplusPointCounterReceiverInfo />,
-            usingRewardType, isNoticeChecked,
+            usingRewardType, usingNotice, isNoticeChecked,
         };
     },
     (dispatch, ownProps) => { return {

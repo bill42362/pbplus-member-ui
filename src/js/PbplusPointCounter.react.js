@@ -21,7 +21,7 @@ class PbplusPointCounter extends React.Component {
     }
     componentDidMount() { this.props.fetchRewardList(); this.props.fetchPoints(); }
     render() {
-        const { rewardTypeTab, isNoticeChecked, updateIsNoticeChecked, receiverInfo } = this.props;
+        const { rewardTypeTab, usingNotice, isNoticeChecked, updateIsNoticeChecked, receiverInfo } = this.props;
         const { points, rewards, usingRewardType, updateRewardSelectCount } = this.props;
         const submitClassName = isNoticeChecked ? '' : ' pbplus-disabled';
         return <div className='pbplus-point-counter'>
@@ -61,28 +61,16 @@ class PbplusPointCounter extends React.Component {
                 })}
             </div>
             <div className='pbplus-point-counter-notice'>
-                <h4 className='pbplus-point-counter-notice-title'>注意事項</h4>
+                <h4 className='pbplus-point-counter-notice-title'>{usingNotice.title}</h4>
                 <div className='pbplus-point-counter-notice-body'>
-                    <ol>
-                        <li>
-                            紅利點數轉入計算時間: 
-                            <ul>
-                                <li>好物商城購物確認通過鑑賞期無退貨後轉入(每月15、30日入帳、遇假日則延後)。</li>
-                                <li>報名揪in活動，於活動結束後 5 個工作天，確定您無退費後轉入。</li>
-                            </ul>
-                        </li>
-                        <li>商城折扣碼及報名折扣碼不能交換使用。</li>
-                        <li>每次從點數兌換現金的作業，請給 pb+ 小編 10 個工作天。</li>
-                        <li>使用紅利點數折抵之消費，若退貨點數不予退回喔!</li>
-                        <li>可折抵之金額依照商品及活動類型有不同上限。</li>
-                        <li>
-                            Pb+ 的管理員會隨時注意點數的使用情形，為所有會員規劃並調整紅利的使用規則，屆時以本頁公佈辦法為主。
-                        </li>
-                        <li>
-                            如果對使用紅利有任何的問題，歡迎
-                            <a href='mailto:support@pcgbros.com'>聯絡我們</a>。
-                        </li>
-                    </ol>
+                    <ol>{usingNotice.contents.map((noticeContent, index) => {
+                        return <li key={index}>
+                            {noticeContent.content}
+                            {!!noticeContent.uls && <ul>{noticeContent.uls.map((ul, index) => {
+                                return <li key={index}>{ul.content}</li>;
+                            })}</ul>}
+                        </li>;
+                    })}</ol>
                 </div>
                 <div className='pbplus-point-counter-notice-checker'>
                     <label className='pbplus-point-counter-notice-checker-label'>
@@ -111,6 +99,7 @@ class PbplusPointCounter extends React.Component {
 PbplusPointCounter.propTypes = {
     points: PropTypes.number.isRequired,
     usingRewardType: PropTypes.string.isRequired,
+    usingNotice: PropTypes.object.isRequired,
     rewardTypeTab: PropTypes.element,
     rewards: PropTypes.array.isRequired,
     updateRewardSelectCount: PropTypes.func.isRequired,
