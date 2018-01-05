@@ -44,16 +44,15 @@ class PbplusPointCounter extends React.Component {
             </div>}
             <div className='pbplus-point-counter-select-panel'>
                 {rewards.map((reward, index) => {
-                    // Stop considering reward amount because of system limit on 91APP.
-                    // const canAddCount = points >= reward.pointCost && reward.selectedCount < reward.total;
-                    const canAddCount = points >= reward.pointCost;
                     if('virtual' === usingRewardType) {
+                        const canAddCount = points >= reward.pointCost;
                         return <PbplusPointCounterVirtualReward
                             key={index}
                             canAddCount={canAddCount} reward={reward}
                             updateRewardSelectCount={updateRewardSelectCount}
                         />;
                     } else {
+                        const canAddCount = points >= reward.pointCost && reward.selectedCount < reward.total;
                         return <PbplusPointCounterRealReward
                             key={index}
                             canAddCount={canAddCount} reward={reward}
