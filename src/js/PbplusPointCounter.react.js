@@ -23,9 +23,11 @@ class PbplusPointCounter extends React.Component {
     }
     componentDidMount() { this.props.fetchRewardList(); this.props.fetchPoints(); }
     render() {
-        const { rewardTypeTab, usingNotice, isNoticeChecked, updateIsNoticeChecked, receiverInfo } = this.props;
-        const { points, rewards, usingRewardType, updateRewardSelectCount } = this.props;
-        const submitClassName = isNoticeChecked ? '' : ' pbplus-disabled';
+        const {
+            rewardTypeTab, usingNotice, isNoticeChecked, updateIsNoticeChecked, receiverInfo,
+            points, rewards, usingRewardType, updateRewardSelectCount, canSubmit
+        } = this.props;
+        const submitClassName = canSubmit ? '' : ' pbplus-disabled';
         return <div className='pbplus-point-counter'>
             <div className='pbplus-point-counter-current-points'>
                 目前紅利點數
@@ -90,7 +92,7 @@ class PbplusPointCounter extends React.Component {
             <div className='pbplus-point-counter-submit-button-wrapper'>
                 <div
                     className={`pbplus-point-counter-submit-button${submitClassName}`}
-                    role='button' onClick={isNoticeChecked ? this.submit : undefined}
+                    role='button' onClick={canSubmit ? this.submit : undefined}
                 >送出</div>
             </div>
         </div>;
@@ -108,6 +110,7 @@ PbplusPointCounter.propTypes = {
     fetchPoints: PropTypes.func.isRequired,
     updateIsNoticeChecked: PropTypes.func.isRequired,
     receiverInfo: PropTypes.element,
+    canSubmit: PropTypes.bool.isRequired,
     submit: PropTypes.func.isRequired,
 };
 
