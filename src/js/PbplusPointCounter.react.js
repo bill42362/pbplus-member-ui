@@ -15,8 +15,10 @@ class PbplusPointCounter extends React.Component {
         this.submit = this.submit.bind(this);
     }
     submit() {
-        const { rewards } = this.props;
-        const orders = rewards.filter(reward => 0 < reward.selectedCount);
+        const { rewards, usingRewardType } = this.props;
+        const orders = rewards
+            .filter(reward => 0 < reward.selectedCount)
+            .filter(reward => usingRewardType === reward.type);
         this.props.submit({ orders });
     }
     componentDidMount() { this.props.fetchRewardList(); this.props.fetchPoints(); }
