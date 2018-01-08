@@ -86,7 +86,7 @@ class PbplusPointCounter extends React.Component {
                             checked={isNoticeChecked}
                             onChange={() => updateIsNoticeChecked({isNoticeChecked: !isNoticeChecked})}
                         />
-                        如果你已經仔細閱讀以上注意事項並確認進行點數兌換現金折扣碼的話，請打勾。
+                        如果你已經仔細閱讀以上注意事項並確認進行點數兌換的話，請打勾。
                     </label>
                 </div>
             </div>
