@@ -21,7 +21,11 @@ class PbplusPointCounter extends React.Component {
             .filter(reward => usingRewardType === reward.type);
         this.props.submit({ orders });
     }
-    componentDidMount() { this.props.fetchRewardList(); this.props.fetchPoints(); }
+    componentDidMount() {
+        this.props.fetchRewardList();
+        this.props.fetchPoints();
+        if(this.props.fetchPersonalData) { this.props.fetchPersonalData(); }
+    }
     render() {
         const {
             rewardTypeTab, usingNotice, isNoticeChecked, updateIsNoticeChecked, receiverInfo,
@@ -108,6 +112,7 @@ PbplusPointCounter.propTypes = {
     updateRewardSelectCount: PropTypes.func.isRequired,
     fetchRewardList: PropTypes.func.isRequired,
     fetchPoints: PropTypes.func.isRequired,
+    fetchPersonalData: PropTypes.func,
     updateIsNoticeChecked: PropTypes.func.isRequired,
     receiverInfo: PropTypes.element,
     canSubmit: PropTypes.bool.isRequired,
