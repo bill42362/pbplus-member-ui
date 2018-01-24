@@ -64,6 +64,7 @@ export default {
         extensions: ['.js', '.jsx'],
         alias: {
           react: `${__dirname}/node_modules/react`,
+          ReactTelephoneInput: `${__dirname}/node_modules/react-telephone-input`,
         },
     },
     devServer: {
