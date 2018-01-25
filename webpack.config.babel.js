@@ -63,7 +63,6 @@ export default {
         extensions: ['.js', '.jsx'],
         alias: {
           react: `${__dirname}/node_modules/react`,
-          'react-telephone-input': `${__dirname}/node_modules/react-telephone-input`,
         },
     },
     externals: {
@@ -73,11 +72,11 @@ export default {
             'amd': 'react',
             'root': 'React',
         },
-        'react-telephone-input': {
-            'commonjs': 'react-telephone-input',
-            'commonjs2': 'react-telephone-input',
-            'amd': 'react-telephone-input',
-            'root': 'react-telephone-input',
+        'react-telephone-input/lib/withStyles': {
+            'commonjs': 'react-telephone-input/lib/withStyles',
+            'commonjs2': 'react-telephone-input/lib/withStyles',
+            'amd': 'react-telephone-input/lib/withStyles',
+            'root': 'react-telephone-input/lib/withStyles',
         },
     }
 };
