@@ -1,7 +1,7 @@
 // MemberMobileInputUnit.react.js
 'use strict';
 import React from 'react';
-import ReactMobileInput from 'ReactTelephoneInput/lib/withStyles';
+import ReactMobileInput from 'react-telephone-input/lib/withStyles';
 import '../css/member-mobile-input-unit.less';
 
 import CountryFlags from '../img/country_flags.png';
