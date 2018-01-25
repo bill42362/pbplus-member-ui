@@ -73,9 +73,9 @@ export default {
             'root': 'React',
         },
         'react-telephone-input': {
-            'commonjs': 'react-telephone-input/lib/withStyles.js',
-            'commonjs2': 'react-telephone-input/lib/withStyles.js',
-            'amd': 'react-telephone-input/lib/withStyles.js',
+            'commonjs': 'react-telephone-input',
+            'commonjs2': 'react-telephone-input',
+            'amd': 'react-telephone-input',
             'root': 'ReactTelephoneInput',
         },
     }
